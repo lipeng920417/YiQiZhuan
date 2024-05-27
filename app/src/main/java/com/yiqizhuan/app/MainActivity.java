@@ -20,7 +20,6 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.bean.BaseResult;
-import com.yiqizhuan.app.bean.CouponInfoBean;
 import com.yiqizhuan.app.databinding.ActivityMainBinding;
 import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.net.Api;
@@ -35,8 +34,6 @@ import com.yiqizhuan.app.ui.shopping.ShoppingFragment;
 import com.yiqizhuan.app.util.SizeUtils;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.util.UnreadMsgUtil;
-import com.yiqizhuan.app.util.SignatureMD5;
-import com.yiqizhuan.app.views.dialog.DialogUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 
 import org.json.JSONObject;

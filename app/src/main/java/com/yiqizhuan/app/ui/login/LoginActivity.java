@@ -1,7 +1,6 @@
 package com.yiqizhuan.app.ui.login;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -9,7 +8,6 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,11 +17,11 @@ import androidx.annotation.Nullable;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
-import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.bean.CaptchaSendBean;
 import com.yiqizhuan.app.bean.LoginMessage;
 import com.yiqizhuan.app.databinding.ActivityLoginBinding;
 import com.yiqizhuan.app.db.MMKVHelper;
+import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.net.WebApi;

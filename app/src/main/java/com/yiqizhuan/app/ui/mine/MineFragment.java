@@ -1,12 +1,8 @@
 package com.yiqizhuan.app.ui.mine;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,31 +12,27 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.hjq.permissions.XXPermissions;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.CouponInfoBean;
 import com.yiqizhuan.app.bean.UserCouponBean;
-import com.yiqizhuan.app.db.MMKVHelper;
-import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.bean.UserInfoBean;
 import com.yiqizhuan.app.databinding.FragmentMineBinding;
+import com.yiqizhuan.app.db.MMKVHelper;
+import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseFragment;
 import com.yiqizhuan.app.ui.setting.SettingActivity;
-import com.yiqizhuan.app.util.CheckPermission;
 import com.yiqizhuan.app.util.PhoneUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
-import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.views.dialog.DialogUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;

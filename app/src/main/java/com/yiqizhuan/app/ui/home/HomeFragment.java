@@ -1,21 +1,16 @@
 package com.yiqizhuan.app.ui.home;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.hjq.permissions.XXPermissions;
 import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.BaseResult;
@@ -30,7 +25,6 @@ import com.yiqizhuan.app.ui.base.BaseFragment;
 import com.yiqizhuan.app.ui.home.item.ChangXiangHuiFlexibleItem;
 import com.yiqizhuan.app.ui.home.item.JinGangQuFlexibleItem;
 import com.yiqizhuan.app.ui.home.item.YueXiangHuiFlexibleItem;
-import com.yiqizhuan.app.util.CheckPermission;
 import com.yiqizhuan.app.util.PhoneUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
 import com.yiqizhuan.app.views.dialog.DialogUtil;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/lly">
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_transparent"
+        app:banner_indicator_normal_color="@color/color_e7e7e7_alpha80"
+        app:banner_indicator_selected_color="@color/color_ff8e22"
+        app:banner_radius="4dp"></com.youth.banner.Banner>
+<!--    android:background="@drawable/bg_corner4_stroke_e9e9e9"-->
+
+</LinearLayout>

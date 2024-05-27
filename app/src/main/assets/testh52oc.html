@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试</title>
+    <script> 
+        function js2AppCallBack(param) {
+            console.log(param);
+            var btn = window.document.getElementById("testbtn");
+            btn.style.backgroundColor = param;
+            btn.style.color = 'white';
+        };
+        
+        function btnOnClickAction() {
+            var os = getDeviceType();
+            if (os == "iOS") {
+                window.webkit.messageHandlers.webViewClose.postMessage({
+                    "testKey":"123456",
+                    "func":js2AppCallBack.toString()
+                })
+            } else {
+                window.Android.webViewClose("测试参数");
+            }
+        }
+
+        function getDeviceType() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
+              return 'iOS';
+            } else if (userAgent.match(/Android/i)) {
+              return 'Android';
+            } else {
+              return 'unknown';
+            }
+          }
+
+    </script>
+    <style>
+        button {
+            background-color: aqua;
+            width: 20%;
+            height: 5%;
+            font-size: large;
+            color: black;
+            margin-top: 20%;
+            margin-left: 40%;
+        }
+    </style>
+</head>
+<body>
+    <button id="testbtn" onclick="btnOnClickAction()">测试按钮</button>
+</body>
+</html>

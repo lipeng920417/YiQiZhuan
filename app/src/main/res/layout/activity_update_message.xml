@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f2f2f2"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/include_actionbar"
+        layout="@layout/include_actionbar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="10dp">
+        <com.xw.repo.XEditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tvNum"
+            android:background="@null"
+            android:hint="请输入昵称"
+            tools:visibility="visible"
+            android:padding="5dp"
+            android:textColor="@color/color_222222"
+            android:textColorHint="@color/color_cccccc"
+            android:textSize="14sp"
+            android:singleLine="true"
+            app:x_clearDrawable="@mipmap/ic_close_gray_circle"></com.xw.repo.XEditText>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="@color/color_999999"
+        android:padding="5dp"
+        android:text="4-20个字符，可由中英文、数字、_、-组成">
+
+    </TextView>
+
+</LinearLayout>

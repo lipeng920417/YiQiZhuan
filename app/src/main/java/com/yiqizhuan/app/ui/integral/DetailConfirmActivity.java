@@ -98,6 +98,7 @@ public class DetailConfirmActivity extends BaseActivity implements View.OnClickL
             case R.id.tvALL:
                 if (queryUserPointsBean != null && queryUserPointsBean.getData() != null && !TextUtils.isEmpty(queryUserPointsBean.getData().getTotalUnavailableQuota())) {
                     binding.edtNum.setText(queryUserPointsBean.getData().getTotalUnavailableQuota());
+                    binding.edtNum.setSelection(binding.edtNum.getText().length());
                 }
                 break;
             case R.id.tvBtn:

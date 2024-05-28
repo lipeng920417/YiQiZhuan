@@ -6,12 +6,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
 
-import com.gyf.immersionbar.ImmersionBar;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.databinding.ActivityIntegralAuthorizationBinding;
-import com.yiqizhuan.app.databinding.ActivityIntegralCreateBinding;
+import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.ui.base.BaseActivity;
 
 import java.util.Calendar;
@@ -19,6 +17,7 @@ import java.util.Calendar;
 /**
  * @author LiPeng
  * @create 2024-05-27 8:03 PM
+ * 兑换协议
  */
 public class IntegralAuthorizationActivity extends BaseActivity implements View.OnClickListener {
     ActivityIntegralAuthorizationBinding binding;
@@ -51,8 +50,8 @@ public class IntegralAuthorizationActivity extends BaseActivity implements View.
                 "\n四、若因本授权书发生任何纠纷或争议，首先应友好协商解决。协商不成的，本人同意将纠纷或争议提交被授权人所在地有管辖权的人民法院管辖。本授权书的成立:生效、履行、解释及纠纷解决，适用中华人民共和国大陆地区法律。" +
                 "\n本人同意被授权人留存本授权书、已查询到的本人信息、兑付信息、积分兑换信息、积分使用信息及被授权人合法收集到的其他信息，保存期限为法律法规要求的最短时间。本人已知悉本授权书所有内容(特别是加粗字体内容)的意义以及由此产生的法律效力，自愿作出上述授权。" +
                 "\n特此授权。" +
-                "\n\n授权人: " +
-                "\n证件号码:" +
+                "\n\n授权人: "+ MMKVHelper.getString("userName","") +
+                "\n证件号码:"+MMKVHelper.getString("idNumber","") +
                 "\n授权日期: " + year + "年" + month + "月" + day + "日");
     }
 

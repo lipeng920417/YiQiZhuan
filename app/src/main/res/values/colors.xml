@@ -35,5 +35,10 @@
     <color name="color_de0e00">#DE0E00</color>
     <color name="color_888888">#888888</color>
     <color name="color_595959">#595959</color>
+    <color name="color_ff2222">#FF2222</color>
+    <color name="color_line">#E0E0E0</color>
+    <color name="color_ff6d00">#FF6D00</color>
+
+
 
 </resources>

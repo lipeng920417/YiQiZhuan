@@ -76,6 +76,10 @@
             android:name="com.yiqizhuan.app.ui.integral.IntegralAuthorizationActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.yiqizhuan.app.ui.integral.DetailConfirmActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_ffe291_fb5236"
+    android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:text="全额兑换"
+            android:textColor="@color/white"
+            android:textSize="17sp"></TextView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/background_conner_ffffff_10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true">
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="16dp"
+                    android:text="兑换积分"
+                    android:textColor="@color/color_222222"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="兑换时间"
+                    android:textColor="@color/color_888888"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"></TextView>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivYiDuiHuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_yiduihuan"></ImageView>
+
+            <LinearLayout
+                android:id="@+id/llyJiFen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right">
+                <TextView
+                    android:id="@+id/tvJiFen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="16dp"
+                    android:text="-8,000,000.00"
+                    android:layout_gravity="right"
+                    android:textColor="@color/color_222222"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="2024-05-15"
+                    android:layout_gravity="right"
+                    android:textColor="@color/color_888888"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"></TextView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDaiShiFang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待释放"
+                android:textSize="25dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/color_222222"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+            </TextView>
+
+        </RelativeLayout>
+
+</LinearLayout>

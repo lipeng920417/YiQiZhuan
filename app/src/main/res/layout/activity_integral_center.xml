@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -127,7 +128,9 @@
                         android:paddingBottom="5dp"
                         android:text="我的兑换方案 >"
                         android:textColor="@color/color_de0e00"
-                        android:textSize="13sp">
+                        android:textSize="13sp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
 
                     </TextView>
 

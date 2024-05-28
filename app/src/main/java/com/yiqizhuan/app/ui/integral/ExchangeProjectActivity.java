@@ -6,29 +6,67 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.yiqizhuan.app.R;
-import com.yiqizhuan.app.databinding.ActivityIntegralCreateBinding;
+import com.yiqizhuan.app.bean.GetHistoryExchange;
+import com.yiqizhuan.app.databinding.ActivityExchangeProjectBinding;
+import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.ui.base.BaseActivity;
+import com.yiqizhuan.app.ui.integral.item.ExchangeProjectFlexibleItem;
+
+import eu.davidea.flexibleadapter.FlexibleAdapter;
+import eu.davidea.flexibleadapter.items.IFlexible;
 
 /**
  * @author LiPeng
  * @create 2024-05-27 8:03 PM
+ * 我的兑换方案
  */
 public class ExchangeProjectActivity extends BaseActivity implements View.OnClickListener {
-    ActivityIntegralCreateBinding binding;
+    ActivityExchangeProjectBinding binding;
+    private FlexibleAdapter<IFlexible> flexibleAdapter;
+    private GetHistoryExchange getHistoryExchange;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ImmersionBar.with(this).statusBarDarkFont(true).init();
-        binding = ActivityIntegralCreateBinding.inflate(getLayoutInflater());
+        binding = ActivityExchangeProjectBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ImageButton actionbarBack = binding.includeActionbar.actionbarBack;
         TextView includeActionbar = binding.includeActionbar.actionbarTitle;
         includeActionbar.setText("积分兑换");
         actionbarBack.setOnClickListener(this);
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            getHistoryExchange = (GetHistoryExchange) getIntent().getExtras().getSerializable("getHistoryExchange");
+        }
+        initView();
+        initData();
+    }
+
+    private void initView() {
+        flexibleAdapter = new FlexibleAdapter<>(null);
+        binding.rc.setLayoutManager(new LinearLayoutManager(this));
+        binding.rc.setAdapter(flexibleAdapter);
+        binding.rc.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void initData() {
+        binding.tvName.setText(MMKVHelper.getString("nickName", "")+"用户您好，您可兑换积分额度为");
+        if (getHistoryExchange != null && getHistoryExchange.getData() != null) {
+            binding.tvNum.setText(getHistoryExchange.getData().getTotalContractPoints());
+        }
+        if (getHistoryExchange != null && getHistoryExchange.getData() != null && getHistoryExchange.getData().getPointsInfo() != null && getHistoryExchange.getData().getPointsInfo().size() > 0) {
+            for (GetHistoryExchange.PointsInfo pointsInfo : getHistoryExchange.getData().getPointsInfo()) {
+                if (pointsInfo.getContractPlan() == 1) {
+                    flexibleAdapter.addItem(new ExchangeProjectFlexibleItem(this, pointsInfo, 1));
+                }
+            }
+        }
+        flexibleAdapter.addItem(new ExchangeProjectFlexibleItem(this, null, 0));
     }
 
     @Override
@@ -37,7 +75,6 @@ public class ExchangeProjectActivity extends BaseActivity implements View.OnClic
             case R.id.actionbar_back:
                 finish();
                 break;
-
         }
     }
 }

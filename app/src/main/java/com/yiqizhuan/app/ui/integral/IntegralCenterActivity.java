@@ -4,25 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.jeremyliao.liveeventbus.LiveEventBus;
-import com.yiqizhuan.app.MainActivity;
 import com.yiqizhuan.app.R;
-import com.yiqizhuan.app.bean.BaseResult;
-import com.yiqizhuan.app.bean.QueryUserPointsBean;
+import com.yiqizhuan.app.bean.GetHistoryExchange;
+import com.yiqizhuan.app.bean.UserCouponBean;
 import com.yiqizhuan.app.databinding.ActivityIntegralCenterBinding;
-import com.yiqizhuan.app.databinding.ActivitySettingBinding;
-import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.ui.base.BaseActivity;
-import com.yiqizhuan.app.ui.setting.SettingActivity;
 import com.yiqizhuan.app.util.ToastUtils;
 
 import java.io.IOException;
@@ -34,11 +27,13 @@ import okhttp3.Response;
 /**
  * @author LiPeng
  * @create 2024-05-27 8:03 PM
+ * 兑换中心
  */
 public class IntegralCenterActivity extends BaseActivity implements View.OnClickListener {
     ActivityIntegralCenterBinding binding;
     boolean ivCheckbox;
-    private QueryUserPointsBean queryUserPointsBean;
+    private UserCouponBean queryUserPointsBean;
+    private GetHistoryExchange getHistoryExchange;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +48,7 @@ public class IntegralCenterActivity extends BaseActivity implements View.OnClick
         binding.tvAgreement.setOnClickListener(this);
         binding.tvBtn.setOnClickListener(this);
         queryUserPoints();
+        getHistoryExchange();
     }
 
     @Override
@@ -65,10 +61,18 @@ public class IntegralCenterActivity extends BaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.tvMingXi:
-                startActivity(new Intent(this, IntegralDetailActivity.class));
+                intent = new Intent(this, IntegralDetailActivity.class);
+                bundle = new Bundle();
+                bundle.putSerializable("queryUserPointsBean", queryUserPointsBean);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case R.id.tvFangAn:
-                startActivity(new Intent(this, ExchangeProjectActivity.class));
+                intent = new Intent(this, ExchangeProjectActivity.class);
+                bundle = new Bundle();
+                bundle.putSerializable("getHistoryExchange", getHistoryExchange);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case R.id.ivCheckbox:
                 ivCheckbox = !ivCheckbox;
@@ -98,24 +102,45 @@ public class IntegralCenterActivity extends BaseActivity implements View.OnClick
     private void queryUserPoints() {
         showLoading();
         HashMap<String, String> paramsMap = new HashMap<>();
-        OkHttpManager.getInstance().getRequest(Api.QUERY_USER_POINTS, paramsMap, new BaseCallBack<QueryUserPointsBean>() {
+        OkHttpManager.getInstance().getRequest(Api.QUERY_USER_COUPON, paramsMap, new BaseCallBack<UserCouponBean>() {
             @Override
             public void onFailure(Call call, IOException e) {
                 cancelLoading();
             }
 
             @Override
-            public void onSuccess(Call call, Response response, QueryUserPointsBean result) {
+            public void onSuccess(Call call, Response response, UserCouponBean result) {
                 cancelLoading();
                 queryUserPointsBean = result;
-                if (result != null && result.getData() != null && !TextUtils.isEmpty(result.getData().getTotalPoints())) {
-                    binding.tvNum.setText(result.getData().getTotalPoints());
+                if (result != null && result.getData() != null && !TextUtils.isEmpty(result.getData().getTotalUnavailableQuota())) {
+                    binding.tvNum.setText(result.getData().getTotalUnavailableQuota());
                 }
             }
 
             @Override
             public void onError(Call call, int statusCode, Exception e) {
                 cancelLoading();
+            }
+        });
+    }
+
+    private void getHistoryExchange() {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        OkHttpManager.getInstance().getRequest(Api.GET_HISTORY_EXCHANGE, paramsMap, new BaseCallBack<GetHistoryExchange>() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onSuccess(Call call, Response response, GetHistoryExchange result) {
+                getHistoryExchange = result;
+                if (result != null && result.getData() != null && result.getData().getPointsInfo() != null && result.getData().getPointsInfo().size() > 0) {
+                    binding.tvFangAn.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onError(Call call, int statusCode, Exception e) {
             }
         });
     }

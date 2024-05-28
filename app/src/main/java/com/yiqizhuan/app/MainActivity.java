@@ -185,6 +185,16 @@ public class MainActivity extends BaseActivity {
                 startActivity(broker);
             }
         });
+
+        //去首页
+        LiveEventBus.get("goHome", String.class).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                intent.putExtra("switchHome", "switchHome");
+                startActivity(intent);
+            }
+        });
     }
 
     @SuppressLint("RestrictedApi")

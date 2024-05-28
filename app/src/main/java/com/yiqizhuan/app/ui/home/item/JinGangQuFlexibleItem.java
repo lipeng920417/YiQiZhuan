@@ -2,6 +2,7 @@ package com.yiqizhuan.app.ui.home.item;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
+import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.integral.IntegralCenterActivity;
 import com.yiqizhuan.app.views.dialog.DialogUtil;
@@ -66,13 +69,11 @@ public class JinGangQuFlexibleItem extends AbstractFlexibleItem<JinGangQuFlexibl
             @Override
             public void onClick(View view) {
                 if ("-1".equals(categoryId)) {
-//                    DialogUtil.build1BtnDialog(context, "敬请期待", "我知道了", true, new DialogUtil.DialogListener1Btn() {
-//                        @Override
-//                        public void onPositiveClick(View v) {
-//
-//                        }
-//                    }).show();
-                    context.startActivity(new Intent(context, IntegralCenterActivity.class));
+                    if (TextUtils.isEmpty(MMKVHelper.getString("token", ""))) {
+                        LiveEventBus.get("goToLogin").post("");
+                    } else {
+                        context.startActivity(new Intent(context, IntegralCenterActivity.class));
+                    }
                 } else {
                     Intent broker = new Intent(context, WebActivity.class);
                     broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CATEGORY_LIST + "?categoryId=" + categoryId);

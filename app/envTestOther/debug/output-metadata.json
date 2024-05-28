@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.yiqizhuan.app",
+  "applicationId": "com.qdgo.app",
   "variantName": "envTestOtherDebug",
   "elements": [
     {

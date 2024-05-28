@@ -94,6 +94,17 @@ public class AndroidJSInterface {
             public void run() {
                 LiveEventBus.get("shopping").post("");
             }
-        },100);
+        }, 100);
+    }
+
+    @JavascriptInterface
+    public void goHome(String data) {
+        LiveEventBus.get("webViewClose").post("");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LiveEventBus.get("goHome").post("");
+            }
+        }, 100);
     }
 }

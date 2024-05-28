@@ -43,4 +43,10 @@ public class WebApi {
      * 金刚区
      */
     public static final String WEB_CATEGORY_LIST= "/categoryList";
+
+    /**
+     * 确认兑换页
+     */
+    public static final String WEB_SIGN_AGREEMENT= "/signAgreement";
+
 }

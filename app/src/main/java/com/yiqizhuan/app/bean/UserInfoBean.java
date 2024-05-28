@@ -12,6 +12,24 @@ public class UserInfoBean extends BaseResult<UserInfoBean.Data> {
         String avatarUrl;
         String phoneNumber;
         String state;
+        String userName;
+        String idNumber;
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public String getIdNumber() {
+            return idNumber;
+        }
+
+        public void setIdNumber(String idNumber) {
+            this.idNumber = idNumber;
+        }
 
         public String getId() {
             return id;

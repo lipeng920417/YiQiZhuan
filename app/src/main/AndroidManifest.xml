@@ -54,6 +54,28 @@
             android:name="com.yiqizhuan.app.webview.WebActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.yiqizhuan.app.ui.integral.IntegralCenterActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.yiqizhuan.app.ui.integral.IntegralCreateActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yiqizhuan.app.ui.integral.ExchangeProjectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yiqizhuan.app.ui.integral.IntegralDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.yiqizhuan.app.ui.integral.IntegralAuthorizationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

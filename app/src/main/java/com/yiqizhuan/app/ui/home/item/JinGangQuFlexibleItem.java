@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.net.WebApi;
+import com.yiqizhuan.app.ui.integral.IntegralCenterActivity;
 import com.yiqizhuan.app.views.dialog.DialogUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 
@@ -65,12 +66,13 @@ public class JinGangQuFlexibleItem extends AbstractFlexibleItem<JinGangQuFlexibl
             @Override
             public void onClick(View view) {
                 if ("-1".equals(categoryId)) {
-                    DialogUtil.build1BtnDialog(context, "敬请期待", "我知道了", true, new DialogUtil.DialogListener1Btn() {
-                        @Override
-                        public void onPositiveClick(View v) {
-
-                        }
-                    }).show();
+//                    DialogUtil.build1BtnDialog(context, "敬请期待", "我知道了", true, new DialogUtil.DialogListener1Btn() {
+//                        @Override
+//                        public void onPositiveClick(View v) {
+//
+//                        }
+//                    }).show();
+                    context.startActivity(new Intent(context, IntegralCenterActivity.class));
                 } else {
                     Intent broker = new Intent(context, WebActivity.class);
                     broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CATEGORY_LIST + "?categoryId=" + categoryId);

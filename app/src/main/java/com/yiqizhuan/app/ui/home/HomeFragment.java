@@ -120,7 +120,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_chufangyongpin, "厨房用品", "8"));
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_shoubiaoshechi, "手表奢侈", "15"));
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_richangbaihuo, "日常百货", "1"));
-//        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_jifenduihuan, "积分兑换", "-1"));
+        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_jifenduihuan, "积分兑换", "-1"));
     }
 
     @Override

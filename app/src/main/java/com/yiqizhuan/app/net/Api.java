@@ -38,5 +38,7 @@ public class Api {
 
     //查询购物车数量
     public static final String SHOP_CART_COUNT = "/api/shopcart/count";
+    //积分兑换
+    public static final String QUERY_USER_POINTS = "/points/queryUserPoints";
 
 }

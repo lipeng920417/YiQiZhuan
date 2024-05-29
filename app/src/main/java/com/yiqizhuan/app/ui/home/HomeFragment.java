@@ -236,7 +236,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             public void onSuccess(Call call, Response response, ProductListBean result) {
                 if (result != null && result.getData() != null && result.getData().getDetails() != null && result.getData().getDetails().size() > 0) {
                     for (int i = 0; i < result.getData().getDetails().size(); i++) {
-                        if (i < 6) {
+                        if (i < 20) {
                             yueXiangHuiFlexibleAdapter.addItem(new YueXiangHuiFlexibleItem(getActivity(), result.getData().getDetails().get(i)));
                         }
                     }
@@ -267,7 +267,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess(Call call, Response response, ProductListBean result) {
                 for (int i = 0; i < result.getData().getDetails().size(); i++) {
-                    if (i < 6) {
+                    if (i < 20) {
                         changXiangHuiFlexibleAdapter.addItem(new ChangXiangHuiFlexibleItem(getActivity(), result.getData().getDetails().get(i)));
                     }
                 }

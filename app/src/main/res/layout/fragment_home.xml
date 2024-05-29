@@ -322,7 +322,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rcYueXiangHui"
                             android:layout_width="match_parent"
-                            android:layout_height="309dp"
+                            android:layout_height="1030dp"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
                             android:overScrollMode="never" />
@@ -368,7 +368,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rcChangXiangHui"
                             android:layout_width="match_parent"
-                            android:layout_height="309dp"
+                            android:layout_height="1030dp"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
                             android:overScrollMode="never" />

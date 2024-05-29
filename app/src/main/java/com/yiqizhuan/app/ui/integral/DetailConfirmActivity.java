@@ -104,7 +104,7 @@ public class DetailConfirmActivity extends BaseActivity implements View.OnClickL
             case R.id.tvBtn:
                 if (!TextUtils.isEmpty(binding.edtNum.getText().toString()) && Double.parseDouble(binding.edtNum.getText().toString()) > 0) {
                     Intent broker = new Intent(this, WebActivity.class);
-                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_SIGN_AGREEMENT + "?contractPlan=1" + "&contractPoints=" + binding.edtNum.getText().toString());
+                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_SIGN_AGREEMENT + "?contractPlan=1" + "&contractPoints=" + binding.edtNum.getText().toString() + "&userName=" + MMKVHelper.getString("userName", ""));
                     startActivity(broker);
                 } else {
                     ToastUtils.showToast("请输入积分");

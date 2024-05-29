@@ -52,7 +52,7 @@ public class ExchangeProjectFlexibleItem extends AbstractFlexibleItem<ExchangePr
             holder.llyJiFen.setVisibility(View.GONE);
             holder.tvDaiShiFang.setVisibility(View.VISIBLE);
         } else {
-            holder.tvTitle.setText("兑换积分");
+            holder.tvTitle.setText("第一期兑换积分");
             holder.ivYiDuiHuan.setVisibility(View.VISIBLE);
             holder.llyJiFen.setVisibility(View.VISIBLE);
             holder.tvDaiShiFang.setVisibility(View.GONE);

@@ -1,6 +1,7 @@
 package com.yiqizhuan.app.ui.integral;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.gyf.immersionbar.ImmersionBar;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.GetHistoryExchange;
+import com.yiqizhuan.app.bean.UserCouponBean;
 import com.yiqizhuan.app.databinding.ActivityExchangeProjectBinding;
 import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.ui.base.BaseActivity;
@@ -28,6 +30,7 @@ import eu.davidea.flexibleadapter.items.IFlexible;
 public class ExchangeProjectActivity extends BaseActivity implements View.OnClickListener {
     ActivityExchangeProjectBinding binding;
     private FlexibleAdapter<IFlexible> flexibleAdapter;
+    private UserCouponBean queryUserPointsBean;
     private GetHistoryExchange getHistoryExchange;
 
     @Override
@@ -41,6 +44,7 @@ public class ExchangeProjectActivity extends BaseActivity implements View.OnClic
         includeActionbar.setText("积分兑换");
         actionbarBack.setOnClickListener(this);
         if (getIntent() != null && getIntent().getExtras() != null) {
+            queryUserPointsBean = (UserCouponBean) getIntent().getExtras().getSerializable("queryUserPointsBean");
             getHistoryExchange = (GetHistoryExchange) getIntent().getExtras().getSerializable("getHistoryExchange");
         }
         initView();
@@ -56,8 +60,11 @@ public class ExchangeProjectActivity extends BaseActivity implements View.OnClic
 
     private void initData() {
         binding.tvName.setText(MMKVHelper.getString("nickName", "")+"用户您好，您可兑换积分额度为");
-        if (getHistoryExchange != null && getHistoryExchange.getData() != null) {
-            binding.tvNum.setText(getHistoryExchange.getData().getTotalContractPoints());
+//        if (getHistoryExchange != null && getHistoryExchange.getData() != null) {
+//            binding.tvNum.setText(getHistoryExchange.getData().getTotalContractPoints());
+//        }
+        if (queryUserPointsBean != null && queryUserPointsBean.getData() != null && !TextUtils.isEmpty(queryUserPointsBean.getData().getTotalUnavailableQuota())) {
+            binding.tvNum.setText(queryUserPointsBean.getData().getTotalUnavailableQuota());
         }
         if (getHistoryExchange != null && getHistoryExchange.getData() != null && getHistoryExchange.getData().getPointsInfo() != null && getHistoryExchange.getData().getPointsInfo().size() > 0) {
             for (GetHistoryExchange.PointsInfo pointsInfo : getHistoryExchange.getData().getPointsInfo()) {

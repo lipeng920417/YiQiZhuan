@@ -70,6 +70,7 @@ public class IntegralCenterActivity extends BaseActivity implements View.OnClick
             case R.id.tvFangAn:
                 intent = new Intent(this, ExchangeProjectActivity.class);
                 bundle = new Bundle();
+                bundle.putSerializable("queryUserPointsBean", queryUserPointsBean);
                 bundle.putSerializable("getHistoryExchange", getHistoryExchange);
                 intent.putExtras(bundle);
                 startActivity(intent);

@@ -28,7 +28,7 @@ public class WebApi {
     /**
      * 共享汇
      */
-    public static final String WEB_SHARED= "/shared";
+    public static final String WEB_SHARED= "/list?type=2";
 
     /**
      * 悦享汇

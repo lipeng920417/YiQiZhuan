@@ -47,7 +47,7 @@ public class DetailConfirmActivity extends BaseActivity implements View.OnClickL
     private void initView() {
         ImageButton actionbarBack = binding.includeActionbar.actionbarBack;
         TextView includeActionbar = binding.includeActionbar.actionbarTitle;
-        includeActionbar.setText("对付详情确认");
+        includeActionbar.setText("兑换详情确认");
         actionbarBack.setOnClickListener(this);
         binding.tvALL.setOnClickListener(this);
         binding.tvBtn.setOnClickListener(this);
@@ -82,7 +82,7 @@ public class DetailConfirmActivity extends BaseActivity implements View.OnClickL
     private void intiData() {
         if (queryUserPointsBean != null && queryUserPointsBean.getData() != null && !TextUtils.isEmpty(queryUserPointsBean.getData().getTotalUnavailableQuota())) {
             totalUnavailableQuota = queryUserPointsBean.getData().getTotalUnavailableQuota();
-            binding.tvMoney.setText("可兑付金额 (元) ：" + queryUserPointsBean.getData().getTotalUnavailableQuota());
+            binding.tvMoney.setText("可兑换金额 (元) ：" + queryUserPointsBean.getData().getTotalUnavailableQuota());
         }
         binding.tvName.setText(MMKVHelper.getString("nickName", ""));
         binding.tvIdNumber.setText(MMKVHelper.getString("idNumber", ""));

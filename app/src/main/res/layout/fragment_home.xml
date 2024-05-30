@@ -298,6 +298,7 @@
                         android:orientation="vertical">
 
                         <RelativeLayout
+                            android:id="@+id/rlyYueXiangHui"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp">
@@ -344,6 +345,7 @@
                         android:orientation="vertical">
 
                         <RelativeLayout
+                            android:id="@+id/rlyChangXiangHui"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp">

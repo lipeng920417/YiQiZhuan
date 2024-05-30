@@ -69,6 +69,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         binding.ivXiaoxi.setOnClickListener(this);
         binding.rlySearch.setOnClickListener(this);
         binding.ivBanner1.setOnClickListener(this);
+        binding.tvYue.setOnClickListener(this);
+        binding.rlyYueXiangHui.setOnClickListener(this);
+        binding.tvChang.setOnClickListener(this);
+        binding.rlyChangXiangHui.setOnClickListener(this);
         jinGangWeiFlexibleAdapter = new FlexibleAdapter<>(null);
         binding.rcJinGangWei.setLayoutManager(new GridLayoutManager(getActivity(), 5, GridLayoutManager.VERTICAL, false));
         binding.rcJinGangWei.setAdapter(jinGangWeiFlexibleAdapter);
@@ -96,18 +100,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         binding.rcChangXiangHui.setAdapter(changXiangHuiFlexibleAdapter);
         binding.rcChangXiangHui.setItemAnimator(new DefaultItemAnimator());
 
-        //悦享汇
-        binding.tvYue.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), WebActivity.class);
-            intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.web_list_three);
-            startActivity(intent);
-        });
-        //畅享汇
-        binding.tvChang.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), WebActivity.class);
-            intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_LIST_FOUR);
-            startActivity(intent);
-        });
     }
 
     private void initData() {
@@ -125,6 +117,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.ivXiaoxi:
                 PhoneUtil.getPhone(getActivity());
@@ -138,6 +131,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 }).show();
                 break;
             case R.id.ivBanner1:
+                break;
+            //悦享汇
+            case R.id.tvYue:
+            case R.id.rlyYueXiangHui:
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.web_list_three);
+                startActivity(intent);
+                break;
+            case R.id.tvChang:
+            case R.id.rlyChangXiangHui:
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_LIST_FOUR);
+                startActivity(intent);
                 break;
         }
     }

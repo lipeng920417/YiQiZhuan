@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
-            android:text="兑付详情"
+            android:text="兑换详情"
             android:textColor="@color/color_222222"
             android:textSize="18sp"></TextView>
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
-            android:text="可兑付金额 (元) ：0"
+            android:text="可兑换金额 (元) ：0"
             android:textColor="@color/color_888888"
             android:textSize="14sp"></TextView>
 
@@ -100,7 +100,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
-            android:text="备注：可兑付金额≤50元时，需一次性兑换"
+            android:text="备注：可兑换金额≤50元时，需一次性兑换"
             android:textColor="@color/color_ff6d00"
             android:textSize="13sp"></TextView>
 
@@ -224,7 +224,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
-            android:text="兑付方案确认"
+            android:text="兑换方案确认"
             android:textColor="@color/color_222222"
             android:textSize="18sp"></TextView>
 
@@ -239,7 +239,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="我的兑付方案："
+                android:text="我的兑换方案："
                 android:textColor="@color/color_888888"
                 android:textSize="15sp"></TextView>
 

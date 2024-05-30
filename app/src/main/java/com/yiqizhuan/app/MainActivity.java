@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -86,7 +87,9 @@ public class MainActivity extends BaseActivity {
         transaction.hide(mineFragment);
         transaction.commit();
         // 设置BottomNavigationView的监听器
+        binding.navView.setItemIconTintList(null);
         binding.navView.setOnItemSelectedListener(onItemSelectedListener);
+        binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home_select);
     }
 
     private NavigationBarView.OnItemSelectedListener onItemSelectedListener = item -> {
@@ -114,12 +117,21 @@ public class MainActivity extends BaseActivity {
         switch (itemId) {
             case R.id.navigation_home:
                 transaction.show(homeFragment);
+                binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home_select);
+                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.icon_cart);
+                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.icon_my);
                 break;
             case R.id.navigation_dashboard:
                 transaction.show(shoppingFragment);
+                binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home);
+                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.icon_cart_select);
+                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.icon_my);
                 break;
             case R.id.navigation_notifications:
                 transaction.show(mineFragment);
+                binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home);
+                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.icon_cart);
+                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.icon_my_select);
                 break;
         }
         transaction.commit();

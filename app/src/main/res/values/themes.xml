@@ -28,4 +28,10 @@
         <item name="android:activityOpenEnterAnimation">@anim/s_push_left_in</item>
         <item name="android:activityCloseExitAnimation">@anim/s_push_right_out</item>
     </style>
+
+    <!-- 底部导航栏按钮theme. -->
+    <style name="footButton" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
 </resources>

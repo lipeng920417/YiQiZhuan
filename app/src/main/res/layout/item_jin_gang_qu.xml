@@ -33,10 +33,12 @@
 
     <ImageView
         android:id="@+id/ivLiSheng"
-        android:layout_width="39dp"
-        android:layout_height="28dp"
+        android:layout_width="30dp"
+        android:layout_height="14dp"
         android:src="@mipmap/ic_lisheng"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="2dp"
         android:visibility="gone">
     </ImageView>
 

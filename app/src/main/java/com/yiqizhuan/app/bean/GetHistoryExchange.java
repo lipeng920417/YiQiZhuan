@@ -32,7 +32,34 @@ public class GetHistoryExchange extends BaseResult<GetHistoryExchange.Data> {
 
     public static class PointsInfo implements Serializable {
         private int contractPlan;//兑换方案 1 全额兑换 2 分期兑换
+        private String contractPoints;
+        private String signDate;
+        private int state;
         private List<PointContractAuditVOs> pointContractAuditVOs;
+
+        public String getContractPoints() {
+            return contractPoints;
+        }
+
+        public void setContractPoints(String contractPoints) {
+            this.contractPoints = contractPoints;
+        }
+
+        public String getSignDate() {
+            return signDate;
+        }
+
+        public void setSignDate(String signDate) {
+            this.signDate = signDate;
+        }
+
+        public int getState() {
+            return state;
+        }
+
+        public void setState(int state) {
+            this.state = state;
+        }
 
         public int getContractPlan() {
             return contractPlan;

@@ -56,9 +56,22 @@ public class ExchangeProjectFlexibleItem extends AbstractFlexibleItem<ExchangePr
             holder.ivYiDuiHuan.setVisibility(View.VISIBLE);
             holder.llyJiFen.setVisibility(View.VISIBLE);
             holder.tvDaiShiFang.setVisibility(View.GONE);
-            if (pointsInfo != null && pointsInfo.getPointContractAuditVOs() != null && pointsInfo.getPointContractAuditVOs().size() > 0) {
-                holder.tvJiFen.setText(pointsInfo.getPointContractAuditVOs().get(0).getCyclePoints());
-                holder.tvTime.setText(pointsInfo.getPointContractAuditVOs().get(0).getExchangeDate());
+            if (pointsInfo != null) {
+                if (pointsInfo.getState() == 1) {
+                    if (pointsInfo.getPointContractAuditVOs() != null && pointsInfo.getPointContractAuditVOs().size() > 0) {
+                        holder.tvJiFen.setText(pointsInfo.getPointContractAuditVOs().get(0).getCyclePoints());
+                        holder.tvTime.setText(pointsInfo.getPointContractAuditVOs().get(0).getExchangeDate());
+                    }
+                    holder.ivYiDuiHuan.setImageResource(R.mipmap.ic_yiduihuan);
+                } else if (pointsInfo.getState() == 0) {
+                    holder.ivYiDuiHuan.setImageResource(R.mipmap.ic_shenhezhong);
+                    holder.tvJiFen.setText(pointsInfo.getContractPoints());
+                    holder.tvTime.setText("——");
+                } else if (pointsInfo.getState() == 2) {
+                    holder.ivYiDuiHuan.setImageResource(R.mipmap.ic_weitongguo);
+                    holder.tvJiFen.setText(pointsInfo.getContractPoints());
+                    holder.tvTime.setText("——");
+                }
             }
         }
     }

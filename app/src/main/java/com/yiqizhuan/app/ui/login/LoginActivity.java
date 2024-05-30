@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
@@ -48,6 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImmersionBar.with(this).statusBarDarkFont(true).init();
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initView();
@@ -114,7 +116,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
-                ds.setColor(getColor(R.color.color_ff8e22));
+                ds.setColor(getColor(R.color.color_222222));
                 ds.setUnderlineText(false);
             }
         };
@@ -130,7 +132,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
-                ds.setColor(getColor(R.color.color_ff8e22));
+                ds.setColor(getColor(R.color.color_222222));
                 ds.setUnderlineText(false);
             }
         };

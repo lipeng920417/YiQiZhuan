@@ -3,7 +3,7 @@
     <string name="title_home">首页</string>
     <string name="title_shopping">购物车</string>
     <string name="title_mine">我的</string>
-    <string name="login_read_and_agree">已阅读并同意%s %s</string>
+    <string name="login_read_and_agree">已阅读并同意 %s %s</string>
     <string name="login_service_agreement">服务协议</string>
     <string name="login_privacy_agreement">隐私协议</string>
 </resources>

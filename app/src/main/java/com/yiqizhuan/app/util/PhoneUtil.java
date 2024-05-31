@@ -57,7 +57,7 @@ public class PhoneUtil {
     }
 
     private static void callPhone(Context context) {
-        context.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel://" + "010-60286913")));
+        context.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel://" + "400-0788-183")));
     }
 
 }

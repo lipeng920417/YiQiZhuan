@@ -106,7 +106,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_daxiaojiadian, "大小家电", "5"));
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_chayejiushui, "茶叶酒水", "23"));
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_jaijujiafang, "家具家纺", "13"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_pijuxiangbao, "皮具箱包", "23"));
+        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_pijuxiangbao, "皮具箱包", "10"));
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_meizhuanghufu, "美妆护肤", "19"));
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_mingpaifuzhuang, "名牌服装", "32"));
         jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_chufangyongpin, "厨房用品", "8"));

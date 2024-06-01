@@ -144,7 +144,9 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -170,8 +172,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcJinGangWei"
                     android:layout_width="match_parent"
-                    android:layout_height="148dp"
-                    android:overScrollMode="never" />
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:nestedScrollingEnabled="false"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -323,10 +326,11 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rcYueXiangHui"
                             android:layout_width="match_parent"
-                            android:layout_height="1030dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
-                            android:overScrollMode="never" />
+                            android:overScrollMode="never"
+                            android:nestedScrollingEnabled="false"/>
 
                         <TextView
                             android:id="@+id/tvYue"
@@ -370,10 +374,11 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rcChangXiangHui"
                             android:layout_width="match_parent"
-                            android:layout_height="1030dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
-                            android:overScrollMode="never" />
+                            android:overScrollMode="never"
+                            android:nestedScrollingEnabled="false"/>
 
                         <TextView
                             android:id="@+id/tvChang"

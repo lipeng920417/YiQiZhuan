@@ -50,7 +50,11 @@ public class Common1BannerAdapter extends BannerAdapter<ProductListBean.Detail, 
             if (!TextUtils.isEmpty(data.getMainImage())) {
                 GlideUtil.loadImage(data.getMainImage(), holder.iv);
             }
-            holder.tv1.setText("超值价￥" + data.getOriginalPrice());
+            if (!TextUtils.isEmpty(data.getOriginalPrice()) && !TextUtils.isEmpty(data.getDiscountPrice())) {
+                holder.tv1.setText("超值价￥" + (Double.parseDouble(data.getOriginalPrice()) - Double.parseDouble(data.getDiscountPrice())));
+            } else {
+                holder.tv1.setText("超值价￥" + data.getOriginalPrice());
+            }
             holder.tv2.setText("￥" + data.getOriginalPrice());
             TextPaint paint = holder.tv2.getPaint();
             paint.setStrikeThruText(true);

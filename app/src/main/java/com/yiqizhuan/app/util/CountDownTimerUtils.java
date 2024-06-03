@@ -57,6 +57,6 @@ public class CountDownTimerUtils extends CountDownTimer {
     public void onFinish() {
         mTextView.setText("重新发送");
         mTextView.setClickable(true);//重新获得点击
-        mTextView.setBackgroundResource(R.drawable.background_conner_ff8e22_26dp);  //还原背景色
+        mTextView.setBackgroundResource(R.drawable.background_conner_ff1804_7dp);  //还原背景色
     }
 }

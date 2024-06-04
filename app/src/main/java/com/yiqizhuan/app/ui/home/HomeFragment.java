@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.BaseResult;
+import com.yiqizhuan.app.bean.CategoryDefaultBean;
+import com.yiqizhuan.app.bean.GetDiscountCategoryBean;
 import com.yiqizhuan.app.bean.ProductDefaultBean;
 import com.yiqizhuan.app.bean.ProductListBean;
 import com.yiqizhuan.app.databinding.FragmentHomeBinding;
@@ -48,6 +50,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private FlexibleAdapter<IFlexible> yueXiangHuiFlexibleAdapter;
     private FlexibleAdapter<IFlexible> changXiangHuiFlexibleAdapter;
     private ProductDefaultBean productDefaultBean;
+    private GetDiscountCategoryBean discountCategoryBean;
+    private List<CategoryDefaultBean> categoryDefaultBeanList;
     private int page = 1;
     private int size = 50;
 
@@ -57,7 +61,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         View root = binding.getRoot();
         StatusBarUtils.setViewHeaderPlaceholder(binding.viewHeaderPlaceholder);
         initView();
-        initData();
+//        initData();
+        getDiscountCategory();
         productDefault();
         productBestsellers();
         yueList();
@@ -103,16 +108,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initData() {
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_daxiaojiadian, "大小家电", "5"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_chayejiushui, "茶叶酒水", "23"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_jaijujiafang, "家具家纺", "13"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_pijuxiangbao, "皮具箱包", "10"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_meizhuanghufu, "美妆护肤", "19"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_mingpaifuzhuang, "名牌服装", "32"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_chufangyongpin, "厨房用品", "8"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_shoubiaoshechi, "手表奢侈", "15"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_richangbaihuo, "日用百货", "1"));
-        jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), R.mipmap.ic_jifenduihuan, "积分兑换", "-1"));
+        if (categoryDefaultBeanList == null) {
+            categoryDefaultBeanList = new ArrayList<>();
+        }
+        categoryDefaultBeanList.add(new CategoryDefaultBean("-1", "积分兑换", "", ""));
+        for (CategoryDefaultBean categoryDefaultBean : categoryDefaultBeanList) {
+            jinGangWeiFlexibleAdapter.addItem(new JinGangQuFlexibleItem(getActivity(), categoryDefaultBean, discountCategoryBean));
+        }
     }
 
     @Override
@@ -165,6 +167,55 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         super.onDestroyView();
         binding = null;
     }
+
+    /**
+     * 获取 类目立减 图标
+     */
+    private void getDiscountCategory() {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        OkHttpManager.getInstance().getRequest(Api.CATEGORY_GETDISCOUNTCATEGORY, paramsMap, new BaseCallBack<GetDiscountCategoryBean>() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getCategoryDefault();
+            }
+
+            @Override
+            public void onSuccess(Call call, Response response, GetDiscountCategoryBean getDiscountCategoryBean) {
+                discountCategoryBean = getDiscountCategoryBean;
+                getCategoryDefault();
+            }
+
+            @Override
+            public void onError(Call call, int statusCode, Exception e) {
+                getCategoryDefault();
+            }
+        });
+    }
+
+    /**
+     * 获取 类目列表
+     */
+    private void getCategoryDefault() {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        OkHttpManager.getInstance().getRequest(Api.CATEGORY_DEFAULT, paramsMap, new BaseCallBack<BaseResult<List<CategoryDefaultBean>>>() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onSuccess(Call call, Response response, BaseResult<List<CategoryDefaultBean>> result) {
+                if (result != null && result.getData() != null) {
+                    categoryDefaultBeanList = result.getData();
+                    initData();
+                }
+            }
+
+            @Override
+            public void onError(Call call, int statusCode, Exception e) {
+            }
+        });
+    }
+
 
     /**
      * 默认商品

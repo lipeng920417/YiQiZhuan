@@ -62,7 +62,8 @@ public class ShoppingFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden){
-            mAgentWeb.getWebCreator().getWebView().reload();
+            mAgentWeb.getWebCreator().getWebView().clearHistory();
+            mAgentWeb.getWebCreator().getWebView().loadUrl(BuildConfig.BASE_WEB_URL + WebApi.WEB_CART);
         }
     }
 

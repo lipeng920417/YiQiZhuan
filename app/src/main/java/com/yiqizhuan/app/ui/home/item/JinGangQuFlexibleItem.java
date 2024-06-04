@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
+import com.yiqizhuan.app.bean.CategoryDefaultBean;
+import com.yiqizhuan.app.bean.GetDiscountCategoryBean;
 import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.integral.IntegralCenterActivity;
+import com.yiqizhuan.app.util.GlideUtil;
 import com.yiqizhuan.app.views.dialog.DialogUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 
@@ -30,15 +33,13 @@ import eu.davidea.flexibleadapter.items.IFlexible;
 
 public class JinGangQuFlexibleItem extends AbstractFlexibleItem<JinGangQuFlexibleItem.ItemViewHolder> {
     public Context context;
-    public int id;
-    public String name;
-    public String categoryId;
+    public CategoryDefaultBean categoryDefaultBean;
+    public GetDiscountCategoryBean discountCategoryBean;
 
-    public JinGangQuFlexibleItem(Context context, int id, String name, String categoryId) {
+    public JinGangQuFlexibleItem(Context context, CategoryDefaultBean categoryDefaultBean, GetDiscountCategoryBean discountCategoryBean) {
         this.context = context;
-        this.id = id;
-        this.name = name;
-        this.categoryId = categoryId;
+        this.categoryDefaultBean = categoryDefaultBean;
+        this.discountCategoryBean = discountCategoryBean;
     }
 
     @Override
@@ -58,29 +59,40 @@ public class JinGangQuFlexibleItem extends AbstractFlexibleItem<JinGangQuFlexibl
 
     @Override
     public void bindViewHolder(FlexibleAdapter<IFlexible> adapter, ItemViewHolder holder, int position, List<Object> payloads) {
-        holder.iv.setImageResource(id);
-        holder.tvName.setText(name);
-        if ("15".equals(categoryId)) {
-            holder.ivLiSheng.setVisibility(View.VISIBLE);
-        } else {
-            holder.ivLiSheng.setVisibility(View.GONE);
-        }
-        holder.lly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if ("-1".equals(categoryId)) {
-                    if (TextUtils.isEmpty(MMKVHelper.getString("token", ""))) {
-                        LiveEventBus.get("goToLogin").post("");
-                    } else {
-                        context.startActivity(new Intent(context, IntegralCenterActivity.class));
-                    }
-                } else {
-                    Intent broker = new Intent(context, WebActivity.class);
-                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CATEGORY_LIST + "?categoryId=" + categoryId);
-                    context.startActivity(broker);
-                }
+        if (categoryDefaultBean != null) {
+            if ("-1".equals(categoryDefaultBean.getId())) {
+                holder.iv.setImageResource(R.mipmap.ic_jifenduihuan);
+            } else {
+                GlideUtil.loadImage(categoryDefaultBean.getImageUrl(), holder.iv);
             }
-        });
+            holder.tvName.setText(categoryDefaultBean.getName());
+            if (discountCategoryBean != null && discountCategoryBean.getData() != null) {
+                if (TextUtils.equals(categoryDefaultBean.getId(), discountCategoryBean.getData().getCategoryId())) {
+                    holder.ivLiSheng.setVisibility(View.VISIBLE);
+                    GlideUtil.loadImage(discountCategoryBean.getData().getDiscountUrl(), holder.ivLiSheng);
+                } else {
+                    holder.ivLiSheng.setVisibility(View.GONE);
+                }
+            } else {
+                holder.ivLiSheng.setVisibility(View.GONE);
+            }
+            holder.lly.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if ("-1".equals(categoryDefaultBean.getId())) {
+                        if (TextUtils.isEmpty(MMKVHelper.getString("token", ""))) {
+                            LiveEventBus.get("goToLogin").post("");
+                        } else {
+                            context.startActivity(new Intent(context, IntegralCenterActivity.class));
+                        }
+                    } else {
+                        Intent broker = new Intent(context, WebActivity.class);
+                        broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CATEGORY_LIST + "?categoryId=" + categoryDefaultBean.getId());
+                        context.startActivity(broker);
+                    }
+                }
+            });
+        }
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {

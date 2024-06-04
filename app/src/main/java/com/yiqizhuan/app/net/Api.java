@@ -45,4 +45,10 @@ public class Api {
     //积分明细查询
     public static final String HISTORY_DETAIL = "/points/historyDetail";
 
+    //获取 类目列表
+    public static final String CATEGORY_DEFAULT = "/category/default";
+    //获取 类目立减 图标
+    public static final String CATEGORY_GETDISCOUNTCATEGORY = "/category/getDiscountCategory";
+
+
 }

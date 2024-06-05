@@ -2,6 +2,8 @@ package com.yiqizhuan.app.ui.shopping;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +46,7 @@ public class ShoppingFragment extends BaseFragment {
                 .useDefaultIndicator(getResources().getColor(R.color.color_transparent))
                 .createAgentWeb().ready().go(BuildConfig.BASE_WEB_URL + WebApi.WEB_CART);
         mAgentWeb.getWebCreator().getWebView().setBackgroundColor(Color.WHITE);
-        mAgentWeb.getWebCreator().getWebView().addJavascriptInterface(new AndroidJSInterface(getContext()),"AndroidBridge");
+        mAgentWeb.getWebCreator().getWebView().addJavascriptInterface(new AndroidJSInterface(getContext()), "AndroidBridge");
         LiveEventBus.get("webViewClose", String.class).observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -61,9 +63,19 @@ public class ShoppingFragment extends BaseFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden){
-            mAgentWeb.getWebCreator().getWebView().clearHistory();
-            mAgentWeb.getWebCreator().getWebView().loadUrl(BuildConfig.BASE_WEB_URL + WebApi.WEB_CART);
+        if (!hidden) {
+            if (TextUtils.equals(MMKVHelper.getString("webView", "webView"), "reload")) {
+                mAgentWeb.getWebCreator().getWebView().loadUrl(BuildConfig.BASE_WEB_URL + WebApi.WEB_CART);
+                //                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mAgentWeb.getWebCreator().getWebView().reload();
+//                    }
+//                }, 300);
+            } else {
+                mAgentWeb.getWebCreator().getWebView().reload();
+                MMKVHelper.putString("webView", "reload");
+            }
         }
     }
 

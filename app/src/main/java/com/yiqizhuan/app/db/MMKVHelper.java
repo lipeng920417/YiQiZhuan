@@ -61,6 +61,7 @@ public class MMKVHelper {
         MMKVHelper.remove("userName");
         MMKVHelper.remove("idNumber");
         MMKVHelper.remove("token");
+        MMKVHelper.remove("webView");
     }
 
 

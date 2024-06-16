@@ -100,7 +100,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 .setIndicatorSliderColor(getActivity().getColor(R.color.color_transparent), getActivity()
                         .getColor(R.color.color_transparent))
                 .setPageMargin(SizeUtils.dp2px(8))
-                .setRevealWidth(SizeUtils.dp2px(0), SizeUtils.dp2px(275))
+                .setRevealWidth(SizeUtils.dp2px(0), SizeUtils.dip2px(getActivity(),275))
                 .setPageStyle(PageStyle.NORMAL)
                 .create();
         List<Integer> strings = new ArrayList<>();

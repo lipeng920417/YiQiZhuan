@@ -31,7 +31,7 @@ public class Api {
     public static final String QUERY_USER_COUPON = "/coupon/queryUserCoupon";
 
     //默认商品
-    public static final String PRODUCT_DEFAULT = "/product/default";
+    public static final String PRODUCT_DEFAULT = "/product/default/1.0.5";
 
     //本周热销
     public static final String PRODUCT_BESTSELLERS = "/product/bestsellers";
@@ -49,6 +49,10 @@ public class Api {
     public static final String CATEGORY_DEFAULT = "/category/default";
     //获取 类目立减 图标
     public static final String CATEGORY_GETDISCOUNTCATEGORY = "/category/getDiscountCategory";
+    //尊享汇轮播图接口
+    public static final String CURATED_CAROUSEL = "/product/curated/carousel";
+    //尊享汇中部商品接口
+    public static final String CURATED_MIDDLE = "/product/curated/middle";
 
-
+    public static final String PRODUCT_CRAZY_BUY= "/product/crazy/buy";
 }

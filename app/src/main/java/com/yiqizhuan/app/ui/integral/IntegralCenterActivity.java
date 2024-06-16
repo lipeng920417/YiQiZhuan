@@ -17,6 +17,7 @@ import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.ui.base.BaseActivity;
 import com.yiqizhuan.app.util.ToastUtils;
+import com.yiqizhuan.app.views.dialog.DialogUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -47,6 +48,7 @@ public class IntegralCenterActivity extends BaseActivity implements View.OnClick
         binding.ivCheckbox.setOnClickListener(this);
         binding.tvAgreement.setOnClickListener(this);
         binding.tvBtn.setOnClickListener(this);
+        binding.ivHint.setOnClickListener(this);
         queryUserPoints();
         getHistoryExchange();
     }
@@ -96,6 +98,14 @@ public class IntegralCenterActivity extends BaseActivity implements View.OnClick
                 bundle.putSerializable("queryUserPointsBean", queryUserPointsBean);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                break;
+            case R.id.ivHint:
+                DialogUtil.build1BtnDialog(this, "当前积分为还未兑换积分数，兑换已发放可消费积分可以去我的页面查看", "我知道了", true, new DialogUtil.DialogListener1Btn() {
+                    @Override
+                    public void onPositiveClick(View v) {
+
+                    }
+                }).show();
                 break;
         }
     }

@@ -39,25 +39,35 @@ public class LaunchActivity extends BaseActivity {
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         binding = ActivityLaunchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Glide.with(this).asGif().load(R.mipmap.ic_launch).into(binding.iv);
+//        Glide.with(this).asGif().load(R.mipmap.ic_launch).into(binding.iv);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                String isFirstStart = MMKVHelper.getString("isFirstStart", "0");
-                if (TextUtils.equals(isFirstStart, "1")) {
-                    Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    privacyDialog();
-                }
+                skip();
             }
-        }, 2500);
+        }, 2000);
+        binding.tvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                skip();
+            }
+        });
+    }
+
+    private void skip() {
+        String isFirstStart = MMKVHelper.getString("isFirstStart", "0");
+        if (TextUtils.equals(isFirstStart, "1")) {
+            Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            privacyDialog();
+        }
     }
 
     public void privacyDialog() {
 //        我们需要收集您的设备信息等个人信息，
-        SpannableString spannableString = new SpannableString("欢迎使用起点Go商城，为了向您提供起点Go商城的软件服务，您可以在相关页面访问、更正、删除您的个人信息并管理您的授权。\\n您可通过阅读《起点Go商城用户服务协议》和《起点Go商城用户隐私协议》了解详细信息，如您同意，请点击“同意”开始接受我们的服务。如您不同意，将退出程序");
+        SpannableString spannableString = new SpannableString("欢迎使用起点Go商城，为了向您提供起点Go商城的软件服务，您可以在相关页面访问、更正、删除您的个人信息并管理您的授权。您可通过阅读《起点Go商城用户服务协议》和《起点Go商城用户隐私协议》了解详细信息，如您同意，请点击“同意”开始接受我们的服务。如您不同意，将退出程序");
         ClickableSpan clickableSpanUserAgreement = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
@@ -84,9 +94,9 @@ public class LaunchActivity extends BaseActivity {
                 ds.setColor(getResources().getColor(R.color.color_ff8e22));
             }
         };
-        spannableString.setSpan(clickableSpanUserAgreement, 67, 81, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(clickableSpanSecretAgreement, 82, 96, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        DialogUtil.build2BtnTitle(LaunchActivity.this, "用户服务隐私协议?",spannableString, "确定", "不同意", false, new DialogUtil.DialogListener2Btn() {
+        spannableString.setSpan(clickableSpanUserAgreement, 65, 79, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(clickableSpanSecretAgreement, 80, 94, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        DialogUtil.build2BtnTitle(LaunchActivity.this, "用户服务隐私协议?", spannableString, "确定", "不同意", false, new DialogUtil.DialogListener2Btn() {
             @Override
             public void onPositiveClick(View v) {
                 MMKVHelper.putString("isFirstStart", "1");

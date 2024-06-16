@@ -151,7 +151,7 @@
                         <ImageView
                             android:id="@+id/ivHint"
                             android:layout_width="14dp"
-                            android:layout_height="14dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
                             android:layout_marginTop="1dp"
                             android:scaleType="fitXY"

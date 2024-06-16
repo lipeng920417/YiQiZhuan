@@ -77,9 +77,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="账户积分"
+                        android:text="可兑换积分"
                         android:textColor="@color/white"
                         android:textSize="18sp"></TextView>
+
+                    <ImageView
+                        android:id="@+id/ivHint"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="1dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_hint"></ImageView>
 
                 </LinearLayout>
 

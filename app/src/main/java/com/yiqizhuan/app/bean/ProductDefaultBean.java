@@ -9,11 +9,11 @@ import java.util.List;
 public class ProductDefaultBean extends BaseResult<ProductDefaultBean.Data>{
 
     public static class Data {
-        //精选汇
+        //尊享
        private List<ProductListBean.Detail> curated_product;
         //共享汇
         private List<ProductListBean.Detail> earn_together;
-        //每日
+        //悦享
         private List<ProductListBean.Detail> daily_exchange;
         //畅享
         private List<ProductListBean.Detail> enjoyable_exchange;

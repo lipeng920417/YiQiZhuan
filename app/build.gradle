@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.qdgo.app"
-        minSdk 26
+        minSdk 24
         targetSdk 33
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
@@ -115,5 +115,6 @@ dependencies {
     implementation  'io.github.scwang90:refresh-footer-ball:2.1.0'        //球脉冲加载
     implementation  'io.github.scwang90:refresh-footer-classics:2.1.0'    //经典加载
     api 'com.github.getActivity:XXPermissions:16.8'
+    implementation 'com.github.zhpanvip:bannerviewpager:3.5.12'
 
 }

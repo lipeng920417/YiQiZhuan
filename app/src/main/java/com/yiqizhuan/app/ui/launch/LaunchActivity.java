@@ -45,7 +45,7 @@ public class LaunchActivity extends BaseActivity {
             public void run() {
                 skip();
             }
-        }, 2000);
+        }, 1500);
         binding.tvSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

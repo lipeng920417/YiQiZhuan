@@ -313,13 +313,13 @@
                                         android:layout_centerHorizontal="true"
                                         android:background="@mipmap/ic_biaoqian_yuexiang"
                                         android:gravity="center"
-                                        android:paddingLeft="14dp"
-                                        android:paddingRight="8dp"
+                                        android:paddingLeft="10dp"
+                                        android:paddingRight="4dp"
                                         android:singleLine="true"
                                         android:ellipsize="end"
                                         android:text="￥299"
                                         android:textColor="@color/white"
-                                        android:textSize="10sp"></TextView>
+                                        android:textSize="8sp"></TextView>
 
                                 </RelativeLayout>
 
@@ -344,13 +344,13 @@
                                         android:layout_centerHorizontal="true"
                                         android:background="@mipmap/ic_biaoqian_yuexiang"
                                         android:gravity="center"
-                                        android:paddingLeft="14dp"
-                                        android:paddingRight="8dp"
+                                        android:paddingLeft="10dp"
+                                        android:paddingRight="4dp"
                                         android:singleLine="true"
                                         android:ellipsize="end"
                                         android:text="￥299"
                                         android:textColor="@color/white"
-                                        android:textSize="10sp"></TextView>
+                                        android:textSize="8sp"></TextView>
 
                                 </RelativeLayout>
                             </LinearLayout>
@@ -497,7 +497,7 @@
                                             android:layout_centerHorizontal="true"
                                             android:background="@mipmap/ic_biaoqianw"
                                             android:gravity="center"
-                                            android:paddingLeft="14dp"
+                                            android:paddingLeft="10dp"
                                             android:paddingRight="4dp"
                                             android:singleLine="true"
                                             android:ellipsize="end"
@@ -547,7 +547,7 @@
                                             android:layout_centerHorizontal="true"
                                             android:background="@mipmap/ic_biaoqianw"
                                             android:gravity="center"
-                                            android:paddingLeft="14dp"
+                                            android:paddingLeft="10dp"
                                             android:paddingRight="4dp"
                                             android:singleLine="true"
                                             android:ellipsize="end"
@@ -601,7 +601,7 @@
                                             android:layout_centerHorizontal="true"
                                             android:background="@mipmap/ic_biaoqianw"
                                             android:gravity="center"
-                                            android:paddingLeft="14dp"
+                                            android:paddingLeft="10dp"
                                             android:paddingRight="4dp"
                                             android:singleLine="true"
                                             android:ellipsize="end"
@@ -648,7 +648,7 @@
                                             android:layout_centerHorizontal="true"
                                             android:background="@mipmap/ic_biaoqianw"
                                             android:gravity="center"
-                                            android:paddingLeft="14dp"
+                                            android:paddingLeft="10dp"
                                             android:paddingRight="4dp"
                                             android:singleLine="true"
                                             android:ellipsize="end"

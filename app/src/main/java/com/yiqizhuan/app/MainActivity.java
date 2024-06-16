@@ -37,6 +37,7 @@ import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.util.UnreadMsgUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -299,10 +300,26 @@ public class MainActivity extends BaseActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         String current = new StringBuilder().append(year).append(month).append(day).toString();
         String homePop = MMKVHelper.getString("homePop", "");
-        if (!TextUtils.equals(homePop, current)) {
-            binding.llyPop.setVisibility(View.VISIBLE);
+        JSONObject object;
+        int homePopNum = 0;
+        if (!TextUtils.isEmpty(homePop)) {
+            try {
+                object = new JSONObject(homePop);
+                homePopNum = Integer.parseInt(object.getString(current));
+            } catch (Exception e) {
+            }
         }
-        MMKVHelper.putString("homePop", current);
+        if (homePopNum < 2) {
+            homePopNum++;
+            binding.llyPop.setVisibility(View.VISIBLE);
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put(current, homePopNum);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+            MMKVHelper.putString("homePop", jsonObject.toString());
+        }
     }
 
 //    @Override

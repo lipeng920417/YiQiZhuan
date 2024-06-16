@@ -74,7 +74,7 @@ public class RemitFragment extends BaseFragment implements View.OnClickListener 
                 .setIndicatorSliderColor(getActivity().getColor(R.color.color_transparent),getActivity().getColor(R.color.color_transparent))
                 .setPageMargin(SizeUtils.dp2px(6))
                 .setRevealWidth(SizeUtils.dp2px(0), SizeUtils.dp2px(270))
-                .setPageStyle(PageStyle.MULTI_PAGE_SCALE, 0.9f).create();
+                .setPageStyle(PageStyle.MULTI_PAGE_SCALE, 0.8f).create();
         binding.ivXiaoxi.setOnClickListener(this);
         binding.smartRefreshLayout.setEnableRefresh(false);
         binding.smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {

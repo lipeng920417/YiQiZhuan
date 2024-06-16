@@ -75,7 +75,7 @@ public class JinRiFlexibleItem extends AbstractFlexibleItem<JinRiFlexibleItem.It
             }
             holder.tvLabel.setText(num + "000+" + "人正在抢购");
             holder.tvMoney.setText(detail.getOriginalPrice());
-            holder.tvZhiJiang.setText(BigDecimalUtil.round(Double.valueOf(detail.getOriginalPrice()) * 0.16, 1) + "");
+            holder.tvZhiJiang.setText(BigDecimalUtil.round(Double.valueOf(detail.getOriginalPrice()) * 0.13, 1) + "");
             holder.lly.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

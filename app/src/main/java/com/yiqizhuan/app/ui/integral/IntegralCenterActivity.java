@@ -100,7 +100,7 @@ public class IntegralCenterActivity extends BaseActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.ivHint:
-                DialogUtil.build1BtnDialog(this, "当前积分为还未兑换积分数，兑换已发放可消费积分可以去我的页面查看", "我知道了", true, new DialogUtil.DialogListener1Btn() {
+                DialogUtil.build1BtnDialog(this, "可兑换积分为账户预发放积分，需要兑换成功后发放至账户，已发放账户积分前往我的页面查看", "我知道了", true, new DialogUtil.DialogListener1Btn() {
                     @Override
                     public void onPositiveClick(View v) {
 

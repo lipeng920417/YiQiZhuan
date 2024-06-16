@@ -295,8 +295,8 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="70dp"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginRight="8dp"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginRight="6dp"
                                     android:layout_weight="1">
 
                                     <ImageView
@@ -313,7 +313,7 @@
                                         android:layout_centerHorizontal="true"
                                         android:background="@mipmap/ic_biaoqian_yuexiang"
                                         android:gravity="center"
-                                        android:paddingLeft="10dp"
+                                        android:paddingLeft="12dp"
                                         android:paddingRight="4dp"
                                         android:singleLine="true"
                                         android:ellipsize="end"
@@ -326,8 +326,8 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="70dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginRight="15dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="12dp"
                                     android:layout_weight="1">
 
                                     <ImageView
@@ -344,7 +344,7 @@
                                         android:layout_centerHorizontal="true"
                                         android:background="@mipmap/ic_biaoqian_yuexiang"
                                         android:gravity="center"
-                                        android:paddingLeft="10dp"
+                                        android:paddingLeft="12dp"
                                         android:paddingRight="4dp"
                                         android:singleLine="true"
                                         android:ellipsize="end"
@@ -381,8 +381,8 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="70dp"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginRight="8dp"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginRight="6dp"
                                     android:layout_weight="1">
 
                                     <ImageView
@@ -414,8 +414,8 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="70dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginRight="15dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="12dp"
                                     android:layout_weight="1">
 
                                     <ImageView
@@ -475,8 +475,8 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginRight="8dp"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginRight="6dp"
                                     android:orientation="vertical">
                                     <RelativeLayout
                                         android:layout_width="match_parent"
@@ -525,8 +525,8 @@
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginRight="15dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="12dp"
                                     android:layout_weight="1"
                                     android:orientation="vertical">
                                     <RelativeLayout
@@ -579,8 +579,8 @@
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginRight="8dp"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginRight="6dp"
                                     android:layout_weight="1"
                                     android:orientation="vertical">
                                     <RelativeLayout
@@ -626,8 +626,8 @@
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginRight="15dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="12dp"
                                     android:layout_weight="1"
                                     android:orientation="vertical">
                                     <RelativeLayout

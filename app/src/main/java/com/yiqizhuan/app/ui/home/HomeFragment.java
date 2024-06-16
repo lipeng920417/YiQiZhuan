@@ -96,14 +96,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         binding.rcJinGangWei.setAdapter(jinGangWeiFlexibleAdapter);
         binding.rcJinGangWei.setItemAnimator(new DefaultItemAnimator());
         //尊享专区
-        binding.bannerViewPager.setAdapter(new BannerZhuanQuAdapter(getActivity()))
-                .setScrollDuration(800)
-                .setIndicatorSliderColor(getActivity().getColor(R.color.color_transparent), getActivity()
-                        .getColor(R.color.color_transparent))
-                .setPageMargin(SizeUtils.dp2px(8))
-                .setRevealWidth(SizeUtils.dp2px(0), SizeUtils.dip2px(getActivity(),275))
-                .setPageStyle(PageStyle.NORMAL)
-                .create();
         List<Integer> strings = new ArrayList<>();
         strings.add(R.mipmap.ic_zunxiang1);
         strings.add(R.mipmap.ic_zunxiang2);
@@ -113,12 +105,22 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         strings.add(R.mipmap.ic_zunxiang6);
         strings.add(R.mipmap.ic_zunxiang7);
         strings.add(R.mipmap.ic_zunxiang8);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.bannerViewPager.refreshData(strings);
-            }
-        },500);
+        binding.bannerViewPager.setAdapter(new BannerZhuanQuAdapter(getActivity()))
+                .setAutoPlay(true)
+                .setScrollDuration(600).setInterval(4500)
+                .setIndicatorSliderColor(getActivity().getColor(R.color.color_transparent), getActivity()
+                        .getColor(R.color.color_transparent))
+                .setPageMargin(SizeUtils.dp2px(8))
+                .setRevealWidth(SizeUtils.dp2px(0), SizeUtils.dip2px(getActivity(),275))
+                .setPageStyle(PageStyle.NORMAL)
+                .create(strings);
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.bannerViewPager.refreshData(strings);
+//            }
+//        },500);
 
         jinRiFlexibleAdapter = new FlexibleAdapter<>(null);
         binding.rcJinRi.setLayoutManager(new LinearLayoutManager(getActivity()));

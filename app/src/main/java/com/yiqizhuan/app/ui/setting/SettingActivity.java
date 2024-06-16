@@ -102,8 +102,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 }).show();
                 break;
             case R.id.tvCancel:
-                DialogUtil.build2BtnDialog(this, "账户注销是不可逆行为，会导致您账户下的积分、订单等数据注销后无法恢复。\n" +
-                        "您确认要注销当前账户吗？", "确定注销", "取消", true, new DialogUtil.DialogListener2Btn() {
+                DialogUtil.build2BtnDialog(this, "账户注销是不可逆行为，会导致您账户下的积分、订单等数据注销后无法恢复，您确认要注销当前账户吗？", "确定注销", "取消", true, new DialogUtil.DialogListener2Btn() {
                     @Override
                     public void onPositiveClick(View v) {
                         cancelLogout();

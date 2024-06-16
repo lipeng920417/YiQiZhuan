@@ -70,7 +70,8 @@ public class RemitFragment extends BaseFragment implements View.OnClickListener 
 
     private void initView() {
         binding.bannerViewPager.setAdapter(new BannerAdapter(getActivity()))
-                .setScrollDuration(800)
+                .setAutoPlay(true)
+                .setScrollDuration(600).setInterval(4000)
                 .setIndicatorSliderColor(getActivity().getColor(R.color.color_transparent),getActivity().getColor(R.color.color_transparent))
                 .setPageMargin(SizeUtils.dp2px(6))
                 .setRevealWidth(SizeUtils.dp2px(0), SizeUtils.dp2px(270))

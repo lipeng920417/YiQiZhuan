@@ -144,9 +144,9 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcJinGangWei"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="158dp"
                         android:nestedScrollingEnabled="false"
-                        android:overScrollMode="never" />
+                        android:overScrollMode="never"/>
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
@@ -399,8 +399,8 @@
                                         android:layout_centerHorizontal="true"
                                         android:background="@drawable/background_conner_ff5400_8dp"
                                         android:gravity="center"
-                                        android:paddingLeft="6dp"
-                                        android:paddingRight="6dp"
+                                        android:paddingLeft="4dp"
+                                        android:paddingRight="4dp"
                                         android:paddingTop="1dp"
                                         android:paddingBottom="2dp"
                                         android:singleLine="true"
@@ -432,12 +432,10 @@
                                         android:layout_centerHorizontal="true"
                                         android:background="@drawable/background_conner_ff5400_8dp"
                                         android:gravity="center"
-                                        android:paddingLeft="6dp"
-                                        android:paddingRight="6dp"
+                                        android:paddingLeft="4dp"
+                                        android:paddingRight="4dp"
                                         android:paddingTop="1dp"
                                         android:paddingBottom="2dp"
-                                        android:singleLine="true"
-                                        android:ellipsize="end"
                                         android:text="便宜更好用"
                                         android:textColor="@color/white"
                                         android:textSize="10sp"></TextView>

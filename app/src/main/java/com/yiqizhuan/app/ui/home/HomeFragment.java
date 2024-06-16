@@ -3,6 +3,7 @@ package com.yiqizhuan.app.ui.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
@@ -112,7 +113,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         strings.add(R.mipmap.ic_zunxiang6);
         strings.add(R.mipmap.ic_zunxiang7);
         strings.add(R.mipmap.ic_zunxiang8);
-        binding.bannerViewPager.refreshData(strings);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                binding.bannerViewPager.refreshData(strings);
+            }
+        },500);
 
         jinRiFlexibleAdapter = new FlexibleAdapter<>(null);
         binding.rcJinRi.setLayoutManager(new LinearLayoutManager(getActivity()));

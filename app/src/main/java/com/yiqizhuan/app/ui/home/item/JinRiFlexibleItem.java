@@ -16,6 +16,7 @@ import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.ProductListBean;
 import com.yiqizhuan.app.net.WebApi;
+import com.yiqizhuan.app.util.BigDecimalUtil;
 import com.yiqizhuan.app.util.GlideUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 
@@ -74,8 +75,7 @@ public class JinRiFlexibleItem extends AbstractFlexibleItem<JinRiFlexibleItem.It
             }
             holder.tvLabel.setText(num + "000+" + "人正在抢购");
             holder.tvMoney.setText(detail.getOriginalPrice());
-            int price = (int) Math.floor(Double.valueOf(detail.getOriginalPrice()) * 0.13);
-            holder.tvZhiJiang.setText(price + "");
+            holder.tvZhiJiang.setText(BigDecimalUtil.round(Double.valueOf(detail.getOriginalPrice()) * 0.16, 1) + "");
             holder.lly.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

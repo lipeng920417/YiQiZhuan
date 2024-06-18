@@ -16,7 +16,6 @@ import com.scwang.smart.refresh.footer.BallPulseFooter;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
-import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.BaseResult;
 import com.yiqizhuan.app.bean.ProductListBean;
@@ -24,7 +23,6 @@ import com.yiqizhuan.app.databinding.FragmentRemitBinding;
 import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
-import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseFragment;
 import com.yiqizhuan.app.ui.home.item.BottomFlexibleItem;
 import com.yiqizhuan.app.ui.remit.adapter.BannerAdapter;
@@ -34,8 +32,8 @@ import com.yiqizhuan.app.ui.shopping.ShoppingViewModel;
 import com.yiqizhuan.app.util.PhoneUtil;
 import com.yiqizhuan.app.util.SizeUtils;
 import com.yiqizhuan.app.util.StatusBarUtils;
-import com.yiqizhuan.app.views.dialog.DialogUtil;
-import com.yiqizhuan.app.webview.WebActivity;
+import com.yiqizhuan.app.views.ScaleInTransformerCustom;
+import com.yiqizhuan.app.views.ScaleInTransformerCustom1;
 import com.zhpan.bannerview.constants.PageStyle;
 
 import java.io.IOException;
@@ -73,9 +71,11 @@ public class RemitFragment extends BaseFragment implements View.OnClickListener 
                 .setAutoPlay(true)
                 .setScrollDuration(600).setInterval(4000)
                 .setIndicatorSliderColor(getActivity().getColor(R.color.color_transparent),getActivity().getColor(R.color.color_transparent))
-                .setPageMargin(SizeUtils.dp2px(6))
-                .setRevealWidth(SizeUtils.dp2px(0), SizeUtils.dp2px(270))
-                .setPageStyle(PageStyle.MULTI_PAGE_SCALE, 0.85f).create();
+                .setPageMargin(SizeUtils.dp2px(8))
+                .setRevealWidth(SizeUtils.dp2px(0), (int) (SizeUtils.getScreenWidth()*0.69))
+                .setPageStyle(PageStyle.MULTI_PAGE_SCALE, 0.85f)
+                .setPageTransformer(new ScaleInTransformerCustom(0.85f))
+                .create();
         binding.ivXiaoxi.setOnClickListener(this);
         binding.smartRefreshLayout.setEnableRefresh(false);
         binding.smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {

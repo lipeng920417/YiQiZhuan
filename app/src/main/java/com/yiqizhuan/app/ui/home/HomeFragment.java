@@ -3,7 +3,6 @@ package com.yiqizhuan.app.ui.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
@@ -16,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
@@ -33,7 +31,6 @@ import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseFragment;
 import com.yiqizhuan.app.ui.home.adapter.BannerZhuanQuAdapter;
-import com.yiqizhuan.app.ui.home.item.ChangXiangHuiFlexibleItem;
 import com.yiqizhuan.app.ui.home.item.JinGangQuFlexibleItem;
 import com.yiqizhuan.app.ui.home.item.JinRiFlexibleItem;
 import com.yiqizhuan.app.util.BigDecimalUtil;
@@ -111,7 +108,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 .setIndicatorSliderColor(getActivity().getColor(R.color.color_transparent), getActivity()
                         .getColor(R.color.color_transparent))
                 .setPageMargin(SizeUtils.dp2px(8))
-                .setRevealWidth(SizeUtils.dp2px(0), SizeUtils.dip2px(getActivity(),275))
+                .setRevealWidth(SizeUtils.dp2px(0), (int) (SizeUtils.getScreenWidth()*0.72))
                 .setPageStyle(PageStyle.NORMAL)
                 .create(strings);
 

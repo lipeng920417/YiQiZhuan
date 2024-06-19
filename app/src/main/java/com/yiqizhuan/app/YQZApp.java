@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 
 /**
@@ -23,6 +24,7 @@ public class YQZApp extends Application {
         applicationContext = getApplicationContext();
         MMKV.initialize(applicationContext);
         initLiveEventBus();
+        CrashReport.initCrashReport(getApplicationContext(), "0123208e70", !BuildConfig.DEBUG);
     }
 
     private void initLiveEventBus() {

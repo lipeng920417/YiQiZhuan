@@ -761,7 +761,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textColor="@color/color_222222"
-                        android:text="爆款推荐"
+                        android:text="精品好物"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="5dp">

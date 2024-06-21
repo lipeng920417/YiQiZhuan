@@ -106,7 +106,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="94dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/ic_haowutuijian"></ImageView>
+                        android:src="@mipmap/ic_jingpinhaowu"></ImageView>
                 </RelativeLayout>
 
                 <ImageView

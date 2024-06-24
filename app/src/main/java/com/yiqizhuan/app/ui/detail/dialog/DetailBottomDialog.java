@@ -333,7 +333,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
         GlideUtil.loadImage(mapping.getGoodsImageUrl(), ivGoods);
         tvName.setText(goodsDetailBean.getProductName());
         tvPrice.setText(mapping.getPrice());
-        tvCommitPrice.setText("￥" + mapping.getPrice());
+        tvCommitPrice.setText("￥" + mapping.getGoodsSellPrice());
         //顶部价格
         //尊享
         if (TextUtils.equals(type, "1")) {

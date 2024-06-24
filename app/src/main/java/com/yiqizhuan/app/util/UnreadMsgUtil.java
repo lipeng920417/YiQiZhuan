@@ -18,7 +18,6 @@ public class UnreadMsgUtil {
         }
         ViewGroup.LayoutParams lp = numView.getLayoutParams();
         DisplayMetrics dm = numView.getResources().getDisplayMetrics();
-        numView.setVisibility(View.VISIBLE);
         if (num >= 0 && num < 10) {//圆
             lp.width = (int) (15 * dm.density);
             numView.setText(num + "");

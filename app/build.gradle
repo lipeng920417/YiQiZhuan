@@ -117,5 +117,7 @@ dependencies {
     api 'com.github.getActivity:XXPermissions:16.8'
     implementation 'com.github.zhpanvip:bannerviewpager:3.5.12'
     implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
 }

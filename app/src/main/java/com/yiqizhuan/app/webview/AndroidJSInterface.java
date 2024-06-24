@@ -107,4 +107,13 @@ public class AndroidJSInterface {
             }
         }, 100);
     }
+
+    @JavascriptInterface
+    public void getAddressFormJs(String data) {
+        if (TextUtils.isEmpty(data)) {
+            return;
+        }
+        LiveEventBus.get("getAddressFormJs").post(data);
+    }
+
 }

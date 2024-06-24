@@ -13,6 +13,7 @@ import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.ProductListBean;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.util.GlideUtil;
+import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 import com.zhpan.bannerview.BaseBannerAdapter;
 import com.zhpan.bannerview.BaseViewHolder;
@@ -49,9 +50,10 @@ public class BannerAdapter extends BaseBannerAdapter<ProductListBean.Detail> {
             lly.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent broker = new Intent(context, WebActivity.class);
-                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + data.getProductId() + "&type=1");
-                    context.startActivity(broker);
+//                    Intent broker = new Intent(context, WebActivity.class);
+//                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + data.getProductId() + "&type=1");
+//                    context.startActivity(broker);
+                    SkipActivityUtil.goGoodsDetail(context, data.getProductId()  , "1");
                 }
             });
         }

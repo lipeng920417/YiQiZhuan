@@ -81,6 +81,16 @@
             android:name="com.yiqizhuan.app.ui.integral.DetailConfirmActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.yiqizhuan.app.ui.detail.GoodsDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.yiqizhuan.app.ui.detail.PhotoViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

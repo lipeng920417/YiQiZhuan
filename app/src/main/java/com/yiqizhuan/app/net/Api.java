@@ -55,4 +55,14 @@ public class Api {
     public static final String CURATED_MIDDLE = "/product/curated/middle";
 
     public static final String PRODUCT_CRAZY_BUY= "/product/crazy/buy";
+
+    public static final String PRODUCT_DETAIL= "/product/detail";
+    public static final String CATEGORY_FINDBYPRODUCTID= "/category/findByProductId";
+
+    public static final String ADDRESS_DEFAULT = "/mall/user/address/default";
+
+    public static final String SHOPCART_ACTION = "/shopcart/action";
+    public static final String SHOPCART_PAYMENTCONFIRM = "/shopcart/paymentConfirm";
+
+
 }

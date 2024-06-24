@@ -46,7 +46,7 @@ public class OkHttpManager {
     private Handler handler;
 
     private OkHttpManager() {
-        mOkHttpClient = new OkHttpClient();
+        mOkHttpClient = OkHttpCustomTrustManager.getUnsafeOkHttpClient();
         mOkHttpClient.newBuilder().connectTimeout(CALL_TIME, TimeUnit.SECONDS).readTimeout(CALL_TIME, TimeUnit.SECONDS).writeTimeout(CALL_TIME, TimeUnit.SECONDS);
         mGson = new Gson();
         handler = new Handler(Looper.getMainLooper());
@@ -79,6 +79,13 @@ public class OkHttpManager {
         url = getCommonUrl(url);
         logRequest(url, params);
         Request request = buildRequest(url, params, HttpMethodType.POST);
+        doRequest(request, callBack);
+    }
+
+
+    public void postRequestObject(String url, Object params, final BaseCallBack callBack) {
+        url = getCommonUrl(url);
+        Request request = buildRequestString(url, params);
         doRequest(request, callBack);
     }
 
@@ -159,6 +166,22 @@ public class OkHttpManager {
         return builder.build();
     }
 
+    private Request buildRequestString(String url, Object params) {
+        Request.Builder builder = new Request.Builder();
+        builder.url(url);
+        Gson gson = new Gson();
+        String json = gson.toJson(params);
+        Log.d("YQZ-Request-", url + "-" + json);
+//        String json = JSON.toJSON(params);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        builder.post(requestBody);
+        //公参
+        builder.addHeader("X-Auth-Token", MMKVHelper.getString("token", ""));
+        builder.addHeader("clientType", "1");
+        builder.addHeader("clientVersion", BuildConfig.VERSION_NAME);
+        return builder.build();
+    }
+
 
     //get请求拼接参数
     private String getUrl(String url, Map<String, String> params) {
@@ -198,13 +221,18 @@ public class OkHttpManager {
         return FormBody.create(MediaType.parse("application/json; charset=utf-8"), json);
     }
 
+    private RequestBody buildFormDataJson(Object object) {
+        String json = JSON.toJSONString(object);
+        return FormBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+    }
+
+
     private void logRequest(String url, Map<String, String> params) {
         if (params == null) {
             params = new HashMap<>();
         }
         params.put("clientType", "1");
         params.put("clientVersion", BuildConfig.VERSION_NAME);
-        params.put("X-Auth-Token", MMKVHelper.getString("token", ""));
         Log.d("YQZ-Request-", url + "-" + JSON.toJSONString(params));
     }
 

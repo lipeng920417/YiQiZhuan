@@ -17,6 +17,7 @@ import com.yiqizhuan.app.YQZApp;
 import com.yiqizhuan.app.bean.BannerBean;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.util.GlideUtil;
+import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.webview.WebActivity;
 import com.youth.banner.adapter.BannerAdapter;
@@ -48,17 +49,19 @@ public class CommonBannerAdapter extends BannerAdapter<BannerBean, CommonBannerA
         holder.iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent broker = new Intent(YQZApp.getContext(), WebActivity.class);
-                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + data.getProductId() + "&type=2");
-                context.startActivity(broker);
+//                Intent broker = new Intent(YQZApp.getContext(), WebActivity.class);
+//                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + data.getProductId() + "&type=2");
+//                context.startActivity(broker);
+                SkipActivityUtil.goGoodsDetail(context, data.getProductId(), "2");
             }
         });
         holder.iv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent broker = new Intent(YQZApp.getContext(), WebActivity.class);
-                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + data.getProductId1() + "&type=2");
-                context.startActivity(broker);
+//                Intent broker = new Intent(YQZApp.getContext(), WebActivity.class);
+//                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + data.getProductId1() + "&type=2");
+//                context.startActivity(broker);
+                SkipActivityUtil.goGoodsDetail(context, data.getProductId(), "2");
             }
         });
     }

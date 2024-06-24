@@ -33,6 +33,7 @@ import com.yiqizhuan.app.ui.mine.MineFragment;
 import com.yiqizhuan.app.ui.remit.RemitFragment;
 import com.yiqizhuan.app.ui.shopping.ShoppingFragment;
 import com.yiqizhuan.app.util.SizeUtils;
+import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.util.UnreadMsgUtil;
 import com.yiqizhuan.app.webview.WebActivity;
@@ -210,9 +211,10 @@ public class MainActivity extends BaseActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Intent broker = new Intent(MainActivity.this, WebActivity.class);
-                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productId + "&type=" + type);
-                startActivity(broker);
+//                Intent broker = new Intent(MainActivity.this, WebActivity.class);
+//                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productId + "&type=" + type);
+//                startActivity(broker);
+                SkipActivityUtil.goGoodsDetail(MainActivity.this, productId, type);
             }
         });
 

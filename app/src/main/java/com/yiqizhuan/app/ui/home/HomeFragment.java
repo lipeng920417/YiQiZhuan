@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
+import com.yiqizhuan.app.MainActivity;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.BaseResult;
 import com.yiqizhuan.app.bean.CategoryDefaultBean;
@@ -37,6 +38,7 @@ import com.yiqizhuan.app.util.BigDecimalUtil;
 import com.yiqizhuan.app.util.GlideUtil;
 import com.yiqizhuan.app.util.PhoneUtil;
 import com.yiqizhuan.app.util.SizeUtils;
+import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
 import com.yiqizhuan.app.views.dialog.DialogUtil;
 import com.yiqizhuan.app.webview.WebActivity;
@@ -281,9 +283,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void skipWebView(String productId,String type){
-        Intent broker = new Intent(getActivity(), WebActivity.class);
-        broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productId + "&type="+type);
-        getActivity().startActivity(broker);
+//        Intent broker = new Intent(getActivity(), WebActivity.class);
+//        broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productId + "&type="+type);
+//        getActivity().startActivity(broker);
+        SkipActivityUtil.goGoodsDetail(getActivity(), productId, type);
     }
 
 

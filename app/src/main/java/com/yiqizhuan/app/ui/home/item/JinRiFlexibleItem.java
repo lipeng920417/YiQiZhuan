@@ -16,8 +16,10 @@ import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.ProductListBean;
 import com.yiqizhuan.app.net.WebApi;
+import com.yiqizhuan.app.ui.detail.GoodsDetailActivity;
 import com.yiqizhuan.app.util.BigDecimalUtil;
 import com.yiqizhuan.app.util.GlideUtil;
+import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 
 import java.util.List;
@@ -79,9 +81,10 @@ public class JinRiFlexibleItem extends AbstractFlexibleItem<JinRiFlexibleItem.It
             holder.lly.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent broker = new Intent(context, WebActivity.class);
-                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + detail.getProductId() + "&type=" + detail.getProductType());
-                    context.startActivity(broker);
+//                    Intent broker = new Intent(context, WebActivity.class);
+//                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + detail.getProductId() + "&type=" + detail.getProductType());
+//                    context.startActivity(broker);
+                    SkipActivityUtil.goGoodsDetail(context, detail.getProductId(), detail.getProductType());
                 }
             });
         }

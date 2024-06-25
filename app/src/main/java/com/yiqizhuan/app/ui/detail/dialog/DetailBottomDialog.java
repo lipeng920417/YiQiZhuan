@@ -402,7 +402,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
             }
             //共享
             else if (TextUtils.equals(type, "2")) {
-                tvXianShiYuGu.setVisibility(View.VISIBLE);
+                tvXianShiYuGu.setVisibility(View.GONE);
                 llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
             }
             //悦享 畅享

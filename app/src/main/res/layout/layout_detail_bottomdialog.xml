@@ -247,7 +247,7 @@
                         android:id="@+id/tvXianShiYuGu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="使用积分价格 "
+                        android:text="使用积分后价格 "
                         android:textColor="@color/white"
                         android:textSize="10sp"></TextView>
 

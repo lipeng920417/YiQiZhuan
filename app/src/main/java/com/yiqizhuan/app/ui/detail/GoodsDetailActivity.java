@@ -249,8 +249,9 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 }
             }
         }
+        stringBuilder.append(currentNum + "件");
         if (stringBuilder.length() > 0) {
-            binding.tvShuXing.setText(stringBuilder.deleteCharAt(stringBuilder.length() - 1).toString());
+            binding.tvShuXing.setText(stringBuilder.toString());
         }
         //底部按钮
         if (Integer.parseInt(goodsDetailBean.getDeleted()) == 1) {
@@ -272,8 +273,8 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
             binding.tvXianShiYuGu.setVisibility(View.GONE);
             binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_989898_989898_21dp));
             binding.tvJiaRuGoWuChe.setBackground(getDrawable(R.drawable.background_conner_989898_989898_21dp));
-            isClickShopping = false;
-            isClickCommit = false;
+            isClickShopping = true;
+            isClickCommit = true;
         } else {
             binding.tvJiaRuGoWuChe.setBackground(getDrawable(R.drawable.background_conner_ffd418_ffbc1f_21dp));
             isClickShopping = true;
@@ -283,14 +284,14 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 binding.tvXianShiYuGu.setVisibility(View.VISIBLE);
                 binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 if (userCouponBean != null && userCouponBean.getData() != null && ((Double.parseDouble(mapping.getDiscount()) * currentNum) > Double.parseDouble(userCouponBean.getData().getTotalQuota()))) {
-                    isClickCommit = false;
+                    isClickCommit = true;
                     binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_989898_989898_21dp));
                     binding.tvXianShiYuGu.setText("您的积分不足");
                 }
             }
             //共享
             else if (TextUtils.equals(type, "2")) {
-                binding.tvXianShiYuGu.setVisibility(View.VISIBLE);
+                binding.tvXianShiYuGu.setVisibility(View.GONE);
                 binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
             }
             //悦享
@@ -299,7 +300,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 binding.tvDiKouXiao.setVisibility(View.VISIBLE);
                 String jifen = "0元购";
                 if (userCouponBean != null && userCouponBean.getData() != null && ((Double.parseDouble(mapping.getDiscount()) * currentNum) > Double.parseDouble(userCouponBean.getData().getTotalQuota()))) {
-                    isClickCommit = false;
+                    isClickCommit = true;
                     jifen = "您的积分不足";
                     binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_989898_989898_21dp));
                 } else {

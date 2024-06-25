@@ -359,26 +359,29 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         dialog = new DetailBottomDialog(this);
         dialog.initData(goodsDetailBean, mapping, type, userCouponBean, selectGoodsAndAttrMapping, currentNum, new DetailBottomDialog.DialogListenerSure() {
             @Override
-            public void onPositiveClick(GoodsDetailBean result, GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping, int num) {
+            public void onPositiveClick(GoodsDetailBean result, GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping, int num, boolean b) {
                 goodsDetailBean = result;
                 mapping = goodsAndAttrMapping;
                 currentNum = num;
+                selectGoodsAndAttrMapping = b;
                 setMapping();
             }
 
             @Override
-            public void shopcartAction(GoodsDetailBean result, GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping, int num) {
+            public void shopcartAction(GoodsDetailBean result, GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping, int num, boolean b) {
                 goodsDetailBean = result;
                 mapping = goodsAndAttrMapping;
                 currentNum = num;
+                selectGoodsAndAttrMapping = b;
                 addShopcartAction(num);
             }
 
             @Override
-            public void addShopcartPaymentConfirm(GoodsDetailBean result, GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping, int num) {
+            public void addShopcartPaymentConfirm(GoodsDetailBean result, GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping, int num, boolean b) {
                 goodsDetailBean = result;
                 mapping = goodsAndAttrMapping;
                 currentNum = num;
+                selectGoodsAndAttrMapping = b;
                 paymentConfirm(num);
             }
         });

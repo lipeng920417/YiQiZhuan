@@ -441,7 +441,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
     public void dismiss() {
         super.dismiss();
         if (dialogListenerSure != null) {
-            dialogListenerSure.onPositiveClick(goodsDetailBean, mapping, currentNum);
+            dialogListenerSure.onPositiveClick(goodsDetailBean, mapping, currentNum,selectGoodsAndAttrMapping);
         }
     }
 
@@ -465,7 +465,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                 if (isClickShopping) {
                     if (selectGoodsAndAttrMapping) {
                         if (dialogListenerSure != null) {
-                            dialogListenerSure.shopcartAction(goodsDetailBean, mapping, currentNum);
+                            dialogListenerSure.shopcartAction(goodsDetailBean, mapping, currentNum,selectGoodsAndAttrMapping);
                         }
                     } else {
                         ToastUtils.showToast("请选择商品规格");
@@ -476,7 +476,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                 if (isClickCommit) {
                     if (selectGoodsAndAttrMapping) {
                         if (dialogListenerSure != null) {
-                            dialogListenerSure.addShopcartPaymentConfirm(goodsDetailBean, mapping, currentNum);
+                            dialogListenerSure.addShopcartPaymentConfirm(goodsDetailBean, mapping, currentNum,selectGoodsAndAttrMapping);
                         }
                     } else {
                         ToastUtils.showToast("请选择商品规格");
@@ -495,10 +495,10 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
 
 
     public interface DialogListenerSure {
-        void onPositiveClick(GoodsDetailBean goodsDetailBean, GoodsDetailBean.GoodsAndAttrMapping mapping, int num);
+        void onPositiveClick(GoodsDetailBean goodsDetailBean, GoodsDetailBean.GoodsAndAttrMapping mapping, int num, boolean selectGoodsAndAttrMapping);
 
-        void shopcartAction(GoodsDetailBean goodsDetailBean, GoodsDetailBean.GoodsAndAttrMapping mapping, int num);
+        void shopcartAction(GoodsDetailBean goodsDetailBean, GoodsDetailBean.GoodsAndAttrMapping mapping, int num, boolean selectGoodsAndAttrMapping);
 
-        void addShopcartPaymentConfirm(GoodsDetailBean goodsDetailBean, GoodsDetailBean.GoodsAndAttrMapping mapping, int num);
+        void addShopcartPaymentConfirm(GoodsDetailBean goodsDetailBean, GoodsDetailBean.GoodsAndAttrMapping mapping, int num, boolean selectGoodsAndAttrMapping);
     }
 }

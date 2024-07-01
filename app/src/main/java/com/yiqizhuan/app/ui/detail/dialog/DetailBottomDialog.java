@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -55,7 +56,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
     private TextView tvJiaRuGoWuChe;
     private TextView tvCommitPrice;
     private TextView tvXianShiYuGu;
-    private TextView tvDiKouXiao;
+    private RelativeLayout rlyJifenquane;
     private LinearLayout llyCommit;
     private ImageView ivJiaHao;
     private ImageView ivJianHao;
@@ -103,7 +104,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
         tvJiaRuGoWuChe = findViewById(R.id.tvJiaRuGoWuChe);
         tvCommitPrice = findViewById(R.id.tvCommitPrice);
         tvXianShiYuGu = findViewById(R.id.tvXianShiYuGu);
-        tvDiKouXiao = findViewById(R.id.tvDiKouXiao);
+        rlyJifenquane = findViewById(R.id.rlyJifenquane);
         llyCommit = findViewById(R.id.llyCommit);
         ivJiaHao = findViewById(R.id.ivJiaHao);
         ivJianHao = findViewById(R.id.ivJianHao);
@@ -408,7 +409,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
             //悦享 畅享
             else if (TextUtils.equals(type, "3") || TextUtils.equals(type, "4")) {
                 tvXianShiYuGu.setVisibility(View.GONE);
-                tvDiKouXiao.setVisibility(View.VISIBLE);
+                rlyJifenquane.setVisibility(View.VISIBLE);
                 String jifen = "0元购";
                 if (userCouponBean != null && userCouponBean.getData() != null && ((Double.parseDouble(mapping.getDiscount()) * currentNum) > Double.parseDouble(userCouponBean.getData().getTotalQuota()))) {
                     isClickCommit = false;

@@ -211,7 +211,8 @@
                     android:text="159.9"
                     android:textColor="@color/color_ff1919"
                     android:textSize="15sp"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/custom_font"></TextView>
             </LinearLayout>
 
 
@@ -248,7 +249,8 @@
                             android:text="88"
                             android:textColor="@color/color_6d4007"
                             android:textSize="11sp"
-                            android:textStyle="bold"></TextView>
+                            android:textStyle="bold"
+                            android:fontFamily="@font/custom_font"></TextView>
 
                     </LinearLayout>
 

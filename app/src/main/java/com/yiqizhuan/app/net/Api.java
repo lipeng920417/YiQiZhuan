@@ -64,5 +64,8 @@ public class Api {
     public static final String SHOPCART_ACTION = "/shopcart/action";
     public static final String SHOPCART_PAYMENTCONFIRM = "/shopcart/paymentConfirm";
 
+    //查询个人购物车
+    public static final String SHOPCART_LIST = "/shopcart/list";
+
 
 }

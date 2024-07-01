@@ -5,11 +5,20 @@ package com.yiqizhuan.app.bean;
  * @create 2024-06-23 3:39 PM
  */
 public class ShopcartActionPara {
+    private int id;
     private int productId;
     private int goodsId;
     private int cartType;
     private int actionType;
     private int productNum;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getProductId() {
         return productId;

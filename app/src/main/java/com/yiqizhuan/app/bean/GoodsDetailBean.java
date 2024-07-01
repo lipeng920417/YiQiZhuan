@@ -173,6 +173,15 @@ public class GoodsDetailBean {
         //0代表待开售，1代表已开售 库存为0
         private int status;
         private String discount;
+        private String isQuota;
+
+        public String getIsQuota() {
+            return isQuota;
+        }
+
+        public void setIsQuota(String isQuota) {
+            this.isQuota = isQuota;
+        }
 
         public String getDiscount() {
             return discount;
@@ -316,7 +325,6 @@ public class GoodsDetailBean {
             this.goodsIds = goodsIds;
         }
     }
-
 
 
 }

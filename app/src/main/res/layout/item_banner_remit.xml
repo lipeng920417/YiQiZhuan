@@ -42,7 +42,8 @@
             android:gravity="center"
             android:textStyle="bold"
             android:singleLine="true"
-            android:ellipsize="end">
+            android:ellipsize="end"
+            android:fontFamily="@font/custom_font">
         </TextView>
 
     </RelativeLayout>

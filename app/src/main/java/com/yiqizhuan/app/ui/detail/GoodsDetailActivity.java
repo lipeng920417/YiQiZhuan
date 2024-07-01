@@ -69,6 +69,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     private boolean isClickCommit;
     private int currentNum = 1;
     boolean isFirst = true;
+    private String goodsId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         if (getIntent() != null) {
             productId = getIntent().getStringExtra("productId");
             type = getIntent().getStringExtra("type");
+            goodsId = getIntent().getStringExtra("goodsId");
         }
         initView();
         queryUserCoupon();
@@ -96,16 +98,16 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         LiveEventBus.get("getAddressFormJs", String.class).observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                String id = "";
-                String detailedAddress = "";
                 try {
                     JSONObject jsonObject = new JSONObject(s);
-                    id = jsonObject.getString("id");
-                    detailedAddress = jsonObject.getString("address");
-                    addressDefaultBean = new AddressDefaultBean();
-                    addressDefaultBean.setId(id);
-                    addressDefaultBean.setDetailedAddress(detailedAddress);
-                    binding.tvAddress.setText(addressDefaultBean.getDetailedAddress());
+                    if ("detail".equals(jsonObject.getString("source"))) {
+                        addressDefaultBean.setId(jsonObject.getString("id"));
+                        addressDefaultBean.setDetailedAddress(jsonObject.getString("detailedAddress"));
+                        addressDefaultBean.setProvince(jsonObject.getString("province"));
+                        addressDefaultBean.setCity(jsonObject.getString("city"));
+                        addressDefaultBean.setCounty(jsonObject.getString("county"));
+                        binding.tvAddress.setText(addressDefaultBean.getProvince() + addressDefaultBean.getCity() + addressDefaultBean.getCounty() + addressDefaultBean.getDetailedAddress());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -158,18 +160,26 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
             if (goodsDetailBean.getDescriptionImages() != null && goodsDetailBean.getDescriptionImages().size() > 0) {
                 GlideUtil.loadImageBig(goodsDetailBean.getDescriptionImages().get(0), binding.ivBig);
             }
-            //取第一个商品库存大于0的，如果都没有取第一个
-            boolean inventory = false;
-            for (GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping : goodsDetailBean.getGoodsAndAttrMapping()) {
-                if (!inventory) {
-                    if (Integer.parseInt(goodsAndAttrMapping.getInventory()) > 0) {
+            if (!TextUtils.isEmpty(goodsId)) {
+                for (GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping : goodsDetailBean.getGoodsAndAttrMapping()) {
+                    if (TextUtils.equals(goodsId, goodsAndAttrMapping.getGoodsId())) {
                         mapping = goodsAndAttrMapping;
-                        inventory = true;
                     }
                 }
-            }
-            if (!inventory) {
-                mapping = goodsDetailBean.getGoodsAndAttrMapping().get(0);
+            } else {
+                //取第一个商品库存大于0的，如果都没有取第一个
+                boolean inventory = false;
+                for (GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping : goodsDetailBean.getGoodsAndAttrMapping()) {
+                    if (!inventory) {
+                        if (Integer.parseInt(goodsAndAttrMapping.getInventory()) > 0) {
+                            mapping = goodsAndAttrMapping;
+                            inventory = true;
+                        }
+                    }
+                }
+                if (!inventory) {
+                    mapping = goodsDetailBean.getGoodsAndAttrMapping().get(0);
+                }
             }
             selectGoodsAndAttrMapping = true;
             //属性
@@ -186,6 +196,11 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         spannableString.setSpan(relativeSizeSpan, originalPrice.length() - 1, originalPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         binding.tvOriginalPrice.setText(spannableString);
         binding.tvCommitPrice.setText("￥" + mapping.getGoodsSellPrice());
+        if (TextUtils.equals(mapping.getIsQuota(), "1")) {
+            binding.tvMeiRiXianGou.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvMeiRiXianGou.setVisibility(View.GONE);
+        }
         //顶部价格
         if (TextUtils.equals(type, "1")) {
             String sellPrice = mapping.getDiscount() + " 积分 + " + mapping.getGoodsSellPrice() + " 元";
@@ -297,7 +312,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
             //悦享
             else if (TextUtils.equals(type, "3") || TextUtils.equals(type, "4")) {
                 binding.tvXianShiYuGu.setVisibility(View.GONE);
-                binding.tvDiKouXiao.setVisibility(View.VISIBLE);
+                binding.rlyJifenquane.setVisibility(View.VISIBLE);
                 String jifen = "0元购";
                 if (userCouponBean != null && userCouponBean.getData() != null && ((Double.parseDouble(mapping.getDiscount()) * currentNum) > Double.parseDouble(userCouponBean.getData().getTotalQuota()))) {
                     isClickCommit = true;
@@ -461,7 +476,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
             public void onSuccess(Call call, Response response, BaseResult<AddressDefaultBean> result) {
                 if (result != null && result.getData() != null) {
                     addressDefaultBean = result.getData();
-                    binding.tvAddress.setText(addressDefaultBean.getDetailedAddress());
+                    binding.tvAddress.setText(addressDefaultBean.getProvince() + addressDefaultBean.getCity() + addressDefaultBean.getCounty() + addressDefaultBean.getDetailedAddress());
                 }
             }
 
@@ -617,6 +632,19 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 cancelLoading();
             }
         });
+    }
+
+    //前面包含后面
+    private boolean compareList(List<String> list, List<String> list1) {
+        if (list != null && list.size() > 0 && list1 != null && list1.size() > 0) {
+            for (String s : list1) {
+                if (!list.contains(s)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
 }

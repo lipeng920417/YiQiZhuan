@@ -71,7 +71,8 @@
             android:textColor="@color/color_f90200"
             android:textSize="10sp"
             android:layout_marginRight="16dp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"
+            android:fontFamily="@font/custom_font"></TextView>
 
         <ImageView
             android:layout_width="34dp"

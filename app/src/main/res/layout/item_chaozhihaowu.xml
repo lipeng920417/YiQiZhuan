@@ -77,7 +77,8 @@
             android:text="￥159.9"
             android:textColor="@color/color_f90200"
             android:textSize="14sp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"
+            android:fontFamily="@font/custom_font"></TextView>
 
         <RelativeLayout
             android:layout_width="84dp"

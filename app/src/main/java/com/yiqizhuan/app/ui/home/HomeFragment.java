@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
-import com.yiqizhuan.app.MainActivity;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.BaseResult;
 import com.yiqizhuan.app.bean.CategoryDefaultBean;
@@ -228,23 +227,23 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         //悦享
         if (productDefaultBean != null && productDefaultBean.getData() != null && productDefaultBean.getData().getDaily_exchange() != null && productDefaultBean.getData().getDaily_exchange().size() > 1) {
             GlideUtil.loadImage(productDefaultBean.getData().getDaily_exchange().get(0).getMainImage(), binding.ivYueXiang1);
-            binding.ivYueXiang1.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getDaily_exchange().get(0).getProductId(),"3"));
+//            binding.ivYueXiang1.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getDaily_exchange().get(0).getProductId(),"3"));
             binding.tvYueXiangPrice1.setText("￥" + productDefaultBean.getData().getDaily_exchange().get(0).getOriginalPrice());
             GlideUtil.loadImage(productDefaultBean.getData().getDaily_exchange().get(1).getMainImage(), binding.ivYueXiang2);
-            binding.ivYueXiang2.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getDaily_exchange().get(1).getProductId(),"3"));
+//            binding.ivYueXiang2.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getDaily_exchange().get(1).getProductId(),"3"));
             binding.tvYueXiangPrice2.setText("￥" + productDefaultBean.getData().getDaily_exchange().get(1).getOriginalPrice());
         }
         //畅享
         if (productDefaultBean != null && productDefaultBean.getData() != null && productDefaultBean.getData().getEnjoyable_exchange() != null && productDefaultBean.getData().getEnjoyable_exchange().size() > 1) {
             GlideUtil.loadImage(productDefaultBean.getData().getEnjoyable_exchange().get(0).getMainImage(), binding.ivChangXiang1);
-            binding.ivChangXiang1.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEnjoyable_exchange().get(0).getProductId(),"4"));
+//            binding.ivChangXiang1.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEnjoyable_exchange().get(0).getProductId(),"4"));
             GlideUtil.loadImage(productDefaultBean.getData().getEnjoyable_exchange().get(1).getMainImage(), binding.ivChangXiang2);
-            binding.ivChangXiang2.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEnjoyable_exchange().get(1).getProductId(),"4"));
+//            binding.ivChangXiang2.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEnjoyable_exchange().get(1).getProductId(),"4"));
         }
         //共享
         if (productDefaultBean != null && productDefaultBean.getData() != null && productDefaultBean.getData().getEarn_together() != null && productDefaultBean.getData().getEarn_together().size() > 3) {
             GlideUtil.loadImage(productDefaultBean.getData().getEarn_together().get(0).getMainImage(), binding.ivGongXiang1);
-            binding.ivGongXiang1.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEarn_together().get(0).getProductId(),"2"));
+//            binding.ivGongXiang1.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEarn_together().get(0).getProductId(),"2"));
             binding.tvGongXiangPriceB1.setText("￥" + productDefaultBean.getData().getEarn_together().get(0).getOriginalPrice());
             String price = "已补" + BigDecimalUtil.round(Double.valueOf(productDefaultBean.getData().getEarn_together().get(0).getOriginalPrice()) * 0.16, 1) + "元";
             SpannableString spannableString = new SpannableString(price);
@@ -253,7 +252,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             binding.tvGongXiangPrice1.setText(spannableString);
 
             GlideUtil.loadImage(productDefaultBean.getData().getEarn_together().get(1).getMainImage(), binding.ivGongXiang2);
-            binding.ivGongXiang2.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEarn_together().get(1).getProductId(),"2"));
+//            binding.ivGongXiang2.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEarn_together().get(1).getProductId(),"2"));
             binding.tvGongXiangPriceB2.setText("￥" + productDefaultBean.getData().getEarn_together().get(1).getOriginalPrice());
             String price1 = "已补" + BigDecimalUtil.round(Double.valueOf(productDefaultBean.getData().getEarn_together().get(1).getOriginalPrice()) * 0.16, 1) + "元";
             SpannableString spannableString1 = new SpannableString(price1);
@@ -262,7 +261,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             binding.tvGongXiangPrice2.setText(spannableString1);
 
             GlideUtil.loadImage(productDefaultBean.getData().getEarn_together().get(2).getMainImage(), binding.ivGongXiang3);
-            binding.ivGongXiang3.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEarn_together().get(2).getProductId(),"2"));
+//            binding.ivGongXiang3.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEarn_together().get(2).getProductId(),"2"));
             binding.tvGongXiangPriceB3.setText("￥" + productDefaultBean.getData().getEarn_together().get(2).getOriginalPrice());
             String price2 = "已补" + BigDecimalUtil.round(Double.valueOf(productDefaultBean.getData().getEarn_together().get(2).getOriginalPrice()) * 0.16, 1) + "元";
             SpannableString spannableString2 = new SpannableString(price2);
@@ -271,7 +270,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             binding.tvGongXiangPrice3.setText(spannableString2);
 
             GlideUtil.loadImage(productDefaultBean.getData().getEarn_together().get(3).getMainImage(), binding.ivGongXiang4);
-            binding.ivGongXiang4.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEarn_together().get(3).getProductId(),"2"));
+//            binding.ivGongXiang4.setOnClickListener(view -> skipWebView(productDefaultBean.getData().getEarn_together().get(3).getProductId(),"2"));
             binding.tvGongXiangPriceB4.setText("￥" + productDefaultBean.getData().getEarn_together().get(3).getOriginalPrice());
             binding.tvGongXiangPrice4.setText("已补" + BigDecimalUtil.round(Double.valueOf(productDefaultBean.getData().getEarn_together().get(3).getOriginalPrice()) * 0.16, 1) + "元");
             String price3 = "已补" + BigDecimalUtil.round(Double.valueOf(productDefaultBean.getData().getEarn_together().get(3).getOriginalPrice()) * 0.16, 1) + "元";

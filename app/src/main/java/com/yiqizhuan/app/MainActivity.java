@@ -68,6 +68,7 @@ public class MainActivity extends BaseActivity {
         initFragment();
         initLiveEventBus();
         pop();
+        shopCartCount();
     }
 
     @Override
@@ -204,17 +205,19 @@ public class MainActivity extends BaseActivity {
             public void onChanged(@Nullable String s) {
                 String productId = "";
                 String type = "";
+                String goodsId = "";
                 try {
                     JSONObject jsonObject = new JSONObject(s);
                     productId = jsonObject.getString("productId");
                     type = jsonObject.getString("cartType");
+                    goodsId = jsonObject.getString("goodsId");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 //                Intent broker = new Intent(MainActivity.this, WebActivity.class);
 //                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productId + "&type=" + type);
 //                startActivity(broker);
-                SkipActivityUtil.goGoodsDetail(MainActivity.this, productId, type);
+                SkipActivityUtil.goGoodsDetail(MainActivity.this, productId, type, goodsId);
             }
         });
 

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.yiqizhuan.app.bean.PaymentConfirmBean;
 import com.yiqizhuan.app.bean.ShopCartBean;
 import com.yiqizhuan.app.databinding.FragmentShoppingTabBinding;
 import com.yiqizhuan.app.ui.base.BaseFragment;
@@ -110,6 +111,17 @@ public class ShoppingTabFragment extends BaseFragment {
             ShoppingFlexibleItem shoppingFlexibleItem = (ShoppingFlexibleItem) mFlexibleAdapter.getItem(i);
             if (goodsId == shoppingFlexibleItem.getDetailsDTO().getGoodsVO().getGoodsId()) {
                 mFlexibleAdapter.notifyItemChanged(i);
+            }
+        }
+    }
+
+    public void refreshMultiItem(List<PaymentConfirmBean.ProductsDTO> products) {
+        for (int i = 0; i < mFlexibleAdapter.getItemCount(); i++) {
+            ShoppingFlexibleItem shoppingFlexibleItem = (ShoppingFlexibleItem) mFlexibleAdapter.getItem(i);
+            for (PaymentConfirmBean.ProductsDTO productsDTO : products) {
+                if (productsDTO.getGoodsVO().getGoodsId() == shoppingFlexibleItem.getDetailsDTO().getGoodsVO().getGoodsId()) {
+                    mFlexibleAdapter.notifyItemChanged(i);
+                }
             }
         }
     }

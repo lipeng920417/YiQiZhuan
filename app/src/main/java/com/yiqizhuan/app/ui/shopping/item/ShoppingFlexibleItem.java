@@ -132,6 +132,12 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             }
             holder.rlyYiXiaJia.setVisibility(View.GONE);
             if (detailsDTO.getState() == 0) {
+                if (detailsDTO.getGoodsVO().getStock() > 0 && detailsDTO.getGoodsVO().getStock() < detailsDTO.getProductNum()) {
+                    holder.tvStock.setVisibility(View.VISIBLE);
+                    holder.tvStock.setText("仅剩" + detailsDTO.getGoodsVO().getStock() + "件");
+                } else {
+                    holder.tvStock.setVisibility(View.GONE);
+                }
                 holder.llyCart.setVisibility(View.VISIBLE);
                 if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1) {
                     holder.ivSelect.setImageResource(R.mipmap.ic_checkbox_no_select);
@@ -155,7 +161,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
                         }
                     });
                     holder.llyCart.setVisibility(View.GONE);
-                } else if (detailsDTO.getProductNum() == 0) {
+                } else if (detailsDTO.getGoodsVO().getStock() == 0) {
                     holder.ivSelect.setImageResource(R.mipmap.ic_checkbox_no_select);
                     holder.rlyYiXiaJia.setVisibility(View.VISIBLE);
                     holder.tvYiXiaJia.setText("已售罄");
@@ -179,6 +185,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
                     holder.llyCart.setVisibility(View.VISIBLE);
                 }
             } else {
+                holder.tvStock.setVisibility(View.GONE);
                 holder.llyCart.setVisibility(View.GONE);
                 holder.ivSelect.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -297,6 +304,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
         TextView tvMoney;
         TextView tvDiscount;
         LinearLayout llyCart;
+        TextView tvStock;
 
 
         private ItemViewHolder(@NonNull View itemView) {
@@ -318,6 +326,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             tvMoney = itemView.findViewById(R.id.tvMoney);
             tvDiscount = itemView.findViewById(R.id.tvDiscount);
             llyCart = itemView.findViewById(R.id.llyCart);
+            tvStock = itemView.findViewById(R.id.tvStock);
         }
     }
 

@@ -14,8 +14,17 @@ public class PaymentConfirmBean {
     private String totalUseMonthCoupon;
     private String totalPrice;
     private List<ProductsDTO> products;
+    private List<ProductsDTO> stockNotEnoughProducts;
     private String originalTotalQuota;
     private String originalMonthQuota;
+
+    public List<ProductsDTO> getStockNotEnoughProducts() {
+        return stockNotEnoughProducts;
+    }
+
+    public void setStockNotEnoughProducts(List<ProductsDTO> stockNotEnoughProducts) {
+        this.stockNotEnoughProducts = stockNotEnoughProducts;
+    }
 
     public String getTotalUseCoupon() {
         return totalUseCoupon;
@@ -184,6 +193,15 @@ public class PaymentConfirmBean {
             private String name;
             private String description;
             private String imageUrl;
+            private int stock;
+
+            public int getStock() {
+                return stock;
+            }
+
+            public void setStock(int stock) {
+                this.stock = stock;
+            }
 
             public String getPrice() {
                 return price;

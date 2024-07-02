@@ -226,17 +226,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                 if (jiFenBuZu) {
                     return;
                 }
-                if (commitObject != null) {
-                    Intent checkout = new Intent(getActivity(), WebActivity.class);
-                    if (addressDefaultBean != null) {
-                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId());
-                    } else {
-                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT);
-                    }
-
-                    checkout.putExtra("data", JSON.toJSONString(commitObject));
-                    startActivity(checkout);
-                }
+                paymentConfirm(true);
                 break;
             case R.id.tvDelete:
                 if (selectData == null || selectData.size() == 0) {
@@ -264,6 +254,20 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                 }
                 setAllSelect();
                 break;
+        }
+    }
+
+    private void goCommitObject() {
+        if (commitObject != null) {
+            Intent checkout = new Intent(getActivity(), WebActivity.class);
+            if (addressDefaultBean != null) {
+                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId());
+            } else {
+                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT);
+            }
+
+            checkout.putExtra("data", JSON.toJSONString(commitObject));
+            startActivity(checkout);
         }
     }
 
@@ -432,6 +436,17 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
+    private void refreshMultiItemFragment(boolean select, List<PaymentConfirmBean.ProductsDTO> products) {
+        for (ShoppingTabFragment shoppingTabFragment : fragments) {
+            if (shoppingTabFragment != null) {
+                shoppingTabFragment.refreshMultiItem(products);
+            }
+        }
+        if (select) {
+            refreshFragmentCommon();
+        }
+    }
+
 
     private void refreshFragment() {
         for (ShoppingTabFragment shoppingTabFragment : fragments) {
@@ -462,7 +477,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
         bottomView();
         isAllSelect();
         if (state == 0) {
-            paymentConfirm();
+            paymentConfirm(false);
         }
     }
 
@@ -582,7 +597,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     }
                     bottomView();
                     isAllSelect();
-                    paymentConfirm();
+                    paymentConfirm(false);
                 }
                 cancelLoading();
             }
@@ -654,7 +669,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
     /**
      * 商品确认
      */
-    private void paymentConfirm() {
+    private void paymentConfirm(boolean payment) {
         if (selectData != null && selectData.size() > 0) {
             showLoading();
             List<ShopcartPaymentConfirmBean> shopCartPaymentConfirmBeans = new ArrayList<>();
@@ -692,7 +707,33 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     commitObject = result.getData();
                     setPrice(commitObject.getTotalPrice(), commitObject.getTotalUseCoupon(), commitObject.getRemainTotalQuota());
                     cancelLoading();
-
+                    //库存不足
+                    if (commitObject != null && commitObject.getStockNotEnoughProducts() != null && commitObject.getStockNotEnoughProducts().size() > 0) {
+                        boolean select = false;
+                        if (details != null) {
+                            for (ShopCartBean.DetailsDTO detailsDTO : details) {
+                                for (PaymentConfirmBean.ProductsDTO productsDTO : commitObject.getStockNotEnoughProducts()) {
+                                    if (detailsDTO.getGoodsId() == productsDTO.getGoodsVO().getGoodsId()) {
+                                        //重置库存
+                                        detailsDTO.getGoodsVO().setStock(productsDTO.getGoodsVO().getStock());
+                                        //库存为0，移除选择
+                                        if (productsDTO.getGoodsVO().getStock() == 0) {
+                                            detailsDTO.setSelect(false);
+                                            select = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        refreshMultiItemFragment(select, commitObject.getStockNotEnoughProducts());
+                        if (payment) {
+                            ToastUtils.showToast("存在库存不足的商品，请调整后重新结算购买");
+                        }
+                    } else {
+                        if (payment) {
+                            goCommitObject();
+                        }
+                    }
                 }
 
                 @Override

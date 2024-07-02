@@ -1,6 +1,7 @@
 package com.yiqizhuan.app.ui.detail;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
@@ -142,7 +143,12 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         if (goodsDetailBean != null) {
             binding.tvNunR.setText(goodsDetailBean.getDetailImages().size() + "");
             binding.banner.setAdapter(new DetailBannerAdapter(this, goodsDetailBean.getDetailImages()));
-            binding.tvName.setText("           " + goodsDetailBean.getProductName());
+//            binding.tvName.setText("           " + goodsDetailBean.getProductName());
+            // 延迟获取ImageView的宽度，以确保其已完成测量
+            binding.ivTitle.post(() -> {
+                int imageViewWidth = binding.ivTitle.getWidth();
+                calculateSpaces(imageViewWidth);
+            });
             StringBuilder tag = new StringBuilder();
             if (goodsDetailBean.getTags() != null) {
                 for (int i = 0; i < goodsDetailBean.getTags().size(); i++) {
@@ -203,12 +209,14 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         }
         //顶部价格
         if (TextUtils.equals(type, "1")) {
+            int discountNum = getDecimalPlaces(mapping.getDiscount());
+            int goodsSellPriceNum = getDecimalPlaces(mapping.getGoodsSellPrice());
             String sellPrice = mapping.getDiscount() + " 积分 + " + mapping.getGoodsSellPrice() + " 元";
             SpannableString spannableString1 = new SpannableString(sellPrice);
             RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.6f);
             RelativeSizeSpan relativeSizeSpan2 = new RelativeSizeSpan(0.6f);
-            spannableString1.setSpan(relativeSizeSpan1, goodsDetailBean.getDiscount().length(), goodsDetailBean.getDiscount().length() + 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString1.setSpan(relativeSizeSpan2, sellPrice.length() - 1, sellPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString1.setSpan(relativeSizeSpan1, mapping.getDiscount().length() - discountNum, mapping.getDiscount().length() + 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString1.setSpan(relativeSizeSpan2, sellPrice.length() - 2 - goodsSellPriceNum, sellPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             binding.tvPrice.setText(spannableString1);
 
             binding.ivRight.setImageResource(R.mipmap.ic_zunxianghui_right);
@@ -334,6 +342,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
             //购物车
             case R.id.llyShop:
+                LiveEventBus.get("webViewClose").post("");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -645,6 +654,32 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
             return true;
         }
         return false;
+    }
+
+    private void calculateSpaces(int imageViewWidth) {
+        Paint paint = new Paint();
+        paint.setTextSize(binding.tvName.getTextSize()); // 设置与TextView相同的字体大小
+        String space = " "; // 一个空格
+        // 测量空格的宽度
+        float spaceWidth = paint.measureText(space);
+        // 计算ImageView的宽度等于多少个空格
+        float numberOfSpaces = imageViewWidth / spaceWidth;
+        int ceilingValue = (int) Math.ceil(numberOfSpaces) + 1;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < ceilingValue; i++) {
+            stringBuilder.append(space);
+        }
+        stringBuilder.append(goodsDetailBean.getProductName());
+        binding.tvName.setText(stringBuilder.toString());
+    }
+
+    private int getDecimalPlaces(String number) {
+        if (number.contains(".")) {
+            int indexOfDecimal = number.indexOf(".");
+            return number.length() - indexOfDecimal - 1;
+        } else {
+            return 0; // 如果字符串中不包含小数点，则小数位数为0
+        }
     }
 
 }

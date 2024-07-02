@@ -63,16 +63,28 @@
                 android:layout_marginLeft="12dp"
                 android:layout_toRightOf="@+id/rlyIv"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvPrice"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/custom_font"
-                    android:text="￥0"
-                    android:textColor="@color/color_fa2c19"
-                    android:textSize="24sp"
-                    android:textStyle="bold"></TextView>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/custom_font"
+                        android:text="￥"
+                        android:textColor="@color/color_fa2c19"
+                        android:textSize="11sp"
+                        android:textStyle="bold"></TextView>
+                    <TextView
+                        android:id="@+id/tvPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/custom_font"
+                        android:text="0"
+                        android:textColor="@color/color_fa2c19"
+                        android:textSize="24sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvFangAn"

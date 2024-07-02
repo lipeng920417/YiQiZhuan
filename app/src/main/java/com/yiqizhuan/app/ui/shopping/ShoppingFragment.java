@@ -105,13 +105,8 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
     }
 
     private void setPrice(String sellPrice, String discount, String remainTotalQuota) {
-        String price = sellPrice + "元+" + discount + "积分";
-        SpannableString spannableString1 = new SpannableString(price);
-        RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.6f);
-        RelativeSizeSpan relativeSizeSpan2 = new RelativeSizeSpan(0.6f);
-        spannableString1.setSpan(relativeSizeSpan1, sellPrice.length(), sellPrice.length() + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString1.setSpan(relativeSizeSpan2, price.length() - 2, price.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        binding.tvMoney.setText(spannableString1);
+        binding.tvMoney.setText(getMoney(sellPrice));
+        binding.tvDiscount.setText(getDiscount(discount));
         if (selectData.size() > 0) {
             if (Double.parseDouble(remainTotalQuota) < 0) {
                 binding.tvCommit.setBackground(getActivity().getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
@@ -143,6 +138,33 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
             jiFenBuZu = false;
         }
     }
+
+    private SpannableString getMoney(String sellPrice) {
+        int sellPriceNum = getDecimalPlaces(sellPrice);
+        SpannableString spannableString1 = new SpannableString(sellPrice);
+        RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.7f);
+        spannableString1.setSpan(relativeSizeSpan1, sellPrice.length() - sellPriceNum, sellPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString1;
+    }
+
+    private SpannableString getDiscount(String discount) {
+        String sellPrice = discount;
+        int sellPriceNum = getDecimalPlaces(sellPrice);
+        SpannableString spannableString1 = new SpannableString(sellPrice);
+        RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.7f);
+        spannableString1.setSpan(relativeSizeSpan1, sellPrice.length() - sellPriceNum, sellPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString1;
+    }
+
+    private int getDecimalPlaces(String number) {
+        if (number.contains(".")) {
+            int indexOfDecimal = number.indexOf(".");
+            return number.length() - indexOfDecimal - 1;
+        } else {
+            return 0; // 如果字符串中不包含小数点，则小数位数为0
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -447,9 +469,10 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
     private void bottomView() {
         if (selectData != null && selectData.size() > 0) {
             binding.tvNum.setText("已选" + selectData.size() + "件,合计:");
+            binding.llyMoney.setVisibility(View.VISIBLE);
         } else {
-            binding.tvNum.setText("合计:");
-            binding.tvMoney.setText("");
+            binding.tvNum.setText("");
+            binding.llyMoney.setVisibility(View.INVISIBLE);
         }
     }
 

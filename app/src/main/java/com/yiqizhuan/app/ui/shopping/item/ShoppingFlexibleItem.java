@@ -94,6 +94,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             if (detailsDTO.getCartType() == 1) {
                 holder.ivTitle.setImageResource(R.mipmap.ic_zunxianghui_title);
                 holder.tvMoney.setText(getMoney(detailsDTO.getGoodsVO()));
+                holder.tvDiscount.setText(getDiscount(detailsDTO.getGoodsVO()));
                 holder.tvOriginalPriceL.setVisibility(View.VISIBLE);
                 holder.tvOriginalPrice.setVisibility(View.VISIBLE);
             }
@@ -101,6 +102,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             else if (detailsDTO.getCartType() == 2) {
                 holder.ivTitle.setImageResource(R.mipmap.ic_gongxianghui_title);
                 holder.tvMoney.setText(detailsDTO.getGoodsVO().getPrice());
+                holder.tvDiscount.setText(getDiscount(detailsDTO.getGoodsVO()));
                 holder.tvOriginalPriceL.setVisibility(View.GONE);
                 holder.tvOriginalPrice.setVisibility(View.GONE);
             }
@@ -108,6 +110,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             else if (detailsDTO.getCartType() == 3) {
                 holder.ivTitle.setImageResource(R.mipmap.ic_yuxianghui_title);
                 holder.tvMoney.setText(getMoney(detailsDTO.getGoodsVO()));
+                holder.tvDiscount.setText(getDiscount(detailsDTO.getGoodsVO()));
                 holder.tvOriginalPriceL.setVisibility(View.VISIBLE);
                 holder.tvOriginalPrice.setVisibility(View.VISIBLE);
             }
@@ -115,10 +118,11 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             else if (detailsDTO.getCartType() == 4) {
                 holder.ivTitle.setImageResource(R.mipmap.ic_changxianghui_title);
                 holder.tvMoney.setText(getMoney(detailsDTO.getGoodsVO()));
+                holder.tvDiscount.setText(getDiscount(detailsDTO.getGoodsVO()));
                 holder.tvOriginalPriceL.setVisibility(View.VISIBLE);
                 holder.tvOriginalPrice.setVisibility(View.VISIBLE);
             }
-            holder.tvOriginalPrice.setText(detailsDTO.getGoodsVO().getPrice());
+            holder.tvOriginalPrice.setText("￥" + detailsDTO.getGoodsVO().getPrice());
             holder.tvOriginalPrice.getPaint().setStrikeThruText(true);
             holder.tvNum.setText(detailsDTO.getProductNum() + "");
             if (detailsDTO.isSelect()) {
@@ -247,16 +251,33 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
         }
     }
 
-    private String getMoney(ShopCartBean.DetailsDTO.GoodsVODTO goodsVODTO) {
+    private SpannableString getMoney(ShopCartBean.DetailsDTO.GoodsVODTO goodsVODTO) {
         String sellPrice = String.valueOf(Double.parseDouble(goodsVODTO.getPrice()) - Double.parseDouble(goodsVODTO.getDiscount()));
-        String money = sellPrice + "元+" + goodsVODTO.getDiscount() + "积分";
-        SpannableString spannableString1 = new SpannableString(money);
-        RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.6f);
-        RelativeSizeSpan relativeSizeSpan2 = new RelativeSizeSpan(0.6f);
-        spannableString1.setSpan(relativeSizeSpan1, sellPrice.length(), sellPrice.length() + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString1.setSpan(relativeSizeSpan2, money.length() - 2, money.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableString1.toString();
+        int sellPriceNum = getDecimalPlaces(sellPrice);
+        SpannableString spannableString1 = new SpannableString(sellPrice);
+        RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.7f);
+        spannableString1.setSpan(relativeSizeSpan1, sellPrice.length() - sellPriceNum, sellPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString1;
     }
+
+    private SpannableString getDiscount(ShopCartBean.DetailsDTO.GoodsVODTO goodsVODTO) {
+        String sellPrice = goodsVODTO.getDiscount();
+        int sellPriceNum = getDecimalPlaces(sellPrice);
+        SpannableString spannableString1 = new SpannableString(sellPrice);
+        RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.7f);
+        spannableString1.setSpan(relativeSizeSpan1, sellPrice.length() - sellPriceNum, sellPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString1;
+    }
+
+    private int getDecimalPlaces(String number) {
+        if (number.contains(".")) {
+            int indexOfDecimal = number.indexOf(".");
+            return number.length() - indexOfDecimal - 1;
+        } else {
+            return 0; // 如果字符串中不包含小数点，则小数位数为0
+        }
+    }
+
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout lly;
@@ -274,6 +295,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
         ImageView ivJianHao;
         TextView tvNum;
         TextView tvMoney;
+        TextView tvDiscount;
         LinearLayout llyCart;
 
 
@@ -294,6 +316,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             ivJianHao = itemView.findViewById(R.id.ivJianHao);
             tvNum = itemView.findViewById(R.id.tvNum);
             tvMoney = itemView.findViewById(R.id.tvMoney);
+            tvDiscount = itemView.findViewById(R.id.tvDiscount);
             llyCart = itemView.findViewById(R.id.llyCart);
         }
     }

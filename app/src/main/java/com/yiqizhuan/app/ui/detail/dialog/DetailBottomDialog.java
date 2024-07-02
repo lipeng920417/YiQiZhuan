@@ -347,6 +347,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
             spannableString1.setSpan(relativeSizeSpan1, mapping.getDiscount().length(), mapping.getDiscount().length() + 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             spannableString1.setSpan(relativeSizeSpan2, sellPrice.length() - 1, sellPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             tvPriceJiFen.setText(spannableString1);
+            tvPrice.getPaint().setStrikeThruText(true);
         }
         //共享
         else if (TextUtils.equals(type, "2")) {
@@ -368,6 +369,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
         //底部按钮
         if (Integer.parseInt(goodsDetailBean.getDeleted()) == 1) {
             tvCommitPrice.setText("已下架");
+            tvCommitPrice.setTextSize(14f);
             tvXianShiYuGu.setVisibility(View.GONE);
             llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
             tvJiaRuGoWuChe.setBackground(context.getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
@@ -375,6 +377,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
             isClickCommit = false;
         } else if (mapping.getStatus() == 0) {
             tvCommitPrice.setText("待开售");
+            tvCommitPrice.setTextSize(14f);
             tvXianShiYuGu.setVisibility(View.GONE);
             llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
             tvJiaRuGoWuChe.setBackground(context.getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
@@ -382,6 +385,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
             isClickCommit = false;
         } else if (mapping.getStatus() == 1 && (Integer.parseInt(mapping.getInventory()) == 0)) {
             tvCommitPrice.setText("已售罄");
+            tvCommitPrice.setTextSize(14f);
             tvXianShiYuGu.setVisibility(View.GONE);
             llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
             tvJiaRuGoWuChe.setBackground(context.getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
@@ -419,6 +423,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                     llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 }
                 tvCommitPrice.setText(jifen);
+                tvCommitPrice.setTextSize(14f);
             }
         }
     }

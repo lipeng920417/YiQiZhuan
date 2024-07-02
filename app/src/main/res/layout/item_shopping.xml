@@ -102,13 +102,13 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:background="@drawable/background_conner_fef0d5_ffe5c2_3dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_stroke_f9e4c4"
                 android:gravity="center"
-                android:paddingLeft="6dp"
-                android:paddingRight="6dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:text="金牌客服 | 暖心无忧"
-                android:textColor="@color/color_994e01"
+                android:textColor="@color/color_e59722"
                 android:textSize="9sp"></TextView>
 
             <TextView
@@ -137,18 +137,16 @@
                 android:id="@+id/tvOriginalPriceL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="原价"
                 android:textColor="@color/color_818082"
-                android:textSize="9sp"></TextView>
+                android:textSize="10sp"></TextView>
 
             <TextView
                 android:id="@+id/tvOriginalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@+id/tvOriginalPriceL"
                 android:ellipsize="end"
@@ -197,14 +195,58 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvMoney"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/custom_font"
-            android:text="9,5731.00元+60999积分"
-            android:textColor="@color/color_fa2c19"
-            android:textSize="13sp"></TextView>
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/custom_font"
+                android:text="95731.00"
+                android:textColor="@color/color_fa2c19"
+                android:textSize="13sp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 元"
+                android:textColor="@color/color_fa2c19"
+                android:textSize="7.8sp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="1dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/custom_font"
+                android:text=" + "
+                android:textColor="@color/color_fa2c19"
+                android:textSize="13sp"
+                android:layout_gravity="center_vertical"></TextView>
+
+
+            <TextView
+                android:id="@+id/tvDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/custom_font"
+                android:text="60999"
+                android:textColor="@color/color_fa2c19"
+                android:textSize="13sp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 积分"
+                android:textColor="@color/color_fa2c19"
+                android:textSize="7.8sp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="1dp"></TextView>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

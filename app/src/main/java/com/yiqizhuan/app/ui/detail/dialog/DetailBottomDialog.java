@@ -268,6 +268,8 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                         } else {
                             MAX_VALUE = 1;
                         }
+                        currentNum = 1;
+                        edtNum.setText("1");
                         setPrice();
                     }
                 }
@@ -331,7 +333,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
     private void setPrice() {
         isClickShopping = false;
         isClickCommit = false;
-        GlideUtil.loadImage(mapping.getGoodsImageUrl(), ivGoods);
+        GlideUtil.loadImage(mapping.getGoodsImageUrl(), ivGoods,4);
         tvName.setText(goodsDetailBean.getProductName());
         tvPrice.setText(mapping.getPrice());
         tvCommitPrice.setText("￥" + mapping.getGoodsSellPrice());

@@ -72,6 +72,8 @@ public class ShoppingTabFragment extends BaseFragment {
                     addData(detailsDTO);
                 }
             }
+        } else {
+            mFlexibleAdapter.notifyDataSetChanged();
         }
     }
 

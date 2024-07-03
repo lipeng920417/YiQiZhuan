@@ -137,7 +137,7 @@
         <LinearLayout
             android:id="@+id/llyAllSelect"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:orientation="horizontal"
             android:layout_gravity="center_vertical">
 
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="2dp"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center_vertical"
                 android:text="全选"
                 android:textColor="@color/color_1a1a1a"
                 android:textSize="10sp"></TextView>
@@ -164,9 +164,10 @@
         <TextView
             android:id="@+id/tvNum"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_marginRight="1dp"
-            android:text="已选0件,合计:"
+            android:gravity="center_vertical"
+            android:text=""
             android:textColor="@color/color_1a1a1a"
             android:textSize="10sp"
             android:layout_gravity="center_vertical"></TextView>

@@ -12,20 +12,23 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="123dp"
+            android:layout_height="140dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp">
 
             <RelativeLayout
                 android:id="@+id/rlyIv"
                 android:layout_width="110dp"
-                android:layout_height="123dp"
+                android:layout_height="140dp"
                 android:background="@drawable/shape_stroke_d1533a">
 
                 <ImageView
                     android:id="@+id/ivGoods"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_marginRight="0.5dp"
+                    android:layout_marginTop="0.5dp"
+                    android:layout_height="109.5dp"
                     android:scaleType="fitXY"></ImageView>
 
                 <ImageView
@@ -41,7 +44,7 @@
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
-                    android:layout_height="24dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="0.5dp"
                     android:layout_marginRight="0.5dp"
@@ -52,7 +55,7 @@
                     android:singleLine="true"
                     android:text="IPhone15pro Max"
                     android:textColor="@color/color_fa2c19"
-                    android:textSize="12sp"></TextView>
+                    android:textSize="10sp"></TextView>
 
             </RelativeLayout>
 
@@ -254,9 +257,11 @@
                         android:id="@+id/tvXianShiYuGu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="使用积分后价格 "
+                        android:text="使用积分后单价 "
+                        android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
-                        android:textSize="10sp"></TextView>
+                        android:textSize="10sp"
+                        android:layout_marginTop="2dp"></TextView>
 
                     <TextView
                         android:id="@+id/tvCommitPrice"
@@ -264,6 +269,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/custom_font"
                         android:text="¥0"
+                        android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="20sp"></TextView>
                 </LinearLayout>

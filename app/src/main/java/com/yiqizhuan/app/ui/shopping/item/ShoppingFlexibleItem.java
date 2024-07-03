@@ -24,6 +24,8 @@ import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.views.dialog.DialogUtil;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,6 +93,9 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             } else {
                 holder.tvMeiRiXianGou.setVisibility(View.GONE);
             }
+            holder.tvDiscount.setVisibility(View.VISIBLE);
+            holder.tvJiaHao.setVisibility(View.VISIBLE);
+            holder.tvJiFen.setVisibility(View.VISIBLE);
             if (detailsDTO.getCartType() == 1) {
                 holder.ivTitle.setImageResource(R.mipmap.ic_zunxianghui_title);
                 holder.tvMoney.setText(getMoney(detailsDTO.getGoodsVO()));
@@ -102,7 +107,10 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             else if (detailsDTO.getCartType() == 2) {
                 holder.ivTitle.setImageResource(R.mipmap.ic_gongxianghui_title);
                 holder.tvMoney.setText(detailsDTO.getGoodsVO().getPrice());
-                holder.tvDiscount.setText(getDiscount(detailsDTO.getGoodsVO()));
+//                holder.tvDiscount.setText(getDiscount(detailsDTO.getGoodsVO()));
+                holder.tvDiscount.setVisibility(View.GONE);
+                holder.tvJiaHao.setVisibility(View.GONE);
+                holder.tvJiFen.setVisibility(View.GONE);
                 holder.tvOriginalPriceL.setVisibility(View.GONE);
                 holder.tvOriginalPrice.setVisibility(View.GONE);
             }
@@ -259,7 +267,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
     }
 
     private SpannableString getMoney(ShopCartBean.DetailsDTO.GoodsVODTO goodsVODTO) {
-        String sellPrice = String.valueOf(Double.parseDouble(goodsVODTO.getPrice()) - Double.parseDouble(goodsVODTO.getDiscount()));
+        String sellPrice = subtractAndRound(Double.parseDouble(goodsVODTO.getPrice()), Double.parseDouble(goodsVODTO.getDiscount()));
         int sellPriceNum = getDecimalPlaces(sellPrice);
         SpannableString spannableString1 = new SpannableString(sellPrice);
         RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.7f);
@@ -274,6 +282,18 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
         RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.7f);
         spannableString1.setSpan(relativeSizeSpan1, sellPrice.length() - sellPriceNum, sellPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString1;
+    }
+
+    private String subtractAndRound(double num1, double num2) {
+        BigDecimal bigDecimal1 = BigDecimal.valueOf(num1);
+        BigDecimal bigDecimal2 = BigDecimal.valueOf(num2);
+        BigDecimal result = bigDecimal1.subtract(bigDecimal2);
+
+        // 使用 setScale 方法来设置小数位数和舍入模式
+        result = result.setScale(2, RoundingMode.HALF_UP);
+
+        // 格式化结果保留两位小数
+        return String.format("%.2f", result.doubleValue());
     }
 
     private int getDecimalPlaces(String number) {
@@ -303,6 +323,8 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
         TextView tvNum;
         TextView tvMoney;
         TextView tvDiscount;
+        TextView tvJiaHao;
+        TextView tvJiFen;
         LinearLayout llyCart;
         TextView tvStock;
 
@@ -325,6 +347,8 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             tvNum = itemView.findViewById(R.id.tvNum);
             tvMoney = itemView.findViewById(R.id.tvMoney);
             tvDiscount = itemView.findViewById(R.id.tvDiscount);
+            tvJiFen= itemView.findViewById(R.id.tvJiFen);
+            tvJiaHao = itemView.findViewById(R.id.tvJiaHao);
             llyCart = itemView.findViewById(R.id.llyCart);
             tvStock = itemView.findViewById(R.id.tvStock);
         }

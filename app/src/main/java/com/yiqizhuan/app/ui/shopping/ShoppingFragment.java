@@ -123,8 +123,9 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                 binding.tvCommit.setBackground(getActivity().getResources().getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 if (yueChang) {
                     binding.tvCommit.setText("0元购");
-                    binding.rlyJifenquane.setVisibility(View.VISIBLE);
-
+                    if (state == 0) {
+                        binding.rlyJifenquane.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     binding.tvCommit.setText("去结算");
                     binding.rlyJifenquane.setVisibility(View.GONE);
@@ -182,7 +183,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     binding.tvCommit.setVisibility(View.GONE);
                     binding.tvDelete.setVisibility(View.VISIBLE);
                     binding.tvNum.setVisibility(View.GONE);
-                    binding.tvMoney.setVisibility(View.GONE);
+                    binding.llyMoney.setVisibility(View.INVISIBLE);
                     if (details != null) {
                         for (ShopCartBean.DetailsDTO detailsDTO : details) {
                             detailsDTO.setState(state);
@@ -199,7 +200,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     binding.tvCommit.setVisibility(View.VISIBLE);
                     binding.tvDelete.setVisibility(View.GONE);
                     binding.tvNum.setVisibility(View.VISIBLE);
-                    binding.tvMoney.setVisibility(View.VISIBLE);
+                    binding.llyMoney.setVisibility(View.VISIBLE);
                     if (selectData != null) {
                         for (ShopCartBean.DetailsDTO detailsDTO : selectData) {
                             if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getProductNum() == 0) {
@@ -484,7 +485,11 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
     private void bottomView() {
         if (selectData != null && selectData.size() > 0) {
             binding.tvNum.setText("已选" + selectData.size() + "件,合计:");
-            binding.llyMoney.setVisibility(View.VISIBLE);
+            if (state == 0) {
+                binding.llyMoney.setVisibility(View.VISIBLE);
+            } else {
+                binding.llyMoney.setVisibility(View.INVISIBLE);
+            }
         } else {
             binding.tvNum.setText("");
             binding.llyMoney.setVisibility(View.INVISIBLE);
@@ -563,7 +568,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onSuccess(Call call, Response response, BaseResult<ShopCartBean> result) {
-                if (result != null && result.getData() != null) {
+                if (result != null && result.getData() != null && result.getData().getDetails() != null) {
                     details = result.getData().getDetails();
                     for (ShopCartBean.DetailsDTO detailsDTO : details) {
                         detailsDTO.setState(state);
@@ -598,6 +603,15 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     bottomView();
                     isAllSelect();
                     paymentConfirm(false);
+                } else {
+                    details.clear();
+                    binding.ivAllSelect.setImageResource(R.mipmap.ic_checkbox);
+                    allSelect = false;
+                    for (ShoppingTabFragment shoppingTabFragment : fragments) {
+                        if (shoppingTabFragment != null) {
+                            shoppingTabFragment.initData(details);
+                        }
+                    }
                 }
                 cancelLoading();
             }

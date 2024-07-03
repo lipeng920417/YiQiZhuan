@@ -263,8 +263,8 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                         if (attributes.getAttrDescription() != null && attributes.getAttrDescription().size() > 0) {
                             for (GoodsDetailBean.AttrDescription attrDescription : attributes.getAttrDescription()) {
                                 if (TextUtils.equals(string, attrDescription.getAttrId())) {
-//                                    stringBuilder.append(attributes.getAttrName() + "，");
-                                    stringBuilder.append(attrDescription.getAttrValue() + "，");
+//                                    stringBuilder.append(attributes.getAttrName() + ",");
+                                    stringBuilder.append(attrDescription.getAttrValue() + ",");
                                 }
                             }
                         }

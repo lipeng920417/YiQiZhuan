@@ -71,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="3dp"
+                android:gravity="center"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="进口 香奈儿香奈儿香香香香奈儿香奈儿香香香香奈儿香奈儿香香香"
@@ -220,6 +221,7 @@
                     android:layout_marginBottom="1dp"></TextView>
 
                 <TextView
+                    android:id="@+id/tvJiaHao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/custom_font"
@@ -239,6 +241,7 @@
                     android:textSize="13sp"></TextView>
 
                 <TextView
+                    android:id="@+id/tvJiFen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 积分"

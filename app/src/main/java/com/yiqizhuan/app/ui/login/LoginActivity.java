@@ -212,6 +212,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onError(Call call, int statusCode, Exception e) {
                 cancelLoading();
+                if (statusCode == 600) {
+                    ToastUtils.showToast("短信发送频繁，请您稍后再试！");
+                }
             }
         });
     }

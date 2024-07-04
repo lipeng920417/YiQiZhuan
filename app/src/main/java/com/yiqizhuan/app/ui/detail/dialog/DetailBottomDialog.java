@@ -184,8 +184,9 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
             MAX_VALUE = 1;
         }
         for (String string : mapping.getAttrs()) {
-            setAttr(true, string);
+            setAttr(true, string, true);
         }
+        edtNum.setText(currentNum + "");
         setPrice();
         for (int i = 0; i < goodsDetailBean.getAttributes().size(); i++) {
             goodsDetailBean.getAttributes().get(i).setPos(i);
@@ -193,7 +194,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
             attributeFlexibleItem.setOnClickListener(new AttributeFlexibleItem.OnClickListener() {
                 @Override
                 public void onPositiveClick(boolean b, GoodsDetailBean.AttrDescription attrDescription, int pos) {
-                    setAttr(b, attrDescription.getAttrId());
+                    setAttr(b, attrDescription.getAttrId(), false);
                     flexibleAdapter.notifyDataSetChanged();
                 }
             });
@@ -213,7 +214,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
     }
 
     //选中、取消选中
-    private void setAttr(boolean b, String attrId) {
+    private void setAttr(boolean b, String attrId, boolean isFirst) {
         if (b) {
             List<String> allAttr = new ArrayList<>();
             //所有包含的Mapping 包含当前选中的
@@ -268,8 +269,10 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                         } else {
                             MAX_VALUE = 1;
                         }
-                        currentNum = 1;
-                        edtNum.setText("1");
+                        if (!isFirst) {
+                            currentNum = 1;
+                            edtNum.setText("1");
+                        }
                         setPrice();
                     }
                 }
@@ -312,7 +315,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
             }
             //循环调用
             for (String select : selectList) {
-                setAttr(true, select);
+                setAttr(true, select, false);
             }
         }
     }
@@ -333,7 +336,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
     private void setPrice() {
         isClickShopping = false;
         isClickCommit = false;
-        GlideUtil.loadImage(mapping.getGoodsImageUrl(), ivGoods,4);
+        GlideUtil.loadImage(mapping.getGoodsImageUrl(), ivGoods, 4);
         tvName.setText(goodsDetailBean.getProductName());
         tvPrice.setText(mapping.getPrice());
         tvCommitPrice.setText("￥" + mapping.getGoodsSellPrice());
@@ -403,8 +406,12 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                 llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 if (userCouponBean != null && userCouponBean.getData() != null && ((Double.parseDouble(mapping.getDiscount()) * currentNum) > Double.parseDouble(userCouponBean.getData().getTotalQuota()))) {
                     isClickCommit = false;
+                    tvXianShiYuGu.setText("您的积分不足 ");
                     llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
-                    tvXianShiYuGu.setText("您的积分不足");
+                } else {
+                    isClickCommit = true;
+                    tvXianShiYuGu.setText("使用积分后单价 ");
+                    llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 }
             }
             //共享
@@ -422,6 +429,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                     jifen = "您的积分不足";
                     llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_989898_989898_21dp));
                 } else {
+                    isClickCommit = true;
                     llyCommit.setBackground(context.getResources().getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 }
                 tvCommitPrice.setText(jifen);
@@ -449,7 +457,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
     public void dismiss() {
         super.dismiss();
         if (dialogListenerSure != null) {
-            dialogListenerSure.onPositiveClick(goodsDetailBean, mapping, currentNum,selectGoodsAndAttrMapping);
+            dialogListenerSure.onPositiveClick(goodsDetailBean, mapping, currentNum, selectGoodsAndAttrMapping);
         }
     }
 
@@ -473,7 +481,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                 if (isClickShopping) {
                     if (selectGoodsAndAttrMapping) {
                         if (dialogListenerSure != null) {
-                            dialogListenerSure.shopcartAction(goodsDetailBean, mapping, currentNum,selectGoodsAndAttrMapping);
+                            dialogListenerSure.shopcartAction(goodsDetailBean, mapping, currentNum, selectGoodsAndAttrMapping);
                         }
                     } else {
                         ToastUtils.showToast("请选择商品规格");
@@ -484,7 +492,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
                 if (isClickCommit) {
                     if (selectGoodsAndAttrMapping) {
                         if (dialogListenerSure != null) {
-                            dialogListenerSure.addShopcartPaymentConfirm(goodsDetailBean, mapping, currentNum,selectGoodsAndAttrMapping);
+                            dialogListenerSure.addShopcartPaymentConfirm(goodsDetailBean, mapping, currentNum, selectGoodsAndAttrMapping);
                         }
                     } else {
                         ToastUtils.showToast("请选择商品规格");

@@ -79,7 +79,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
                 for (ShopCartBean.DetailsDTO.GoodsVODTO.AttributesDTO attributes : detailsDTO.getGoodsVO().getAttributes()) {
                     if (attributes.getAttrDescription() != null && attributes.getAttrDescription().size() > 0) {
                         for (ShopCartBean.DetailsDTO.GoodsVODTO.AttributesDTO.AttrDescriptionDTO attrDescription : attributes.getAttrDescription()) {
-                            stringBuilder.append(attrDescription.getAttrValue() + "，");
+                            stringBuilder.append(attrDescription.getAttrValue() + ",");
                         }
                     }
                 }

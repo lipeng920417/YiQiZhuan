@@ -58,7 +58,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
     private TabShoppingFragmentAdapter tabFragmentAdapter;
     private ShoppingTabFragment shoppingTabFragment;
     private AddressDefaultBean addressDefaultBean;
-    private List<ShopCartBean.DetailsDTO> details;
+    private List<ShopCartBean.DetailsDTO> details = new ArrayList<>();
     private int state;
     private List<ShopCartBean.DetailsDTO> selectData = new ArrayList<>();
     private PaymentConfirmBean commitObject;
@@ -203,7 +203,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     binding.llyMoney.setVisibility(View.VISIBLE);
                     if (selectData != null) {
                         for (ShopCartBean.DetailsDTO detailsDTO : selectData) {
-                            if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getProductNum() == 0) {
+                            if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getGoodsVO().getStock() == 0) {
                                 detailsDTO.setSelect(false);
                             }
                         }
@@ -211,7 +211,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     if (details != null) {
                         for (ShopCartBean.DetailsDTO detailsDTO : details) {
                             detailsDTO.setState(state);
-                            if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getProductNum() == 0) {
+                            if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 ||  detailsDTO.getGoodsVO().getStock() == 0) {
                                 detailsDTO.setSelect(false);
                             }
                         }
@@ -371,7 +371,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
             for (ShopCartBean.DetailsDTO detailsDTO : details) {
                 if (type == 0) {
                     if (state == 0) {
-                        if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getProductNum() == 0) {
+                        if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getGoodsVO().getStock() == 0) {
                         } else {
                             if (!detailsDTO.isSelect()) {
                                 select = false;
@@ -385,7 +385,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                 } else {
                     if (detailsDTO.getCartType() == type) {
                         if (state == 0) {
-                            if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getProductNum() == 0) {
+                            if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getGoodsVO().getStock() == 0) {
                             } else {
                                 if (!detailsDTO.isSelect()) {
                                     select = false;
@@ -465,7 +465,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
             for (ShopCartBean.DetailsDTO detailsDTO : details) {
                 if (detailsDTO.isSelect()) {
                     if (state == 0) {
-                        if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getProductNum() == 0) {
+                        if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getGoodsVO().getStock() == 0) {
                         } else {
                             selectData.add(detailsDTO);
                         }

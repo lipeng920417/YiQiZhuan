@@ -307,9 +307,13 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 binding.tvXianShiYuGu.setVisibility(View.VISIBLE);
                 binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 if (userCouponBean != null && userCouponBean.getData() != null && ((Double.parseDouble(mapping.getDiscount()) * currentNum) > Double.parseDouble(userCouponBean.getData().getTotalQuota()))) {
-                    isClickCommit = true;
-                    binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_989898_989898_21dp));
+                    isClickCommit = false;
                     binding.tvXianShiYuGu.setText("您的积分不足");
+                    binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_989898_989898_21dp));
+                } else {
+                    isClickCommit = true;
+                    binding.tvXianShiYuGu.setText("使用积分后单价");
+                    binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 }
             }
             //共享
@@ -323,10 +327,11 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 binding.rlyJifenquane.setVisibility(View.VISIBLE);
                 String jifen = "0元购";
                 if (userCouponBean != null && userCouponBean.getData() != null && ((Double.parseDouble(mapping.getDiscount()) * currentNum) > Double.parseDouble(userCouponBean.getData().getTotalQuota()))) {
-                    isClickCommit = true;
+                    isClickCommit = false;
                     jifen = "您的积分不足";
                     binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_989898_989898_21dp));
                 } else {
+                    isClickCommit = true;
                     binding.llyCommit.setBackground(getDrawable(R.drawable.background_conner_ff404f_fa2c19_21dp));
                 }
                 binding.tvCommitPrice.setText(jifen);

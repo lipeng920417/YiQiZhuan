@@ -119,5 +119,7 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport:latest.release'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    // 支付宝 SDK AAR 包所需的配置
+    api 'com.alipay.sdk:alipaysdk-android:+@aar'
 
 }

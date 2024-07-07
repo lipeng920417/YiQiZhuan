@@ -54,7 +54,7 @@
         android:gravity="center_vertical|right"
         android:paddingRight="16dp"
         android:textAllCaps="false"
-        android:textColor="@color/color_ff8e22"
+        android:textColor="@color/purple_500"
         android:textSize="14sp" />
 
 

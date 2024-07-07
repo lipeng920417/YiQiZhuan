@@ -67,5 +67,8 @@ public class Api {
     //查询个人购物车
     public static final String SHOPCART_LIST = "/shopcart/list";
 
+    //支付订单
+    public static final String MALL_ORDER_PAY = "/mall/order/pay";
+
 
 }

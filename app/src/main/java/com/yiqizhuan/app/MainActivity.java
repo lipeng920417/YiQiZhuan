@@ -30,6 +30,7 @@ import com.yiqizhuan.app.ui.base.BaseActivity;
 import com.yiqizhuan.app.ui.home.HomeFragment;
 import com.yiqizhuan.app.ui.login.LoginActivity;
 import com.yiqizhuan.app.ui.mine.MineFragment;
+import com.yiqizhuan.app.ui.pay.PayActivity;
 import com.yiqizhuan.app.ui.remit.RemitFragment;
 import com.yiqizhuan.app.ui.shopping.ShoppingFragment;
 import com.yiqizhuan.app.util.SizeUtils;
@@ -238,6 +239,40 @@ public class MainActivity extends BaseActivity {
                 binding.navView.setSelectedItemId(R.id.navigation_remit);
             }
         });
+
+        //h5跳转app支付
+        LiveEventBus.get("jumpAppPay", String.class).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                String id = "";
+                String orderNumber = "";
+                boolean needCash = false;
+                String totalPrice = "";
+                String totalUseCoupon = "";
+                String source = "";
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    id = jsonObject.getString("id");
+                    orderNumber = jsonObject.getString("orderNumber");
+                    JSONObject jsonObject1 = jsonObject.getJSONObject("confirmVO");
+                    needCash = jsonObject1.getBoolean("needCash");
+                    totalPrice = jsonObject1.getString("totalPrice");
+                    totalUseCoupon = jsonObject1.getString("totalUseCoupon");
+                    source = jsonObject1.getString("source");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(MainActivity.this, PayActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("orderNumber", orderNumber);
+                intent.putExtra("totalPrice", totalPrice);
+                intent.putExtra("totalUseCoupon", totalUseCoupon);
+                intent.putExtra("source", source);
+                intent.putExtra("needCash", needCash);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @SuppressLint("RestrictedApi")

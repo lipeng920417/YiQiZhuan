@@ -26,6 +26,7 @@ import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseFragment;
 import com.yiqizhuan.app.ui.integral.IntegralDetailActivity;
+import com.yiqizhuan.app.ui.pay.PayActivity;
 import com.yiqizhuan.app.ui.setting.SettingActivity;
 import com.yiqizhuan.app.util.PhoneUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
@@ -110,6 +111,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 //                LiveEventBus.get("goToLogin").post("");
 //                LiveEventBus.get("changeCartNum").post("0");
 //                LiveEventBus.get("shopping").post("");
+                intent = new Intent(getActivity(), PayActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ivHint:
                 couponInfo();

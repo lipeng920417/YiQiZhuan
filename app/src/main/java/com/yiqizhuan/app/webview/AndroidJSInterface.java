@@ -116,4 +116,15 @@ public class AndroidJSInterface {
         LiveEventBus.get("getAddressFormJs").post(data);
     }
 
+    @JavascriptInterface
+    public void jumpAppPay(String data) {
+        LiveEventBus.get("webViewClose").post("");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LiveEventBus.get("jumpAppPay").post(data);
+            }
+        }, 100);
+    }
+
 }

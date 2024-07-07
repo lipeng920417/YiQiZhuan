@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.just.agentweb.AgentWeb;
+import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.databinding.ActivityWebBinding;
 import com.yiqizhuan.app.ui.base.BaseActivity;
@@ -73,7 +74,7 @@ public class WebActivity extends BaseActivity {
         // 获取当前的 User-Agent 字符串
         String originalUserAgent = webSettings.getUserAgentString();
         // 追加自定义的 User-Agent 信息
-        String customUserAgent = originalUserAgent + " isApp=1";
+        String customUserAgent = originalUserAgent + " isApp=1;"+"clientVersion="+ BuildConfig.VERSION_NAME+";";
         // 设置新的 User-Agent 字符串
         webSettings.setUserAgentString(customUserAgent);
 //        if (!TextUtils.isEmpty(data)) {

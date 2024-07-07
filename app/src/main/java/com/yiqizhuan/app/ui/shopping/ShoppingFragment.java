@@ -65,6 +65,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
     private boolean jiFenBuZu;
     private boolean allSelect;
     private int type;
+    private boolean hidden;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ShoppingViewModel shoppingViewModel = new ViewModelProvider(this).get(ShoppingViewModel.class);
@@ -499,9 +500,19 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        this.hidden  =hidden;
         if (!hidden) {
             shopCartList();
             addressDefault();
+            LiveEventBus.get("changeCartNum").post("");
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!hidden) {
+            shopCartList();
             LiveEventBus.get("changeCartNum").post("");
         }
     }
@@ -568,8 +579,24 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onSuccess(Call call, Response response, BaseResult<ShopCartBean> result) {
-                if (result != null && result.getData() != null && result.getData().getDetails() != null) {
+                if (result != null && result.getData() != null && result.getData().getDetails() != null && result.getData().getDetails().size() > 0) {
                     details = result.getData().getDetails();
+                    List<ShopCartBean.DetailsDTO> newSelectData = new ArrayList<>();
+                    if (selectData != null && selectData.size() > 0) {
+                        for (ShopCartBean.DetailsDTO detailsDTO : selectData) {
+                            boolean select = false;
+                            for (ShopCartBean.DetailsDTO detailsDTO1 : details) {
+                                if (detailsDTO1.getGoodsId() == detailsDTO.getGoodsId()) {
+                                    select = true;
+                                }
+                            }
+                            if (select) {
+                                newSelectData.add(detailsDTO);
+                            }
+                        }
+                    }
+                    selectData.clear();
+                    selectData.addAll(newSelectData);
                     for (ShopCartBean.DetailsDTO detailsDTO : details) {
                         detailsDTO.setState(state);
                         if (!TextUtils.isEmpty(detailsDTO.getProductVO().getProductName())) {
@@ -605,8 +632,10 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     paymentConfirm(false);
                 } else {
                     details.clear();
+                    selectData.clear();
                     binding.ivAllSelect.setImageResource(R.mipmap.ic_checkbox);
                     allSelect = false;
+                    bottomView();
                     for (ShoppingTabFragment shoppingTabFragment : fragments) {
                         if (shoppingTabFragment != null) {
                             shoppingTabFragment.initData(details);

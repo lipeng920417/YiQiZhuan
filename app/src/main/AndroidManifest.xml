@@ -106,6 +106,10 @@
             android:name="com.yiqizhuan.app.ui.pay.PaySucceedActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.yiqizhuan.app.ui.search.SearchActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

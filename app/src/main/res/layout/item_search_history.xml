@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:paddingRight="12dp"
+    android:paddingLeft="12dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:background="@drawable/background_conner_ffffff_12dp"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/item_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="111"
+        android:textColor="@color/color_333333"
+        android:textSize="11sp"
+        android:layout_gravity="center"
+        tools:ignore="MissingConstraints"
+        android:singleLine="true"
+        android:ellipsize="middle"/>
+</RelativeLayout>

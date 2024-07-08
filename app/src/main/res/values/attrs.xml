@@ -27,5 +27,26 @@
         <attr name="android:gravity" />
     </declare-styleable>
 
+    <!-- 流布局-->
+    <declare-styleable name="FlowLayout1">
+        <!--支持折叠 -->
+        <attr name="flow_fold_history" format="boolean" />
+        <!--折叠时的行数（支持折叠情况下） -->
+        <attr name="flow_foldLines_history" format="integer" />
+        <!--平均分配 -->
+        <attr name="flow_equally_history" format="boolean" />
+        <!--平局分配一行的数量 -->
+        <attr name="flow_equally_count_history" format="integer" />
+        <!--水平间距 -->
+        <attr name="flow_horizontalSpacing_history" format="dimension" />
+        <!--竖直间距 -->
+        <attr name="flow_verticalSpacing_history" format="dimension" />
+        <!--左右对齐 -->
+        <attr name="flow_gravity_history">
+            <enum name="LEFT" value="0" />
+            <enum name="RIGHT" value="1" />
+        </attr>
+    </declare-styleable>
+
 
 </resources>

@@ -33,6 +33,7 @@ import com.yiqizhuan.app.ui.base.BaseFragment;
 import com.yiqizhuan.app.ui.home.adapter.BannerZhuanQuAdapter;
 import com.yiqizhuan.app.ui.home.item.JinGangQuFlexibleItem;
 import com.yiqizhuan.app.ui.home.item.JinRiFlexibleItem;
+import com.yiqizhuan.app.ui.search.SearchActivity;
 import com.yiqizhuan.app.util.BigDecimalUtil;
 import com.yiqizhuan.app.util.GlideUtil;
 import com.yiqizhuan.app.util.PhoneUtil;
@@ -146,12 +147,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 PhoneUtil.getPhone(getActivity());
                 break;
             case R.id.rlySearch:
-                DialogUtil.build1BtnDialog(getActivity(), "搜索模块正在开发中，敬请期待", "我知道了", true, new DialogUtil.DialogListener1Btn() {
-                    @Override
-                    public void onPositiveClick(View v) {
-
-                    }
-                }).show();
+                intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
                 break;
             //悦享汇
             case R.id.vYuexiang:

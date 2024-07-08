@@ -141,8 +141,10 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
 
     private void initData() {
         if (goodsDetailBean != null) {
-            binding.tvNunR.setText(goodsDetailBean.getDetailImages().size() + "");
-            binding.banner.setAdapter(new DetailBannerAdapter(this, goodsDetailBean.getDetailImages()));
+            if (goodsDetailBean.getDetailImages() != null && goodsDetailBean.getDetailImages().size() > 0) {
+                binding.tvNunR.setText(goodsDetailBean.getDetailImages().size() + "");
+                binding.banner.setAdapter(new DetailBannerAdapter(this, goodsDetailBean.getDetailImages()));
+            }
 //            binding.tvName.setText("           " + goodsDetailBean.getProductName());
             // 延迟获取ImageView的宽度，以确保其已完成测量
             binding.ivTitle.post(() -> {
@@ -629,9 +631,9 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                     }
                     Intent checkout = new Intent(GoodsDetailActivity.this, WebActivity.class);
                     if (addressDefaultBean != null) {
-                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId());
+                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId() + "&from=1");
                     } else {
-                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT);
+                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?from=1");
                     }
 
                     checkout.putExtra("data", JSON.toJSONString(result.getData()));

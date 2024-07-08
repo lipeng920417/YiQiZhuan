@@ -212,7 +212,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     if (details != null) {
                         for (ShopCartBean.DetailsDTO detailsDTO : details) {
                             detailsDTO.setState(state);
-                            if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 ||  detailsDTO.getGoodsVO().getStock() == 0) {
+                            if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1 || detailsDTO.getGoodsVO().getStatus() == 0 || detailsDTO.getGoodsVO().getStock() == 0) {
                                 detailsDTO.setSelect(false);
                             }
                         }
@@ -263,9 +263,9 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
         if (commitObject != null) {
             Intent checkout = new Intent(getActivity(), WebActivity.class);
             if (addressDefaultBean != null) {
-                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId());
+                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId() + "&form=2");
             } else {
-                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT);
+                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?form=2");
             }
 
             checkout.putExtra("data", JSON.toJSONString(commitObject));
@@ -500,7 +500,7 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        this.hidden  =hidden;
+        this.hidden = hidden;
         if (!hidden) {
             shopCartList();
             addressDefault();

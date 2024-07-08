@@ -10,36 +10,68 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gyf.immersionbar.ImmersionBar;
+import com.scwang.smart.refresh.footer.BallPulseFooter;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.yiqizhuan.app.R;
+import com.yiqizhuan.app.bean.ProductListBean;
 import com.yiqizhuan.app.databinding.ActivitySearchBinding;
 import com.yiqizhuan.app.db.MMKVHelper;
+import com.yiqizhuan.app.net.Api;
+import com.yiqizhuan.app.net.BaseCallBack;
+import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.ui.base.BaseActivity;
+import com.yiqizhuan.app.ui.home.item.BottomFlexibleItem;
+import com.yiqizhuan.app.ui.remit.item.ChaoZhiHaoWuFlexibleItem;
 import com.yiqizhuan.app.ui.search.history.ExpansionFoldLayout;
 import com.yiqizhuan.app.ui.search.history.SearchHistoryAdapter;
+import com.yiqizhuan.app.ui.search.item.SearchFlexibleItem;
+import com.yiqizhuan.app.util.KeyboardUtils;
 import com.yiqizhuan.app.util.ToastUtils;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+
+import eu.davidea.flexibleadapter.FlexibleAdapter;
+import eu.davidea.flexibleadapter.items.IFlexible;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * @author LiPeng
  * @create 2024-07-07 4:35 PM
  */
 public class SearchActivity extends BaseActivity implements View.OnClickListener {
+    //历史热词
     private boolean flag = true;
     private int MIN_VALUE = 2;
-    ActivitySearchBinding binding;
     //    private List<String> list = Utils.getHistoryList();
     private SearchHistoryAdapter mAdapter;
 
     private static final int MAX_SIZE = 20;
     private ArrayList<String> listHistory = new ArrayList<>(MAX_SIZE);
+    //搜索结果
+    private int page = 1;
+    private int size = 10;
+    private FlexibleAdapter<IFlexible> searchFlexibleAdapter;
+    private String inputTextCurrent;
+    private String firstCategoryId;
+    private String type;
+    ActivitySearchBinding binding;
 
 
     @Override
@@ -48,6 +80,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         binding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        if (getIntent() != null) {
+            firstCategoryId = getIntent().getStringExtra("firstCategoryId");
+            type = getIntent().getStringExtra("type");
+        }
         initView();
     }
 
@@ -70,6 +106,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             public void afterTextChanged(Editable editable) {
                 if (TextUtils.isEmpty(editable.toString())) {
                     binding.llyHistoryRecommend.setVisibility(View.VISIBLE);
+                    binding.rcSearch.setVisibility(View.GONE);
+                    binding.smartRefreshLayout.setEnableLoadMore(false);
+                    binding.smartRefreshLayout.setNoMoreData(true);
                 }
             }
         });
@@ -79,9 +118,26 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onPositiveClick(String s) {
                 binding.edtSearch.setText(s);
+                binding.edtSearch.setSelection(binding.edtSearch.getText().length()); // 设置光标位置
+                inputText(s);
             }
         });
         initHistory();
+        binding.smartRefreshLayout.setEnableRefresh(false);
+        binding.smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                productList(inputTextCurrent,false);
+            }
+        });
+        //设置 Footer 为 球脉冲 样式
+        binding.smartRefreshLayout.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
+        searchFlexibleAdapter = new FlexibleAdapter<>(null);
+        binding.rcSearch.setLayoutManager(new LinearLayoutManager(this));
+        binding.rcSearch.setAdapter(searchFlexibleAdapter);
+        binding.rcSearch.setItemAnimator(new DefaultItemAnimator());
+        binding.smartRefreshLayout.setEnableLoadMore(false);
+        binding.smartRefreshLayout.setNoMoreData(true);
     }
 
     private void initHistory() {
@@ -120,14 +176,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 finish();
                 break;
             case R.id.tvSearch:
-                String inputText = binding.edtSearch.getText().toString().trim();
-                if (!TextUtils.isEmpty(inputText)) {
-                    addElement(inputText);
-                    binding.llyHistoryRecommend.setVisibility(View.GONE);
-                    closeKeyboard();
-                } else {
-                    ToastUtils.showToast("请输入商品名称");
-                }
+                inputText(binding.edtSearch.getText().toString());
                 break;
             case R.id.ivDelete:
                 listHistory.clear();
@@ -137,7 +186,17 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+
     public void addElement(String element) {
+        if (listHistory != null && listHistory.size() > 0) {
+            Iterator<String> iterator = listHistory.iterator();
+            while (iterator.hasNext()) {
+                String current = iterator.next();
+                if (TextUtils.equals(element, current)) {
+                    iterator.remove();
+                }
+            }
+        }
         // 将新元素添加到第一个位置
         listHistory.add(0, element);
         // 如果列表超过了最大尺寸，移除最后一个元素
@@ -161,12 +220,94 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
-    private void closeKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+    private void inputText(String inputText) {
+        if (!TextUtils.isEmpty(inputText) && !TextUtils.isEmpty(inputText.trim())) {
+            inputTextCurrent = inputText.trim();
+            addElement(inputTextCurrent);
+            binding.llyHistoryRecommend.setVisibility(View.GONE);
+            binding.rcSearch.setVisibility(View.VISIBLE);
+            KeyboardUtils.hideKeyboard(this);
+            binding.smartRefreshLayout.setEnableLoadMore(true);
+            binding.smartRefreshLayout.setNoMoreData(false);
+            page = 1;
+            productList(inputText, true);
+        } else {
+            ToastUtils.showToast("请输入商品名称");
         }
+    }
+
+    private void updateDataUI(List<ProductListBean.Detail> result) {
+        for (ProductListBean.Detail detail : result) {
+            searchFlexibleAdapter.addItem(new SearchFlexibleItem(this, detail));
+        }
+    }
+
+    /**
+     * 商品搜索
+     * "firstCategoryId": // 九大类目中搜索时，需要传递类目id
+     * "type" : // 四大板块中搜索时，需要加上type，目前不涉及这个的搜索，值同四大板块
+     */
+    private void productList(String term, boolean loading) {
+        if (loading) {
+            showLoading();
+        }
+        HashMap<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("type", "1");
+        paramsMap.put("page", page + "");
+        paramsMap.put("size", size + "");
+        paramsMap.put("term", term);
+        if (!TextUtils.isEmpty(firstCategoryId)) {
+            paramsMap.put("firstCategoryId", firstCategoryId);
+        }
+        if (!TextUtils.isEmpty(type)) {
+            paramsMap.put("type", type);
+        }
+        OkHttpManager.getInstance().postRequest(Api.PRODUCT_SEARCH, paramsMap, new BaseCallBack<ProductListBean>() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (binding != null && binding.smartRefreshLayout != null) {
+                    binding.smartRefreshLayout.finishRefresh();
+                    binding.smartRefreshLayout.finishLoadMore();
+                }
+                if (loading) {
+                    cancelLoading();
+                }
+            }
+
+            @Override
+            public void onSuccess(Call call, Response response, ProductListBean result) {
+                if (binding != null && binding.smartRefreshLayout != null) {
+                    binding.smartRefreshLayout.finishRefresh();
+                    binding.smartRefreshLayout.finishLoadMore();
+                }
+                if (page == 1) {
+                    searchFlexibleAdapter.clear();
+                }
+                if (result != null && result.getData() != null && result.getData().getDetails() != null && result.getData().getDetails().size() > 0) {
+                    page++;
+                    updateDataUI(result.getData().getDetails());
+                } else {
+                    searchFlexibleAdapter.addItem(new BottomFlexibleItem(SearchActivity.this));
+                    binding.smartRefreshLayout.setEnableLoadMore(false);
+                    binding.smartRefreshLayout.setNoMoreData(true);
+                }
+                if (loading) {
+                    cancelLoading();
+                }
+            }
+
+            @Override
+            public void onError(Call call, int statusCode, Exception e) {
+                if (binding != null && binding.smartRefreshLayout != null) {
+                    binding.smartRefreshLayout.finishRefresh();
+                    binding.smartRefreshLayout.finishLoadMore();
+                }
+                if (loading) {
+                    cancelLoading();
+                }
+            }
+        });
     }
 
 }

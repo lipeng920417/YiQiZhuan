@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_ff1804"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="vertical">
 
     <View
         android:id="@+id/viewHeaderPlaceholder"
@@ -56,14 +56,14 @@
                 android:layout_toLeftOf="@+id/tvSearch"
                 android:layout_toRightOf="@+id/ivSouSuo"
                 android:background="@null"
+                android:ellipsize="end"
+                android:focusableInTouchMode="true"
                 android:hint="请输入商品名称"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:textColor="@color/color_333333"
                 android:textColorHint="@color/color_999999"
                 android:textSize="14sp"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:scrollHorizontally="true"
-                android:focusableInTouchMode="true"
                 app:x_clearDrawable="@mipmap/ic_close_gray_circle"></com.xw.repo.XEditText>
 
             <TextView
@@ -88,53 +88,86 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/llyHistoryRecommend"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_conner_f9f9f9_top_10dp"
-        android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp">
+        android:background="@drawable/background_conner_f9f9f9_top_10dp">
 
-        <LinearLayout
-            android:id="@+id/llySearch"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/llyHistoryRecommend"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="搜素历史"
-                    android:textColor="@color/color_333333"
-                    android:textSize="12sp"></TextView>
+                    android:orientation="vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp">
 
-                <ImageView
-                    android:id="@+id/ivDelete"
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/ic_search_delete"></ImageView>
+                    <LinearLayout
+                        android:id="@+id/llySearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-            </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
 
-            <RelativeLayout
-                android:id="@+id/rlyHistory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="搜素历史"
+                                android:textColor="@color/color_333333"
+                                android:textSize="12sp"></TextView>
 
-            </RelativeLayout>
-        </LinearLayout>
+                            <ImageView
+                                android:id="@+id/ivDelete"
+                                android:layout_width="13dp"
+                                android:layout_height="13dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/ic_search_delete"></ImageView>
 
-    </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlyHistory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.scwang.smart.refresh.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 
 </LinearLayout>

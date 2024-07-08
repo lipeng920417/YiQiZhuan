@@ -70,5 +70,8 @@ public class Api {
     //支付订单
     public static final String MALL_ORDER_PAY = "/mall/order/pay";
 
+    //商品搜索
+    public static final String PRODUCT_SEARCH = "/product/search";
+
 
 }

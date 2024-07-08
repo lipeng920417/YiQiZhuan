@@ -141,8 +141,10 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
 
     private void initData() {
         if (goodsDetailBean != null) {
-            binding.tvNunR.setText(goodsDetailBean.getDetailImages().size() + "");
-            binding.banner.setAdapter(new DetailBannerAdapter(this, goodsDetailBean.getDetailImages()));
+            if (goodsDetailBean.getDetailImages() != null && goodsDetailBean.getDetailImages().size() > 0) {
+                binding.tvNunR.setText(goodsDetailBean.getDetailImages().size() + "");
+                binding.banner.setAdapter(new DetailBannerAdapter(this, goodsDetailBean.getDetailImages()));
+            }
 //            binding.tvName.setText("           " + goodsDetailBean.getProductName());
             // 延迟获取ImageView的宽度，以确保其已完成测量
             binding.ivTitle.post(() -> {

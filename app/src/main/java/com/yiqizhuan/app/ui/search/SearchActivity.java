@@ -1,19 +1,15 @@
 package com.yiqizhuan.app.ui.search;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
@@ -32,9 +28,9 @@ import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.ui.base.BaseActivity;
 import com.yiqizhuan.app.ui.home.item.BottomFlexibleItem;
-import com.yiqizhuan.app.ui.remit.item.ChaoZhiHaoWuFlexibleItem;
 import com.yiqizhuan.app.ui.search.history.ExpansionFoldLayout;
 import com.yiqizhuan.app.ui.search.history.SearchHistoryAdapter;
+import com.yiqizhuan.app.ui.search.item.RecommendFlexibleItem;
 import com.yiqizhuan.app.ui.search.item.SearchFlexibleItem;
 import com.yiqizhuan.app.util.KeyboardUtils;
 import com.yiqizhuan.app.util.ToastUtils;
@@ -56,6 +52,7 @@ import okhttp3.Response;
  * @create 2024-07-07 4:35 PM
  */
 public class SearchActivity extends BaseActivity implements View.OnClickListener {
+    ActivitySearchBinding binding;
     //历史热词
     private boolean flag = true;
     private int MIN_VALUE = 2;
@@ -71,7 +68,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private String inputTextCurrent;
     private String firstCategoryId;
     private String type;
-    ActivitySearchBinding binding;
+    private FlexibleAdapter<IFlexible> recommendFlexibleAdapter;
 
 
     @Override
@@ -127,7 +124,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         binding.smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                productList(inputTextCurrent,false);
+                productList(inputTextCurrent, false);
             }
         });
         //设置 Footer 为 球脉冲 样式
@@ -138,6 +135,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         binding.rcSearch.setItemAnimator(new DefaultItemAnimator());
         binding.smartRefreshLayout.setEnableLoadMore(false);
         binding.smartRefreshLayout.setNoMoreData(true);
+        //推荐
+        recommendFlexibleAdapter = new FlexibleAdapter<>(null);
+        binding.rcRecommend.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.rcRecommend.setAdapter(recommendFlexibleAdapter);
+        binding.rcRecommend.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void initHistory() {
@@ -308,6 +310,13 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 }
             }
         });
+    }
+
+    private void updateDataRecommend(List<ProductListBean.Detail> result) {
+        for (int i = 0; i < 10; i++) {
+//        for (ProductListBean.Detail detail : result) {
+            recommendFlexibleAdapter.addItem(new RecommendFlexibleItem(this));
+        }
     }
 
 }

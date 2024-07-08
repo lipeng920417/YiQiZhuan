@@ -109,25 +109,26 @@
                     android:id="@+id/llyHistoryRecommend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/llySearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:layout_marginTop="20dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp">
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="搜素历史"
+                                android:layout_centerVertical="true"
                                 android:textColor="@color/color_333333"
                                 android:textSize="12sp"></TextView>
 
@@ -149,6 +150,13 @@
 
                         </RelativeLayout>
                     </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcRecommend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="12dp"/>
 
                 </LinearLayout>
 

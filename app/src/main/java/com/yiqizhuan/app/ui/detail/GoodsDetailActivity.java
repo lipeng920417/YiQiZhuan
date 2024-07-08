@@ -631,9 +631,9 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                     }
                     Intent checkout = new Intent(GoodsDetailActivity.this, WebActivity.class);
                     if (addressDefaultBean != null) {
-                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId() + "&form=1");
+                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId() + "&from=1");
                     } else {
-                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?form=1");
+                        checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?from=1");
                     }
 
                     checkout.putExtra("data", JSON.toJSONString(result.getData()));

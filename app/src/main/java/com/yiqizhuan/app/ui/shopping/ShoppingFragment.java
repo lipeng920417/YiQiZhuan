@@ -263,9 +263,9 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
         if (commitObject != null) {
             Intent checkout = new Intent(getActivity(), WebActivity.class);
             if (addressDefaultBean != null) {
-                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId() + "&form=2");
+                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?id=" + addressDefaultBean.getId() + "&from=2");
             } else {
-                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?form=2");
+                checkout.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_CHECKOUT + "?from=2");
             }
 
             checkout.putExtra("data", JSON.toJSONString(commitObject));

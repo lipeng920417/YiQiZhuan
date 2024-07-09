@@ -8,14 +8,14 @@
     <RelativeLayout
         android:id="@+id/rly1"
         android:layout_width="0dp"
-        android:layout_height="97dp"
+        android:layout_height="90dp"
         android:layout_marginRight="3dp"
         android:layout_weight="1">
 
         <ImageView
             android:id="@+id/iv1"
             android:layout_width="match_parent"
-            android:layout_height="97dp"
+            android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_custom_1"></ImageView>
         <ImageView
@@ -45,14 +45,14 @@
     <RelativeLayout
         android:id="@+id/rly2"
         android:layout_width="0dp"
-        android:layout_height="97dp"
+        android:layout_height="90dp"
         android:layout_marginLeft="3dp"
         android:layout_weight="1">
 
         <ImageView
             android:id="@+id/iv2"
             android:layout_width="match_parent"
-            android:layout_height="97dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_custom_2"></ImageView>

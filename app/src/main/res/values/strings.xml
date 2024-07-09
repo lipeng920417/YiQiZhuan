@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">起点GO商城</string>
     <string name="title_home">首页</string>
+    <string name="title_category">分类</string>
     <string name="title_remit">尊享汇</string>
     <string name="title_shopping">购物车</string>
     <string name="title_mine">我的</string>

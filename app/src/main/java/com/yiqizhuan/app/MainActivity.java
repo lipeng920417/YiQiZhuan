@@ -25,8 +25,8 @@ import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
-import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseActivity;
+import com.yiqizhuan.app.ui.category.CategoryFragment;
 import com.yiqizhuan.app.ui.home.HomeFragment;
 import com.yiqizhuan.app.ui.login.LoginActivity;
 import com.yiqizhuan.app.ui.mine.MineFragment;
@@ -37,7 +37,6 @@ import com.yiqizhuan.app.util.SizeUtils;
 import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.util.UnreadMsgUtil;
-import com.yiqizhuan.app.webview.WebActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,6 +52,7 @@ public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
     private HomeFragment homeFragment;
+    private CategoryFragment categoryFragment;
     private RemitFragment remitFragment;
     private ShoppingFragment shoppingFragment;
     private MineFragment mineFragment;
@@ -85,12 +85,15 @@ public class MainActivity extends BaseActivity {
 
     private void initFragment() {
         homeFragment = new HomeFragment();
+        categoryFragment = new CategoryFragment();
         remitFragment = new RemitFragment();
         shoppingFragment = new ShoppingFragment();
         mineFragment = new MineFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.nav_host_fragment_activity_main, homeFragment);
         transaction.show(homeFragment);
+        transaction.add(R.id.nav_host_fragment_activity_main, categoryFragment);
+        transaction.show(categoryFragment);
         transaction.add(R.id.nav_host_fragment_activity_main, remitFragment);
         transaction.show(remitFragment);
         transaction.add(R.id.nav_host_fragment_activity_main, shoppingFragment);
@@ -124,6 +127,7 @@ public class MainActivity extends BaseActivity {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(homeFragment);
+        transaction.hide(categoryFragment);
         transaction.hide(remitFragment);
         transaction.hide(shoppingFragment);
         transaction.hide(mineFragment);
@@ -131,30 +135,42 @@ public class MainActivity extends BaseActivity {
             case R.id.navigation_home:
                 transaction.show(homeFragment);
                 binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home_select);
-                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_remit);
-                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.icon_cart);
-                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_my);
+                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_category);
+                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.ic_remit);
+                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_cart);
+                binding.navView.getMenu().getItem(4).setIcon(R.mipmap.icon_my);
+                break;
+            case R.id.navigation_category:
+                transaction.show(categoryFragment);
+                binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home);
+                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_category_select);
+                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.ic_remit);
+                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_cart);
+                binding.navView.getMenu().getItem(4).setIcon(R.mipmap.icon_my);
                 break;
             case R.id.navigation_remit:
                 transaction.show(remitFragment);
                 binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home);
-                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_remit_select);
-                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.icon_cart);
-                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_my);
+                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_category);
+                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.ic_remit_select);
+                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_cart);
+                binding.navView.getMenu().getItem(4).setIcon(R.mipmap.icon_my);
                 break;
             case R.id.navigation_dashboard:
                 transaction.show(shoppingFragment);
                 binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home);
-                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_remit);
-                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.icon_cart_select);
-                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_my);
+                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_category);
+                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.ic_remit);
+                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_cart_select);
+                binding.navView.getMenu().getItem(4).setIcon(R.mipmap.icon_my);
                 break;
             case R.id.navigation_notifications:
                 transaction.show(mineFragment);
                 binding.navView.getMenu().getItem(0).setIcon(R.mipmap.icon_home);
-                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_remit);
-                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.icon_cart);
-                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_my_select);
+                binding.navView.getMenu().getItem(1).setIcon(R.mipmap.ic_category);
+                binding.navView.getMenu().getItem(2).setIcon(R.mipmap.ic_remit);
+                binding.navView.getMenu().getItem(3).setIcon(R.mipmap.icon_cart);
+                binding.navView.getMenu().getItem(4).setIcon(R.mipmap.icon_my_select);
                 break;
         }
         transaction.commit();

@@ -7,6 +7,10 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_category"
+        android:icon="@mipmap/ic_category"
+        android:title="@string/title_category" />
+    <item
         android:id="@+id/navigation_remit"
         android:icon="@mipmap/ic_remit"
         android:title="@string/title_remit" />

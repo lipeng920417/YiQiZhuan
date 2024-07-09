@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_cc1c21"
-            android:textSize="11sp"
+            android:textSize="11dp"
             android:text="3C数码"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true">

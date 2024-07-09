@@ -69,7 +69,9 @@ public class MainActivity extends BaseActivity {
         initFragment();
         initLiveEventBus();
         pop();
-        shopCartCount();
+        if (!TextUtils.isEmpty(MMKVHelper.getString("token", ""))) {
+            shopCartCount();
+        }
     }
 
     @Override

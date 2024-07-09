@@ -13,6 +13,7 @@ import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.bean.BaseResult;
 import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.util.AppUtil;
+import com.yiqizhuan.app.util.ToastUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -274,6 +275,7 @@ public class OkHttpManager {
         handler.post(new Runnable() {
             @Override
             public void run() {
+                ToastUtils.showToast("手机网络开小差啦");
                 callBack.onFailure(call, e);
             }
         });

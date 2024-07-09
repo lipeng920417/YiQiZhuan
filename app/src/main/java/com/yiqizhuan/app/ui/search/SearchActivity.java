@@ -22,6 +22,7 @@ import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.BaseResult;
 import com.yiqizhuan.app.bean.ProductListBean;
+import com.yiqizhuan.app.bean.ProductSearchDefaultBean;
 import com.yiqizhuan.app.databinding.ActivitySearchBinding;
 import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.net.Api;
@@ -315,23 +316,23 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         });
     }
 
-    private void updateDataRecommend(Map<String, List<ProductListBean.Detail>> result) {
-        for (Map.Entry<String, List<ProductListBean.Detail>> entry : result.entrySet()) {
-            recommendFlexibleAdapter.addItem(new RecommendFlexibleItem(this, entry.getKey(), entry.getValue()));
+    private void updateDataRecommend(List<ProductSearchDefaultBean> result) {
+        for (ProductSearchDefaultBean productSearchDefaultBean : result) {
+            recommendFlexibleAdapter.addItem(new RecommendFlexibleItem(this, productSearchDefaultBean));
         }
     }
 
     private void productSearchDefault() {
         showLoading();
         HashMap<String, String> paramsMap = new HashMap<>();
-        OkHttpManager.getInstance().getRequest(Api.PRODUCT_SEARCH_DEFAULT, paramsMap, new BaseCallBack<BaseResult<Map<String, List<ProductListBean.Detail>>>>() {
+        OkHttpManager.getInstance().getRequest(Api.PRODUCT_SEARCH_DEFAULT, paramsMap, new BaseCallBack<BaseResult<List<ProductSearchDefaultBean>>>() {
             @Override
             public void onFailure(Call call, IOException e) {
                 cancelLoading();
             }
 
             @Override
-            public void onSuccess(Call call, Response response, BaseResult<Map<String, List<ProductListBean.Detail>>> result) {
+            public void onSuccess(Call call, Response response, BaseResult<List<ProductSearchDefaultBean>> result) {
                 if (result != null && result.getData() != null) {
                     updateDataRecommend(result.getData());
                 }

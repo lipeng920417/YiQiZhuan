@@ -72,6 +72,8 @@ public class Api {
 
     //商品搜索
     public static final String PRODUCT_SEARCH = "/product/search";
+    //搜索推荐
+    public static final String PRODUCT_SEARCH_DEFAULT = "/product/search/default";
 
 
 }

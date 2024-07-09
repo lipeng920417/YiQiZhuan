@@ -20,6 +20,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.yiqizhuan.app.R;
+import com.yiqizhuan.app.bean.BaseResult;
 import com.yiqizhuan.app.bean.ProductListBean;
 import com.yiqizhuan.app.databinding.ActivitySearchBinding;
 import com.yiqizhuan.app.db.MMKVHelper;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
@@ -82,6 +84,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             type = getIntent().getStringExtra("type");
         }
         initView();
+        productSearchDefault();
     }
 
     private void initView() {
@@ -312,11 +315,34 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         });
     }
 
-    private void updateDataRecommend(List<ProductListBean.Detail> result) {
-        for (int i = 0; i < 10; i++) {
-//        for (ProductListBean.Detail detail : result) {
-            recommendFlexibleAdapter.addItem(new RecommendFlexibleItem(this));
+    private void updateDataRecommend(Map<String, List<ProductListBean.Detail>> result) {
+        for (Map.Entry<String, List<ProductListBean.Detail>> entry : result.entrySet()) {
+            recommendFlexibleAdapter.addItem(new RecommendFlexibleItem(this, entry.getKey(), entry.getValue()));
         }
+    }
+
+    private void productSearchDefault() {
+        showLoading();
+        HashMap<String, String> paramsMap = new HashMap<>();
+        OkHttpManager.getInstance().getRequest(Api.PRODUCT_SEARCH_DEFAULT, paramsMap, new BaseCallBack<BaseResult<Map<String, List<ProductListBean.Detail>>>>() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                cancelLoading();
+            }
+
+            @Override
+            public void onSuccess(Call call, Response response, BaseResult<Map<String, List<ProductListBean.Detail>>> result) {
+                if (result != null && result.getData() != null) {
+                    updateDataRecommend(result.getData());
+                }
+                cancelLoading();
+            }
+
+            @Override
+            public void onError(Call call, int statusCode, Exception e) {
+                cancelLoading();
+            }
+        });
     }
 
 }

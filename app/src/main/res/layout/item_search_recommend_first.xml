@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
 
     <RelativeLayout
+        android:id="@+id/rly1"
         android:layout_width="0dp"
         android:layout_height="97dp"
         android:layout_marginRight="3dp"
@@ -16,6 +18,13 @@
             android:layout_height="97dp"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_custom_1"></ImageView>
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="17dp"
+            android:src="@mipmap/ic_recommend_num1"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="5dp">
+        </ImageView>
 
         <TextView
             android:id="@+id/tvName1"
@@ -34,6 +43,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rly2"
         android:layout_width="0dp"
         android:layout_height="97dp"
         android:layout_marginLeft="3dp"
@@ -46,6 +56,14 @@
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_custom_2"></ImageView>
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="17dp"
+            android:src="@mipmap/ic_recommend_num2"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="5dp">
+        </ImageView>
 
         <TextView
             android:id="@+id/tvName2"

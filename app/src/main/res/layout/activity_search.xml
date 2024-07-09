@@ -31,7 +31,7 @@
         <RelativeLayout
             android:id="@+id/rlySearch"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="34dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
@@ -76,12 +76,12 @@
                 android:background="@drawable/background_conner_ff4414_ff1130f_14dp"
                 android:gravity="center"
                 android:paddingLeft="16dp"
-                android:paddingTop="5dp"
+                android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="5dp"
+                android:paddingBottom="4dp"
                 android:text="搜索"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold"></TextView>
 
         </RelativeLayout>
@@ -156,7 +156,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:layout_marginLeft="12dp"/>
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginBottom="20dp"/>
 
                 </LinearLayout>
 

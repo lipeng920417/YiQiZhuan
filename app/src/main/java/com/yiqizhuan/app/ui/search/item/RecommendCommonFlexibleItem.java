@@ -70,7 +70,7 @@ public class RecommendCommonFlexibleItem extends AbstractFlexibleItem<RecommendC
                 for (int i = 0; i < detailsDTO1.getTags().size(); i++) {
                     tag.append(detailsDTO1.getTags().get(i));
                     if (i < detailsDTO1.getTags().size() - 1) {
-                        tag.append("、");
+                        tag.append(" · ");
                     }
                 }
             }

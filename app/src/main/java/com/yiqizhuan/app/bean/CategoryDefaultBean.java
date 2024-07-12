@@ -9,12 +9,61 @@ public class CategoryDefaultBean {
     private String name;
     private String parentId;
     private String imageUrl;
+    private String topIconUrl;
+    private String bannerUrl;
+    private int deleted;
+    private boolean select;
+    private int hide;
+
+
+    public CategoryDefaultBean() {
+    }
 
     public CategoryDefaultBean(String id, String name, String parentId, String imageUrl) {
         this.id = id;
         this.name = name;
         this.parentId = parentId;
         this.imageUrl = imageUrl;
+    }
+
+    public int getHide() {
+        return hide;
+    }
+
+    public void setHide(int hide) {
+        this.hide = hide;
+    }
+
+    public String getTopIconUrl() {
+        return topIconUrl;
+    }
+
+    public void setTopIconUrl(String topIconUrl) {
+        this.topIconUrl = topIconUrl;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
+    }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean isSelect() {
+        return select;
+    }
+
+    public void setSelect(boolean select) {
+        this.select = select;
     }
 
     public String getId() {

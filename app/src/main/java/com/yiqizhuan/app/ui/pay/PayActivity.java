@@ -91,7 +91,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         }
         if (BuildConfig.DEBUG) {
             // 设置支付宝SDK运行模式为沙箱模式
-//            EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
+            EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         }
     }
 

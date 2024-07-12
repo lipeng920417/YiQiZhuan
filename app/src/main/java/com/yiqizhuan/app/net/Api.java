@@ -75,5 +75,10 @@ public class Api {
     //搜索推荐
     public static final String PRODUCT_SEARCH_DEFAULT = "/product/search/default";
 
+    //分类二级类目
+    public static final String category_second = "/category/second";
+    //分类二级商品
+    public static final String PRODUCT_BY_CATEGORY = "/product/byCategory";
+
 
 }

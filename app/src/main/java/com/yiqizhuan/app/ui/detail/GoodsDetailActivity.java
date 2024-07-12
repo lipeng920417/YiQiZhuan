@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSON;
 import com.gyf.immersionbar.ImmersionBar;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.yiqizhuan.app.BuildConfig;
+import com.yiqizhuan.app.MainActivity;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.AddressDefaultBean;
 import com.yiqizhuan.app.bean.BaseResult;
@@ -33,6 +34,7 @@ import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseActivity;
 import com.yiqizhuan.app.ui.detail.adapter.DetailBannerAdapter;
 import com.yiqizhuan.app.ui.detail.dialog.DetailBottomDialog;
+import com.yiqizhuan.app.ui.setting.SettingActivity;
 import com.yiqizhuan.app.util.ClickUtil;
 import com.yiqizhuan.app.util.GlideUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
@@ -349,13 +351,16 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
             //购物车
             case R.id.llyShop:
-                LiveEventBus.get("webViewClose").post("");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        LiveEventBus.get("shopping").post("");
-                    }
-                }, 100);
+//                LiveEventBus.get("webViewClose").post("");
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        LiveEventBus.get("shopping").post("");
+//                    }
+//                }, 100);
+                Intent shop = new Intent(GoodsDetailActivity.this, MainActivity.class);
+                shop.putExtra("shopping", "shopping");
+                startActivity(shop);
                 finish();
                 break;
             //地址

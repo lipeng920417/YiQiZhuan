@@ -80,6 +80,9 @@ public class MainActivity extends BaseActivity {
         if (intent != null && intent.getExtras() != null && "switchHome".equals(intent.getExtras().getString("switchHome"))) {
             binding.navView.setSelectedItemId(R.id.navigation_home);
             switchTab(R.id.navigation_home);
+        } else if (intent != null && intent.getExtras() != null && "shopping".equals(intent.getExtras().getString("shopping"))) {
+            binding.navView.setSelectedItemId(R.id.navigation_dashboard);
+            switchTab(R.id.navigation_dashboard);
         }
     }
 
@@ -191,7 +194,7 @@ public class MainActivity extends BaseActivity {
             public void onChanged(@Nullable String s) {
                 //清除登录信息
                 MMKVHelper.removeLoginMessage();
-                setBNV_Badge(2, 0);
+                setBNV_Badge(3, 0);
                 ToastUtils.showToast("您的登录状态已过期，请重新登录");
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 intent.putExtra("switchHome", "switchHome");
@@ -212,7 +215,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onChanged(@Nullable String s) {
                 if (!TextUtils.isEmpty(s)) {
-                    setBNV_Badge(2, Integer.parseInt(s));
+                    setBNV_Badge(3, Integer.parseInt(s));
                 } else {
                     shopCartCount();
                 }
@@ -330,7 +333,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(Call call, Response response, BaseResult<String> result) {
                 if (result != null && !TextUtils.isEmpty(result.getData())) {
-                    setBNV_Badge(2, Integer.parseInt(result.getData()));
+                    setBNV_Badge(3, Integer.parseInt(result.getData()));
                 }
             }
 

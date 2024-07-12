@@ -8,7 +8,16 @@ import java.util.List;
  */
 public class ProductSearchDefaultBean {
     private String title;
+    private int categoryId;
     private List<ProductListBean.Detail> products;
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public String getTitle() {
         return title;

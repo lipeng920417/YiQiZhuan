@@ -1,6 +1,7 @@
 package com.yiqizhuan.app.ui.category.item;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -9,9 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.CategoryDefaultBean;
+import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.util.GlideUtil;
+import com.yiqizhuan.app.webview.WebActivity;
 
 import java.util.List;
 
@@ -20,7 +24,7 @@ import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import eu.davidea.flexibleadapter.items.IFlexible;
 
 
-public class JinGangQuCategoryFlexibleItem extends AbstractFlexibleItem<JinGangQuCategoryFlexibleItem.ItemViewHolder> {
+public class JinGangQuCategoryPopFlexibleItem extends AbstractFlexibleItem<JinGangQuCategoryPopFlexibleItem.ItemViewHolder> {
     public Context context;
     public CategoryDefaultBean categoryDefaultBean;
     private OnClickListener onClickListener;
@@ -29,7 +33,7 @@ public class JinGangQuCategoryFlexibleItem extends AbstractFlexibleItem<JinGangQ
         this.onClickListener = onClickListener;
     }
 
-    public JinGangQuCategoryFlexibleItem(Context context, CategoryDefaultBean categoryDefaultBean) {
+    public JinGangQuCategoryPopFlexibleItem(Context context, CategoryDefaultBean categoryDefaultBean) {
         this.context = context;
         this.categoryDefaultBean = categoryDefaultBean;
     }
@@ -41,7 +45,7 @@ public class JinGangQuCategoryFlexibleItem extends AbstractFlexibleItem<JinGangQ
 
     @Override
     public int getLayoutRes() {
-        return R.layout.item_jin_gang_qu_category;
+        return R.layout.item_jin_gang_qu_category_pop;
     }
 
     @Override
@@ -66,7 +70,7 @@ public class JinGangQuCategoryFlexibleItem extends AbstractFlexibleItem<JinGangQ
             holder.lly.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (onClickListener!=null){
+                    if (onClickListener != null) {
                         onClickListener.onPositiveClick(categoryDefaultBean,position);
                     }
                 }
@@ -88,6 +92,7 @@ public class JinGangQuCategoryFlexibleItem extends AbstractFlexibleItem<JinGangQ
             tvName = itemView.findViewById(R.id.tvName);
         }
     }
+
     public interface OnClickListener {
         void onPositiveClick(CategoryDefaultBean categoryDefaultBean,int position);
     }

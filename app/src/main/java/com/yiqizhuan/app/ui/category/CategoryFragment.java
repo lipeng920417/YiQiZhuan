@@ -257,7 +257,7 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
         if (recommendExist() != null) {
             CategoryDefaultBean categoryDefaultBean = new CategoryDefaultBean();
             categoryDefaultBean.setId("-1");
-            categoryDefaultBean.setName("为你推荐");
+            categoryDefaultBean.setName("精选好物");
             category2DefaultBeanList.add(0, categoryDefaultBean);
         }
         for (int i = 0; i < category2DefaultBeanList.size(); i++) {

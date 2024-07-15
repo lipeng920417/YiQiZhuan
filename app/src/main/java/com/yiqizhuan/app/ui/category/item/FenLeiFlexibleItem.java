@@ -64,7 +64,7 @@ public class FenLeiFlexibleItem extends AbstractFlexibleItem<FenLeiFlexibleItem.
             holder.lly.setBackgroundColor(context.getResources().getColor(R.color.color_f5f6fa));
         }
         if (TextUtils.equals(categoryDefaultBean.getId(), "-1")) {
-            holder.tvBiaoQian.setVisibility(View.VISIBLE);
+            holder.tvBiaoQian.setVisibility(View.GONE);
         } else {
             holder.tvBiaoQian.setVisibility(View.GONE);
         }

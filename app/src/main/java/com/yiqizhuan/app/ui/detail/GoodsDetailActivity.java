@@ -43,6 +43,7 @@ import com.yiqizhuan.app.util.UnreadMsgUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 import com.youth.banner.listener.OnPageChangeListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -73,6 +74,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     private int currentNum = 1;
     boolean isFirst = true;
     private String goodsId;
+    private List<CategoryFindByBean> categoryFindByBeans;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,6 +125,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         binding.rlyXuanZe.setOnClickListener(this);
         binding.rlyAddress.setOnClickListener(this);
         binding.llyShop.setOnClickListener(this);
+        binding.llyFeiLei.setOnClickListener(this);
         binding.banner.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -345,6 +348,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.ivBack:
                 finish();
@@ -358,9 +362,9 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
 //                        LiveEventBus.get("shopping").post("");
 //                    }
 //                }, 100);
-                Intent shop = new Intent(GoodsDetailActivity.this, MainActivity.class);
-                shop.putExtra("shopping", "shopping");
-                startActivity(shop);
+                intent = new Intent(GoodsDetailActivity.this, MainActivity.class);
+                intent.putExtra("shopping", "shopping");
+                startActivity(intent);
                 finish();
                 break;
             //地址
@@ -387,6 +391,23 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 if (ClickUtil.isRealClick()) {
                     showDialog();
                 }
+                break;
+            case R.id.llyFeiLei:
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    if (categoryFindByBeans != null && categoryFindByBeans.size() > 0) {
+                        jsonObject.put("firstPosId", Integer.parseInt(categoryFindByBeans.get(0).getId()));
+                    }
+                    if (categoryFindByBeans != null && categoryFindByBeans.size() > 1) {
+                        jsonObject.put("secondPosId", Integer.parseInt(categoryFindByBeans.get(1).getId()));
+                    }
+                    LiveEventBus.get("categoryPos").post(jsonObject.toString());
+                } catch (Exception e) {
+                }
+                intent = new Intent(GoodsDetailActivity.this, MainActivity.class);
+                intent.putExtra("categoryFragment", "categoryFragment");
+                startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -471,6 +492,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Call call, Response response, BaseResult<List<CategoryFindByBean>> result) {
                 if (result != null && result.getData() != null) {
+                    categoryFindByBeans = result.getData();
                     StringBuilder stringBuilder = new StringBuilder();
                     for (CategoryFindByBean categoryFindByBean : result.getData()) {
                         stringBuilder.append(categoryFindByBean.getName() + " ");

@@ -62,7 +62,7 @@ public class RecommendFlexibleItem extends AbstractFlexibleItem<RecommendFlexibl
             if (details != null && details.size() > 2) {
                 for (int i = 0; i < details.size(); i++) {
                     if (i > 1 && i < 10) {
-                        recommendFlexibleAdapter.addItem(new RecommendCommonFlexibleItem(context, details.get(i)));
+                        recommendFlexibleAdapter.addItem(new RecommendCommonFlexibleItem(context, details.get(i), true));
                     }
                 }
             }
@@ -70,7 +70,7 @@ public class RecommendFlexibleItem extends AbstractFlexibleItem<RecommendFlexibl
             if (details != null && details.size() > 0) {
                 for (int i = 0; i < details.size(); i++) {
                     if (i < 10) {
-                        recommendFlexibleAdapter.addItem(new RecommendCommonFlexibleItem(context, details.get(i)));
+                        recommendFlexibleAdapter.addItem(new RecommendCommonFlexibleItem(context, details.get(i), false));
                     }
                 }
             }

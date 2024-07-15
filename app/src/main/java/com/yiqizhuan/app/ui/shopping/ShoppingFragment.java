@@ -566,7 +566,8 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
      * 查询个人购物车
      */
     private void shopCartList() {
-        showLoading();
+//        showLoading();
+        showLoadingDialog();
         HashMap<String, String> paramsMap = new HashMap<>();
         paramsMap.put("type", "");
         paramsMap.put("page", "1");
@@ -574,7 +575,8 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
         OkHttpManager.getInstance().getRequest(Api.SHOPCART_LIST, paramsMap, new BaseCallBack<BaseResult<ShopCartBean>>() {
             @Override
             public void onFailure(Call call, IOException e) {
-                cancelLoading();
+//                cancelLoading();
+                dismissLoadingDialog();
             }
 
             @Override
@@ -642,12 +644,14 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                         }
                     }
                 }
-                cancelLoading();
+//                cancelLoading();
+                dismissLoadingDialog();
             }
 
             @Override
             public void onError(Call call, int statusCode, Exception e) {
-                cancelLoading();
+//                cancelLoading();
+                dismissLoadingDialog();
             }
         });
     }
@@ -670,17 +674,20 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
      * @param actionType 操作类型 0 添加 1删除 2 编辑（加减商品数量）
      */
     private void addShopCartAction(int actionType, List<ShopcartActionPara> shopCartActionParas, boolean isSelect) {
-        showLoading();
+//        showLoading();
+        showLoadingDialog();
         OkHttpManager.getInstance().postRequestObject(Api.SHOPCART_ACTION, shopCartActionParas, new BaseCallBack<String>() {
             @Override
             public void onFailure(Call call, IOException e) {
-                cancelLoading();
+//                cancelLoading();
+                dismissLoadingDialog();
             }
 
             @Override
             public void onSuccess(Call call, Response response, String result) {
                 selectData.clear();
-                cancelLoading();
+//                cancelLoading();
+                dismissLoadingDialog();
                 if (actionType == 1) {
                     shopCartList();
                     LiveEventBus.get("changeCartNum").post("");
@@ -704,7 +711,8 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onError(Call call, int statusCode, Exception e) {
-                cancelLoading();
+//                cancelLoading();
+                dismissLoadingDialog();
             }
         });
     }
@@ -714,7 +722,8 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
      */
     private void paymentConfirm(boolean payment) {
         if (selectData != null && selectData.size() > 0) {
-            showLoading();
+//            showLoading();
+            showLoadingDialog();
             List<ShopcartPaymentConfirmBean> shopCartPaymentConfirmBeans = new ArrayList<>();
             for (ShopCartBean.DetailsDTO detailsDTO : selectData) {
                 ShopcartPaymentConfirmBean bean = new ShopcartPaymentConfirmBean();
@@ -742,14 +751,16 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
             OkHttpManager.getInstance().postRequestObject(Api.SHOPCART_PAYMENTCONFIRM, shopCartPaymentConfirmBeans, new BaseCallBack<BaseResult<PaymentConfirmBean>>() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    cancelLoading();
+//                    cancelLoading();
+                    dismissLoadingDialog();
                 }
 
                 @Override
                 public void onSuccess(Call call, Response response, BaseResult<PaymentConfirmBean> result) {
                     commitObject = result.getData();
                     setPrice(commitObject.getTotalPrice(), commitObject.getTotalUseCoupon(), commitObject.getRemainTotalQuota());
-                    cancelLoading();
+//                    cancelLoading();
+                    dismissLoadingDialog();
                     //库存不足
                     if (commitObject != null && commitObject.getStockNotEnoughProducts() != null && commitObject.getStockNotEnoughProducts().size() > 0) {
                         boolean select = false;
@@ -781,7 +792,8 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
 
                 @Override
                 public void onError(Call call, int statusCode, Exception e) {
-                    cancelLoading();
+//                    cancelLoading();
+                    dismissLoadingDialog();
                 }
             });
         } else {

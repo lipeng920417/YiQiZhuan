@@ -26,10 +26,12 @@ import eu.davidea.flexibleadapter.items.IFlexible;
 public class RecommendCommonFlexibleItem extends AbstractFlexibleItem<RecommendCommonFlexibleItem.ItemViewHolder> {
     Context context;
     ProductListBean.Detail detailsDTO1;
+    boolean first;
 
-    public RecommendCommonFlexibleItem(Context context, ProductListBean.Detail detailsDTO1) {
+    public RecommendCommonFlexibleItem(Context context, ProductListBean.Detail detailsDTO1, boolean first) {
         this.context = context;
         this.detailsDTO1 = detailsDTO1;
+        this.first = first;
     }
 
     @Override
@@ -51,18 +53,24 @@ public class RecommendCommonFlexibleItem extends AbstractFlexibleItem<RecommendC
     public void bindViewHolder(FlexibleAdapter<IFlexible> adapter, ItemViewHolder holder, int position, List<Object> payloads) {
         if (detailsDTO1 != null) {
             GlideUtil.loadImage(detailsDTO1.getMainImage(), holder.iv1, 5);
-            if (position == 0) {
-                holder.iv.setVisibility(View.VISIBLE);
-                holder.iv.setImageResource(R.mipmap.ic_recommend_num1);
-                holder.tvNum.setVisibility(View.GONE);
-            } else if (position == 1) {
-                holder.iv.setVisibility(View.VISIBLE);
-                holder.iv.setImageResource(R.mipmap.ic_recommend_num2);
-                holder.tvNum.setVisibility(View.GONE);
-            } else {
+            if (first) {
                 holder.iv.setVisibility(View.GONE);
                 holder.tvNum.setVisibility(View.VISIBLE);
-                holder.tvNum.setText((position + 1) + "");
+                holder.tvNum.setText((position + 2) + "");
+            } else {
+                if (position == 0) {
+                    holder.iv.setVisibility(View.VISIBLE);
+                    holder.iv.setImageResource(R.mipmap.ic_recommend_num1);
+                    holder.tvNum.setVisibility(View.GONE);
+                } else if (position == 1) {
+                    holder.iv.setVisibility(View.VISIBLE);
+                    holder.iv.setImageResource(R.mipmap.ic_recommend_num2);
+                    holder.tvNum.setVisibility(View.GONE);
+                } else {
+                    holder.iv.setVisibility(View.GONE);
+                    holder.tvNum.setVisibility(View.VISIBLE);
+                    holder.tvNum.setText((position + 1) + "");
+                }
             }
             holder.tvName.setText(detailsDTO1.getProductName());
             StringBuilder tag = new StringBuilder();

@@ -57,6 +57,7 @@
                 android:layout_toRightOf="@+id/ivSouSuo"
                 android:background="@null"
                 android:ellipsize="end"
+                android:imeOptions="actionSearch"
                 android:focusableInTouchMode="true"
                 android:hint="请输入商品名称"
                 android:scrollHorizontally="true"

@@ -2,10 +2,12 @@ package com.yiqizhuan.app.views.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.bumptech.glide.Glide;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.ShopCartBean;
 import com.yiqizhuan.app.util.ToastUtils;
@@ -119,7 +122,7 @@ public class DialogUtil {
     }
 
     public static Dialog build2BtnDialogNum(Context context, String message, String textPositive, String textNegative, boolean cancelable, ShopCartBean.DetailsDTO detailsDTO, final DialogListener2BtnNum listener2Btn) {
-        int MIN_VALUE = 1;
+        int MIN_VALUE = 0;
         int MAX_VALUE = 1;
         if (detailsDTO.getGoodsVO().getStock() > 0) {
             MAX_VALUE = detailsDTO.getGoodsVO().getStock();
@@ -144,7 +147,13 @@ public class DialogUtil {
         btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener2Btn.onPositiveClick(v, detailsDTO, Integer.parseInt(edtNum.getText().toString()));
+                int num = 1;
+                if (!TextUtils.isEmpty(edtNum.getText().toString().trim())) {
+                    if (Integer.parseInt(edtNum.getText().toString().trim()) > 0) {
+                        num = Integer.parseInt(edtNum.getText().toString().trim());
+                    }
+                }
+                listener2Btn.onPositiveClick(v, detailsDTO, num);
                 dialog.dismiss();
             }
         });
@@ -161,6 +170,7 @@ public class DialogUtil {
                 int numJ = Integer.parseInt(edtNum.getText().toString()) - 1;
                 if (numJ > 0) {
                     edtNum.setText(numJ + "");
+                    edtNum.setSelection(edtNum.getText().length());
                 } else {
                     ToastUtils.showToast("数量最少为1");
                 }
@@ -172,6 +182,7 @@ public class DialogUtil {
                 int numJ = Integer.parseInt(edtNum.getText().toString()) + 1;
                 if (numJ <= detailsDTO.getGoodsVO().getStock()) {
                     edtNum.setText(numJ + "");
+                    edtNum.setSelection(edtNum.getText().length());
                 } else {
                     ToastUtils.showToast("数量不能超过库存");
                 }
@@ -194,35 +205,94 @@ public class DialogUtil {
                 String input = s.toString();
 
                 // 防止输入前导零
-                if (input.startsWith("0") && input.length() > 1) {
-                    edtNum.setText(input.substring(1));
-                    edtNum.setSelection(edtNum.getText().length()); // 设置光标位置
-                    return;
-                }
+//                if (input.startsWith("0") && input.length() > 1) {
+//                    edtNum.setText(input.substring(1));
+//                    edtNum.setSelection(edtNum.getText().length()); // 设置光标位置
+//                    return;
+//                }
 
                 // 防止输入为空或0
-                if (input.isEmpty() || input.equals("0")) {
-                    edtNum.setText(String.valueOf(MIN_VALUE));
-                    edtNum.setSelection(edtNum.getText().length()); // 设置光标位置
-                    return;
-                }
+//                if (input.isEmpty() || input.equals("0")) {
+//                    edtNum.setText(String.valueOf(MIN_VALUE));
+//                    edtNum.setSelection(edtNum.getText().length()); // 设置光标位置
+//                    return;
+//                }
                 if (!input.isEmpty()) {
                     try {
                         int value = Integer.parseInt(input);
-                        if (value < MIN_VALUE) {
-                            edtNum.setText(String.valueOf(MIN_VALUE));
-                        } else if (value > finalMAX_VALUE) {
+//                        if (value < MIN_VALUE) {
+//                            edtNum.setText(String.valueOf(MIN_VALUE));
+//                        } else
+                        if (value > finalMAX_VALUE) {
                             edtNum.setText(String.valueOf(finalMAX_VALUE));
+                            edtNum.setSelection(edtNum.getText().length());
                         }
                     } catch (NumberFormatException e) {
                         // 忽略非法输入
                     }
                 } else {
-                    edtNum.setText(String.valueOf(MIN_VALUE));
+//                    edtNum.setText(String.valueOf(MIN_VALUE));
                 }
                 // 将光标移到文本的末尾
-                edtNum.setSelection(edtNum.getText().length());
+//                edtNum.setSelection(edtNum.getText().length());
                 Log.d("afterTextChanged", edtNum.getText().toString());
+            }
+        });
+        return dialog;
+    }
+
+    /**
+     * 新版loading，透明背景无字
+     *
+     * @param context
+     * @return
+     */
+    public static Dialog buildLoadingDialog(Context context) {
+        return buildLoadingDialog(context, true);
+    }
+
+    /**
+     * 新版loading，透明背景无字
+     *
+     * @param context
+     * @param cancelable
+     * @return
+     */
+    public static Dialog buildLoadingDialog(Context context, boolean cancelable) {
+        return buildLoadingDialog(context, "", cancelable);
+    }
+
+    /**
+     * 新版loading，透明背景有字
+     *
+     * @param context
+     * @return
+     */
+    public static Dialog buildLoadingDialog(Context context, String msg, boolean cancelable) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_loading_layout, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.up_dialogstyle);
+        builder.setCancelable(cancelable);
+        builder.setView(layout);
+        ImageView img = layout.findViewById(R.id.loading_img);
+        TextView tvMsg = layout.findViewById(R.id.tvMsg);
+        try {
+            Glide.with(context).asGif().load(R.mipmap.loading).into(img);
+        } catch (Exception e) {
+        }
+//        AnimUtil.startLoadingAnimation(img, context);
+        if (!TextUtils.isEmpty(msg)) {
+            tvMsg.setVisibility(View.VISIBLE);
+            tvMsg.setText(msg);
+        } else {
+            tvMsg.setVisibility(View.GONE);
+        }
+        final Dialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+//                AnimUtil.stopLoadingAnimation();
             }
         });
         return dialog;

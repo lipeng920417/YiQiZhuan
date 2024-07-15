@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +33,7 @@ import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.ui.base.BaseActivity;
 import com.yiqizhuan.app.ui.home.item.BottomFlexibleItem;
+import com.yiqizhuan.app.ui.home.item.NoDataFlexibleItem;
 import com.yiqizhuan.app.ui.search.history.ExpansionFoldLayout;
 import com.yiqizhuan.app.ui.search.history.SearchHistoryAdapter;
 import com.yiqizhuan.app.ui.search.item.RecommendFlexibleItem;
@@ -66,7 +70,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private ArrayList<String> listHistory = new ArrayList<>(MAX_SIZE);
     //搜索结果
     private int page = 1;
-    private int size = 10;
+    private int size = 20;
     private FlexibleAdapter<IFlexible> searchFlexibleAdapter;
     private String inputTextCurrent;
     private String firstCategoryId;
@@ -111,6 +115,16 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     binding.smartRefreshLayout.setEnableLoadMore(false);
                     binding.smartRefreshLayout.setNoMoreData(true);
                 }
+            }
+        });
+        binding.edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    inputText(binding.edtSearch.getText().toString());
+                    return true;
+                }
+                return false;
             }
         });
         getListHistory();
@@ -237,7 +251,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             binding.smartRefreshLayout.setEnableLoadMore(true);
             binding.smartRefreshLayout.setNoMoreData(false);
             page = 1;
-            productList(inputText, true);
+            productList(inputTextCurrent, true);
         } else {
             ToastUtils.showToast("请输入商品名称");
         }
@@ -259,7 +273,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             showLoading();
         }
         HashMap<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("type", "1");
         paramsMap.put("page", page + "");
         paramsMap.put("size", size + "");
         paramsMap.put("term", term);
@@ -294,7 +307,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     page++;
                     updateDataUI(result.getData().getDetails());
                 } else {
-                    searchFlexibleAdapter.addItem(new BottomFlexibleItem(SearchActivity.this));
+                    if (searchFlexibleAdapter.getItemCount() < 1) {
+                        searchFlexibleAdapter.addItem(new NoDataFlexibleItem(SearchActivity.this));
+                    } else {
+                        searchFlexibleAdapter.addItem(new BottomFlexibleItem(SearchActivity.this));
+                    }
                     binding.smartRefreshLayout.setEnableLoadMore(false);
                     binding.smartRefreshLayout.setNoMoreData(true);
                 }

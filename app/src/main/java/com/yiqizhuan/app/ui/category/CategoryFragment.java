@@ -12,13 +12,18 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.scwang.smart.refresh.footer.BallPulseFooter;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.BaseResult;
@@ -36,11 +41,14 @@ import com.yiqizhuan.app.ui.category.item.JinGangQuCategoryFlexibleItem;
 import com.yiqizhuan.app.ui.category.item.JinGangQuCategoryPopFlexibleItem;
 import com.yiqizhuan.app.ui.home.item.BottomFlexibleItem;
 import com.yiqizhuan.app.ui.home.item.JinGangQuFlexibleItem;
+import com.yiqizhuan.app.ui.home.item.NoDataFlexibleItem;
 import com.yiqizhuan.app.ui.search.SearchActivity;
 import com.yiqizhuan.app.util.AnimationUtil;
 import com.yiqizhuan.app.util.GlideUtil;
 import com.yiqizhuan.app.util.PhoneUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -66,7 +74,7 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
     private FlexibleAdapter<IFlexible> fenLeiGoodsFlexibleAdapter;
 
     private int page = 1;
-    private int size = 10;
+    private int size = 20;
     //为你推荐数据
     private List<ProductSearchDefaultBean> productSearchDefaultBeans;
     //一级分类
@@ -75,6 +83,9 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
     //二级分类
     private List<CategoryDefaultBean> category2DefaultBeanList;
     private CategoryDefaultBean category2DefaultBeanCurrent;
+    private int firstPosId = -1;
+    private int firstPos = 0;
+    private int secondPosId = -1;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,6 +97,29 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
         StatusBarUtils.setViewHeaderPlaceholder(binding.viewHeaderPlaceholder2);
         initView();
         productSearchDefault();
+        LiveEventBus.get("categoryPos", String.class).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    firstPosId = jsonObject.getInt("firstPosId");
+                    secondPosId = jsonObject.getInt("secondPosId");
+                    if (initCategory1Exist()) {
+                        jinGangWeiFlexibleAdapter.clear();
+                        jinGangWeiPopFlexibleAdapter.clear();
+                        for (CategoryDefaultBean categoryDefaultBean1 : categoryDefaultBeanList) {
+                            categoryDefaultBean1.setSelect(false);
+                        }
+                        initCategoryDefaultData();
+                    } else {
+                        firstPosId = -1;
+                        secondPosId = -1;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return root;
     }
 
@@ -115,6 +149,8 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
         binding.rcFenLeiGoods.setAdapter(fenLeiGoodsFlexibleAdapter);
         binding.rcFenLeiGoods.setItemAnimator(new DefaultItemAnimator());
 
+        //设置 Footer 为 球脉冲 样式
+        binding.smartRefreshLayout.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
         binding.smartRefreshLayout.setEnableRefresh(false);
         binding.smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
@@ -152,10 +188,18 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
             categoryDefaultBeanList = new ArrayList<>();
         }
         for (int i = 0; i < categoryDefaultBeanList.size(); i++) {
-            if (i == 0) {
+            if (firstPosId != -1) {
+                if (TextUtils.equals(categoryDefaultBeanList.get(i).getId(), firstPosId + "")) {
+                    categoryDefaultBeanList.get(i).setSelect(true);
+                    categoryDefaultBeanCurrent = categoryDefaultBeanList.get(i);
+                    firstPos = i;
+                }
+            } else if (i == 0) {
                 categoryDefaultBeanList.get(i).setSelect(true);
                 categoryDefaultBeanCurrent = categoryDefaultBeanList.get(i);
+                firstPos = i;
             }
+
             JinGangQuCategoryFlexibleItem jinGangQuCategoryFlexibleItem = new JinGangQuCategoryFlexibleItem(getActivity(), categoryDefaultBeanList.get(i));
             jinGangQuCategoryFlexibleItem.setOnClickListener(new JinGangQuCategoryFlexibleItem.OnClickListener() {
                 @Override
@@ -174,6 +218,9 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
             });
             jinGangWeiPopFlexibleAdapter.addItem(jinGangQuCategoryPopFlexibleItem);
         }
+        LinearLayoutManager layoutManager = (LinearLayoutManager) binding.rcJinGangWei.getLayoutManager();
+        layoutManager.scrollToPositionWithOffset(firstPos, 260);
+        firstPosId = -1;
         initCategorySecond();
     }
 
@@ -214,7 +261,12 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
             category2DefaultBeanList.add(0, categoryDefaultBean);
         }
         for (int i = 0; i < category2DefaultBeanList.size(); i++) {
-            if (i == 0) {
+            if (secondPosId != -1) {
+                if (TextUtils.equals(category2DefaultBeanList.get(i).getId(), secondPosId + "")) {
+                    category2DefaultBeanList.get(i).setSelect(true);
+                    category2DefaultBeanCurrent = category2DefaultBeanList.get(i);
+                }
+            } else if (i == 0) {
                 category2DefaultBeanList.get(i).setSelect(true);
                 category2DefaultBeanCurrent = category2DefaultBeanList.get(i);
             }
@@ -238,6 +290,7 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
             });
             fenLeiFlexibleAdapter.addItem(flexibleItem);
         }
+        secondPosId = -1;
         initGoods();
     }
 
@@ -248,7 +301,11 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
             binding.smartRefreshLayout.setNoMoreData(true);
             fenLeiGoodsFlexibleAdapter.clear();
             initCategory2Goods(recommendExist().getProducts());
-            fenLeiGoodsFlexibleAdapter.addItem(new BottomFlexibleItem(getActivity()));
+            if (fenLeiGoodsFlexibleAdapter.getItemCount() < 1) {
+                fenLeiGoodsFlexibleAdapter.addItem(new NoDataFlexibleItem(getActivity()));
+            } else {
+                fenLeiGoodsFlexibleAdapter.addItem(new BottomFlexibleItem(getActivity()));
+            }
         } else {
             initFirstGoods();
         }
@@ -378,7 +435,11 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
                     page++;
                     initCategory2Goods(result.getData().getDetails());
                 } else {
-                    fenLeiGoodsFlexibleAdapter.addItem(new BottomFlexibleItem(getActivity()));
+                    if (fenLeiGoodsFlexibleAdapter.getItemCount() < 1) {
+                        fenLeiGoodsFlexibleAdapter.addItem(new NoDataFlexibleItem(getActivity()));
+                    } else {
+                        fenLeiGoodsFlexibleAdapter.addItem(new BottomFlexibleItem(getActivity()));
+                    }
                     binding.smartRefreshLayout.setEnableLoadMore(false);
                     binding.smartRefreshLayout.setNoMoreData(true);
                 }
@@ -424,6 +485,15 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
                 getCategoryDefault();
             }
         });
+    }
+
+    private boolean initCategory1Exist() {
+        for (CategoryDefaultBean categoryDefaultBean1 : categoryDefaultBeanList) {
+            if (TextUtils.equals(categoryDefaultBean1.getId(), firstPosId + "")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

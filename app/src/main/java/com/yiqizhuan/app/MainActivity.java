@@ -83,6 +83,9 @@ public class MainActivity extends BaseActivity {
         } else if (intent != null && intent.getExtras() != null && "shopping".equals(intent.getExtras().getString("shopping"))) {
             binding.navView.setSelectedItemId(R.id.navigation_dashboard);
             switchTab(R.id.navigation_dashboard);
+        } else if (intent != null && intent.getExtras() != null && "categoryFragment".equals(intent.getExtras().getString("categoryFragment"))) {
+            binding.navView.setSelectedItemId(R.id.navigation_category);
+            switchTab(R.id.navigation_category);
         }
     }
 

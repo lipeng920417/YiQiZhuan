@@ -27,12 +27,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.GoodsDetailBean;
+import com.yiqizhuan.app.bean.ShopCartBean;
 import com.yiqizhuan.app.bean.UserCouponBean;
 import com.yiqizhuan.app.ui.detail.PhotoViewActivity;
 import com.yiqizhuan.app.ui.detail.item.AttributeFlexibleItem;
 import com.yiqizhuan.app.util.GlideUtil;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.views.dialog.BottomDialog;
+import com.yiqizhuan.app.views.dialog.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +62,7 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
     private LinearLayout llyCommit;
     private ImageView ivJiaHao;
     private ImageView ivJianHao;
-    private EditText edtNum;
+    private TextView edtNum;
     private FlexibleAdapter<IFlexible> flexibleAdapter;
     private Context context;
     private GoodsDetailBean goodsDetailBean;
@@ -119,53 +121,75 @@ public class DetailBottomDialog extends BottomDialog implements View.OnClickList
         ivJiaHao.setOnClickListener(this);
         ivJianHao.setOnClickListener(this);
         ivFangDa.setOnClickListener(this);
-        edtNum.addTextChangedListener(new TextWatcher() {
+//        edtNum.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                String input = s.toString();
+//
+//                // 防止输入前导零
+//                if (input.startsWith("0") && input.length() > 1) {
+//                    edtNum.setText(input.substring(1));
+//                    edtNum.setSelection(edtNum.getText().length()); // 设置光标位置
+//                    return;
+//                }
+//
+//                // 防止输入为空或0
+//                if (input.isEmpty() || input.equals("0")) {
+//                    edtNum.setText(String.valueOf(MIN_VALUE));
+//                    edtNum.setSelection(edtNum.getText().length()); // 设置光标位置
+//                    return;
+//                }
+//                if (!input.isEmpty()) {
+//                    try {
+//                        int value = Integer.parseInt(input);
+//                        if (value < MIN_VALUE) {
+//                            edtNum.setText(String.valueOf(MIN_VALUE));
+//                        } else if (value > MAX_VALUE) {
+//                            edtNum.setText(String.valueOf(MAX_VALUE));
+//                        }
+//                    } catch (NumberFormatException e) {
+//                        // 忽略非法输入
+//                    }
+//                } else {
+//                    edtNum.setText(String.valueOf(MIN_VALUE));
+//                }
+//                // 将光标移到文本的末尾
+//                edtNum.setSelection(edtNum.getText().length());
+//                Log.d("afterTextChanged", edtNum.getText().toString());
+//                currentNum = Integer.parseInt(edtNum.getText().toString());
+//                setPrice();
+//            }
+//        });
+        edtNum.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String input = s.toString();
-
-                // 防止输入前导零
-                if (input.startsWith("0") && input.length() > 1) {
-                    edtNum.setText(input.substring(1));
-                    edtNum.setSelection(edtNum.getText().length()); // 设置光标位置
-                    return;
-                }
-
-                // 防止输入为空或0
-                if (input.isEmpty() || input.equals("0")) {
-                    edtNum.setText(String.valueOf(MIN_VALUE));
-                    edtNum.setSelection(edtNum.getText().length()); // 设置光标位置
-                    return;
-                }
-                if (!input.isEmpty()) {
-                    try {
-                        int value = Integer.parseInt(input);
-                        if (value < MIN_VALUE) {
-                            edtNum.setText(String.valueOf(MIN_VALUE));
-                        } else if (value > MAX_VALUE) {
-                            edtNum.setText(String.valueOf(MAX_VALUE));
-                        }
-                    } catch (NumberFormatException e) {
-                        // 忽略非法输入
+            public void onClick(View view) {
+                ShopCartBean.DetailsDTO detailsDTO = new ShopCartBean.DetailsDTO();
+                detailsDTO.setProductNum(currentNum);
+                ShopCartBean.DetailsDTO.GoodsVODTO goodsVODTO = new ShopCartBean.DetailsDTO.GoodsVODTO();
+                goodsVODTO.setStock(MAX_VALUE);
+                detailsDTO.setGoodsVO(goodsVODTO);
+                DialogUtil.build2BtnDialogNum(context, "修改购买数量", "确定", "取消", true, detailsDTO, new DialogUtil.DialogListener2BtnNum() {
+                    @Override
+                    public void onPositiveClick(View v, ShopCartBean.DetailsDTO detailsDTO, int num) {
+                        currentNum = num;
+                        edtNum.setText(num+"");
                     }
-                } else {
-                    edtNum.setText(String.valueOf(MIN_VALUE));
-                }
-                // 将光标移到文本的末尾
-                edtNum.setSelection(edtNum.getText().length());
-                Log.d("afterTextChanged", edtNum.getText().toString());
-                currentNum = Integer.parseInt(edtNum.getText().toString());
-                setPrice();
+
+                    @Override
+                    public void onNegativeClick(View v) {
+
+                    }
+                }).show();
             }
         });
     }

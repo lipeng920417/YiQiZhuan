@@ -41,23 +41,22 @@
             <LinearLayout
                 android:id="@+id/llyAddress"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="9dp"
                 android:layout_marginRight="7dp"
                 android:layout_toLeftOf="@+id/tvRightBtn"
                 android:layout_toRightOf="@+id/tvShopping"
-                android:background="@drawable/background_conner_30ffffff_10dp"
+                android:background="@drawable/background_conner_30ffffff_15dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="3dp"
+                    android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_yanjing"></ImageView>
 
                 <TextView
@@ -67,18 +66,20 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
                     android:ellipsize="end"
                     android:gravity="left"
                     android:singleLine="true"
                     android:text="请选择"
                     android:textColor="@color/white"
-                    android:textSize="12sp"></TextView>
+                    android:textSize="14sp"></TextView>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
+                    android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_right_white"></ImageView>
 
             </LinearLayout>

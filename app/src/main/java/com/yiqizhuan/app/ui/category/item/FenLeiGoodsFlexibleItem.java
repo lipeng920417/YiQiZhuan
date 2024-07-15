@@ -88,12 +88,19 @@ public class FenLeiGoodsFlexibleItem extends AbstractFlexibleItem<FenLeiGoodsFle
                 holder.tvMeiRiXianGou.setVisibility(View.GONE);
             }
             holder.tvMoney.setText(getMoney(detailsDTO));
-            holder.tvOriginalPrice.setText("￥" + detailsDTO.getOriginalPrice());
-            if (Double.parseDouble(detailsDTO.getSellPrice()) < Double.parseDouble(detailsDTO.getOriginalPrice())) {
-                holder.tvOriginalPrice.getPaint().setStrikeThruText(true);
+            if (TextUtils.equals(detailsDTO.getSellPrice(), detailsDTO.getOriginalPrice())) {
+                holder.tvOriginalPrice.setVisibility(View.GONE);
             } else {
-                holder.tvOriginalPrice.getPaint().setStrikeThruText(false);
+                holder.tvOriginalPrice.setText("￥" + detailsDTO.getOriginalPrice());
+                holder.tvOriginalPrice.getPaint().setStrikeThruText(true);
+                holder.tvOriginalPrice.setVisibility(View.VISIBLE);
             }
+//            if (Double.parseDouble(detailsDTO.getSellPrice()) < Double.parseDouble(detailsDTO.getOriginalPrice())) {
+//                holder.tvOriginalPrice.getPaint().setStrikeThruText(true);
+//            } else {
+//                holder.tvOriginalPrice.getPaint().setStrikeThruText(false);
+//            }
+
 
 //            if (detailsDTO.getState() == 0) {
 //                if (detailsDTO.getGoodsVO().getDeleted() == 1 || detailsDTO.getProductVO().getDeleted() == 1) {

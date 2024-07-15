@@ -39,7 +39,7 @@ public class GlideUtil {
     public static void loadImageBig(String url, ImageView imageView) {
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                .override(SizeUtils.getScreenWidth(), Target.SIZE_ORIGINAL)
                 .fitCenter();
 
         Glide.with(YQZApp.getContext())

@@ -1,11 +1,13 @@
 package com.yiqizhuan.app.bean;
 
+import java.io.Serializable;
+
 /**
  * @author LiPeng
  * @create 2024-04-25 2:11 PM
  */
 public class UserCouponBean extends BaseResult<UserCouponBean.Data>{
-    public static class Data {
+    public static class Data implements Serializable {
         //用户ID
         private String userId;
         //总额度
@@ -25,6 +27,16 @@ public class UserCouponBean extends BaseResult<UserCouponBean.Data>{
         private String validTime;
         //生效标识 0 生效 1失效
         private String validFlag;
+        private String totalUnavailableQuota;
+
+
+        public String getTotalUnavailableQuota() {
+            return totalUnavailableQuota;
+        }
+
+        public void setTotalUnavailableQuota(String totalUnavailableQuota) {
+            this.totalUnavailableQuota = totalUnavailableQuota;
+        }
 
         public String getUserId() {
             return userId;

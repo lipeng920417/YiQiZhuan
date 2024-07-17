@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_conner_ff6613_ff9c00_25dp"
+    android:orientation="vertical"
+    android:id="@+id/lly">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:background="@drawable/background_conner_ffffff_23dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp">
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:text="直降3000元"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/background_conner_ff1703_10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:paddingBottom="1.5dp"
+            android:paddingTop="0.5dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:fontFamily="@font/custom_font">
+        </TextView>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:text="高奢优品"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="7dp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold">
+    </TextView>
+
+</LinearLayout>

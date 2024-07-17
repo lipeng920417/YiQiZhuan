@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_daxiaojiadian"></ImageView>
@@ -28,15 +28,17 @@
             android:gravity="center"
             android:text="大小家电"
             android:textColor="@color/color_222222"
-            android:textSize="14sp"></TextView>
+            android:textSize="14dp"></TextView>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/ivLiSheng"
-        android:layout_width="39dp"
-        android:layout_height="28dp"
+        android:layout_width="30dp"
+        android:layout_height="14dp"
         android:src="@mipmap/ic_lisheng"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="2dp"
         android:visibility="gone">
     </ImageView>
 

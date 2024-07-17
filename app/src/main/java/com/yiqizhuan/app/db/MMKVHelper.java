@@ -47,6 +47,8 @@ public class MMKVHelper {
             MMKVHelper.putString("phone", userInfoBean.getData().getPhoneNumber());
             MMKVHelper.putString("avatarUrl", userInfoBean.getData().getAvatarUrl());
             MMKVHelper.putString("state", userInfoBean.getData().getState());
+            MMKVHelper.putString("userName", userInfoBean.getData().getUserName());
+            MMKVHelper.putString("idNumber", userInfoBean.getData().getIdNumber());
         }
     }
 
@@ -56,7 +58,10 @@ public class MMKVHelper {
         MMKVHelper.remove("phone");
         MMKVHelper.remove("avatarUrl");
         MMKVHelper.remove("state");
+        MMKVHelper.remove("userName");
+        MMKVHelper.remove("idNumber");
         MMKVHelper.remove("token");
+        MMKVHelper.remove("webView");
     }
 
 

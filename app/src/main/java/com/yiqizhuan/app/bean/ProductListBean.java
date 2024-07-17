@@ -38,6 +38,60 @@ public class ProductListBean extends BaseResult<ProductListBean.Data>{
         private String discount;
         private String mainImage;
         private String productType;
+        private String serialNumber;
+        private String sellPrice;
+        private int deleted;
+        private int displaySupplierName;
+        private List<String> tags;
+        private String quota;
+
+        public String getQuota() {
+            return quota;
+        }
+
+        public void setQuota(String quota) {
+            this.quota = quota;
+        }
+
+        public String getSerialNumber() {
+            return serialNumber;
+        }
+
+        public void setSerialNumber(String serialNumber) {
+            this.serialNumber = serialNumber;
+        }
+
+        public String getSellPrice() {
+            return sellPrice;
+        }
+
+        public void setSellPrice(String sellPrice) {
+            this.sellPrice = sellPrice;
+        }
+
+        public int getDeleted() {
+            return deleted;
+        }
+
+        public void setDeleted(int deleted) {
+            this.deleted = deleted;
+        }
+
+        public int getDisplaySupplierName() {
+            return displaySupplierName;
+        }
+
+        public void setDisplaySupplierName(int displaySupplierName) {
+            this.displaySupplierName = displaySupplierName;
+        }
+
+        public List<String> getTags() {
+            return tags;
+        }
+
+        public void setTags(List<String> tags) {
+            this.tags = tags;
+        }
 
         public String getProductType() {
             return productType;

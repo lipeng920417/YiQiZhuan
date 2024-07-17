@@ -10,10 +10,10 @@ public class WebApi {
     /**
      * productId=1&type=2
      * type传以下
-     * 1：精选好物
-     * 2：一起赚
-     * 3：每日换购
-     * 4：畅享换购
+     * 1：尊享
+     * 2：共享
+     * 3：悦享
+     * 4：畅享
      */
     public static final String WEB_GOODS = "/goods";
     public static final String WEB_CART= "/cart";
@@ -28,7 +28,7 @@ public class WebApi {
     /**
      * 共享汇
      */
-    public static final String WEB_SHARED= "/shared";
+    public static final String WEB_SHARED= "/list?type=2";
 
     /**
      * 悦享汇
@@ -43,4 +43,15 @@ public class WebApi {
      * 金刚区
      */
     public static final String WEB_CATEGORY_LIST= "/categoryList";
+
+    /**
+     * 确认兑换页
+     */
+    public static final String WEB_SIGN_AGREEMENT= "/signAgreement";
+
+    /**
+     * 下单页
+     */
+    public static final String WEB_CHECKOUT= "/checkout";
+
 }

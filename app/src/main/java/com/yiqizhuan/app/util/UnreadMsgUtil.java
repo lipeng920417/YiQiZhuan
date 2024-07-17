@@ -18,7 +18,6 @@ public class UnreadMsgUtil {
         }
         ViewGroup.LayoutParams lp = numView.getLayoutParams();
         DisplayMetrics dm = numView.getResources().getDisplayMetrics();
-        numView.setVisibility(View.VISIBLE);
         if (num >= 0 && num < 10) {//圆
             lp.width = (int) (15 * dm.density);
             numView.setText(num + "");
@@ -29,7 +28,7 @@ public class UnreadMsgUtil {
         } else {//数字超过两位,显示99+
             lp.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
             numView.setPadding((int) (6 * dm.density), 0, (int) (6 * dm.density), 0);
-            numView.setText("99+");
+            numView.setText(num + "");
         }
         numView.setLayoutParams(lp);
     }

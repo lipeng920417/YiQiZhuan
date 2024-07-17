@@ -25,6 +25,7 @@ import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseFragment;
 import com.yiqizhuan.app.ui.home.adapter.TabFragmentAdapter;
 import com.yiqizhuan.app.util.GlideUtil;
+import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
 import com.yiqizhuan.app.webview.WebActivity;
 
@@ -99,19 +100,22 @@ public class HomeFragment1 extends BaseFragment {
             mHandler.removeCallbacks(runnable); //取消执行
             mHandler.postDelayed(runnable, 3000); //延时执行
             binding.ivOne.setOnClickListener(view -> {
-                Intent broker = new Intent(getActivity(), WebActivity.class);
-                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productDefaultBean.getData().getCurated_product().get(0).getProductId() + "&type=1");
-                startActivity(broker);
+//                Intent broker = new Intent(getActivity(), WebActivity.class);
+//                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productDefaultBean.getData().getCurated_product().get(0).getProductId() + "&type=1");
+//                startActivity(broker);
+                SkipActivityUtil.goGoodsDetail(getActivity(), productDefaultBean.getData().getCurated_product().get(0).getProductId() , "1");
             });
             binding.ivTwo.setOnClickListener(view -> {
-                Intent broker = new Intent(getActivity(), WebActivity.class);
-                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productDefaultBean.getData().getCurated_product().get(1).getProductId() + "&type=1");
-                startActivity(broker);
+//                Intent broker = new Intent(getActivity(), WebActivity.class);
+//                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productDefaultBean.getData().getCurated_product().get(1).getProductId() + "&type=1");
+//                startActivity(broker);
+                SkipActivityUtil.goGoodsDetail(getActivity(), productDefaultBean.getData().getCurated_product().get(1).getProductId() , "1");
             });
             binding.ivThree.setOnClickListener(view -> {
-                Intent broker = new Intent(getActivity(), WebActivity.class);
-                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productDefaultBean.getData().getCurated_product().get(2).getProductId() + "&type=1");
-                startActivity(broker);
+//                Intent broker = new Intent(getActivity(), WebActivity.class);
+//                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + productDefaultBean.getData().getCurated_product().get(2).getProductId() + "&type=1");
+//                startActivity(broker);
+                SkipActivityUtil.goGoodsDetail(getActivity(), productDefaultBean.getData().getCurated_product().get(2).getProductId() , "1");
             });
         }
         if (productDefaultBean != null && productDefaultBean.getData() != null && productDefaultBean.getData().getEarn_together() != null && productDefaultBean.getData().getEarn_together().size() > 1) {

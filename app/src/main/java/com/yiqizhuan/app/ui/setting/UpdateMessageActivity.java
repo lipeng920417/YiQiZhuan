@@ -59,9 +59,7 @@ public class UpdateMessageActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    /**
-     * 退出登录
-     */
+
     private void userSave() {
         if (TextUtils.isEmpty(binding.edtName.getText().toString())) {
             return;

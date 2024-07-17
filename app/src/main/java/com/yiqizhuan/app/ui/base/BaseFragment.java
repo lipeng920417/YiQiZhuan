@@ -1,5 +1,6 @@
 package com.yiqizhuan.app.ui.base;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.tu.loadingdialog.LoadingDailog;
+import com.yiqizhuan.app.views.dialog.DialogUtil;
 
 /**
  * @author LiPeng
@@ -17,6 +19,8 @@ import com.android.tu.loadingdialog.LoadingDailog;
  */
 public abstract class BaseFragment extends Fragment {
     private LoadingDailog loadingDialog;
+
+    private Dialog loadingDialog1;
 
     @Nullable
     @Override
@@ -38,6 +42,25 @@ public abstract class BaseFragment extends Fragment {
             loadingDialog.cancel();
         }
     }
+
+    public void showLoadingDialog() {
+        dismissLoadingDialog();
+        loadingDialog1 = DialogUtil.buildLoadingDialog(getContext());
+        loadingDialog1.show();
+    }
+
+    public void showLoadingDialog(boolean cancelable) {
+        dismissLoadingDialog();
+        loadingDialog1 = DialogUtil.buildLoadingDialog(getContext(), cancelable);
+        loadingDialog1.show();
+    }
+
+    public void dismissLoadingDialog() {
+        if (null != loadingDialog1) {
+            loadingDialog1.dismiss();
+        }
+    }
+
 }
 
 

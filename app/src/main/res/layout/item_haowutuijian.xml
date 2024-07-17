@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lly"
+    android:layout_width="105dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:background="@drawable/background_conner_ffffff_8dp"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_gengduochaozhihaowu"
+        android:layout_marginTop="8dp"></ImageView>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="进口 香奈儿香奈儿香香香..."
+        android:textColor="@color/color_020202"
+        android:textSize="12sp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/background_conner_fdedec_3dp"
+        android:ellipsize="end"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:singleLine="true"
+        android:text="好评率96%"
+        android:textColor="@color/color_f90200"
+        android:textSize="10sp"
+        android:textStyle="bold"></TextView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="6dp">
+
+        <TextView
+            android:id="@+id/tvMoney"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/background_conner_fdedec_3dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingLeft="3dp"
+            android:singleLine="true"
+            android:text="￥159.9"
+            android:textColor="@color/color_f90200"
+            android:textSize="10sp"
+            android:layout_marginRight="16dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/custom_font"></TextView>
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/ic_baokuanzhijiang"
+            android:scaleType="fitXY"
+            android:layout_alignParentRight="true">
+        </ImageView>
+    </RelativeLayout>
+
+
+</LinearLayout>

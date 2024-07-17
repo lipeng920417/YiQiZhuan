@@ -19,6 +19,7 @@ import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.ProductListBean;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.util.GlideUtil;
+import com.yiqizhuan.app.util.SkipActivityUtil;
 import com.yiqizhuan.app.webview.WebActivity;
 import com.youth.banner.adapter.BannerAdapter;
 
@@ -50,16 +51,21 @@ public class Common1BannerAdapter extends BannerAdapter<ProductListBean.Detail, 
             if (!TextUtils.isEmpty(data.getMainImage())) {
                 GlideUtil.loadImage(data.getMainImage(), holder.iv);
             }
-            holder.tv1.setText("超值价￥" + data.getOriginalPrice());
+            if (!TextUtils.isEmpty(data.getOriginalPrice()) && !TextUtils.isEmpty(data.getDiscountPrice())) {
+                holder.tv1.setText("超值价￥" + (Double.parseDouble(data.getOriginalPrice()) - Double.parseDouble(data.getDiscountPrice())));
+            } else {
+                holder.tv1.setText("超值价￥" + data.getOriginalPrice());
+            }
             holder.tv2.setText("￥" + data.getOriginalPrice());
             TextPaint paint = holder.tv2.getPaint();
             paint.setStrikeThruText(true);
             holder.lly.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent broker = new Intent(context, WebActivity.class);
-                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + data.getProductId() + "&type=" + type);
-                    context.startActivity(broker);
+//                    Intent broker = new Intent(context, WebActivity.class);
+//                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_GOODS + "?productId=" + data.getProductId() + "&type=" + type);
+//                    context.startActivity(broker);
+                    SkipActivityUtil.goGoodsDetail(context, data.getProductId() , type);
                 }
             });
         }

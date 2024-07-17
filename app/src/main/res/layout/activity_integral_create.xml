@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_bg_jifenduihuan"></ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_actionbar"
+            layout="@layout/include_actionbar_transparent_white" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="xx用户您好，您可兑换积分额度为"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/background_conner_ffffff_15dp_top"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@mipmap/ic_zhaobiaofangan"></ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="我的兑换方案"
+                            android:textColor="@color/color_222222"
+                            android:textSize="16sp"></TextView>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@mipmap/ic_bg_fangan"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:text="方案A"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"></TextView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/lly"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/lly1"
+                            android:layout_alignBottom="@+id/lly1"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/bg_ffe291_fb5236"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="-5dp"
+                            android:layout_marginRight="30dp"
+                            android:src="@mipmap/ic_quanezhanwei"></ImageView>
+
+                        <LinearLayout
+                            android:id="@+id/lly1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="24dp"
+                                android:layout_marginTop="20dp"
+                                android:text="全额兑换"
+                                android:textColor="@color/white"
+                                android:textSize="17sp"></TextView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/background_conner_ffffff_10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginBottom="25dp"
+                                    android:text="积分兑换说明：\n\n1、兑换比例1:1，债权兑换为积分后，无法反向兑换成为债权。\n\n2、积分释放时间，以约定内容时间为准；\n\n3、本协议由起点GO平台根据乙方所签署的债权转让协议及商城积分兑换协议等相关文件而生成，以乙方通过网上点击方式确认本协议，本协议自生成之时立即生效。\n\n4、本协议自乙方积分消耗完毕之日起自动终止。\n\n5、本协议以电子文本形式生成。"
+                                    android:textColor="@color/color_595959"
+                                    android:textSize="14sp"></TextView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tvBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/background_conner_ff1804_8dp"
+                        android:gravity="center"
+                        android:text="下一步"
+                        android:textColor="@color/white"
+                        android:textSize="20sp">
+
+                    </TextView>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</RelativeLayout>

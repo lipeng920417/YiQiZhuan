@@ -3,17 +3,26 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black"
+        android:icon="@mipmap/icon_home"
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_category"
+        android:icon="@mipmap/ic_category"
+        android:title="@string/title_category" />
+    <item
+        android:id="@+id/navigation_remit"
+        android:icon="@mipmap/ic_remit"
+        android:title="@string/title_remit" />
+
+    <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_shopping_black"
+        android:icon="@mipmap/icon_cart"
         android:title="@string/title_shopping" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_mine_black"
+        android:icon="@mipmap/icon_my"
         android:title="@string/title_mine" />
 
 </menu>

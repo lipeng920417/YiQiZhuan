@@ -25,6 +25,8 @@ import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseFragment;
+import com.yiqizhuan.app.ui.integral.IntegralDetailActivity;
+import com.yiqizhuan.app.ui.pay.PayActivity;
 import com.yiqizhuan.app.ui.setting.SettingActivity;
 import com.yiqizhuan.app.util.PhoneUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
@@ -40,6 +42,7 @@ import okhttp3.Response;
 public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private FragmentMineBinding binding;
+    private UserCouponBean userCouponBean;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MineViewModel mineViewModel = new ViewModelProvider(this).get(MineViewModel.class);
@@ -53,6 +56,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         binding.avatar.setOnClickListener(this);
         binding.ivHint.setOnClickListener(this);
         binding.ivXiaoxi.setOnClickListener(this);
+        binding.llyJiFen.setOnClickListener(this);
         initView();
         return root;
     }
@@ -85,32 +89,45 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        Intent intent;
+        Bundle bundle;
         switch (view.getId()) {
             case R.id.tvName:
             case R.id.ivSetting:
-                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                intent = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent);
                 break;
             case R.id.llyBroker:
-                Intent broker = new Intent(getActivity(), WebActivity.class);
-                broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=1");
-                startActivity(broker);
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=1");
+                startActivity(intent);
                 break;
             case R.id.llyCompleted:
-                Intent completed = new Intent(getActivity(), WebActivity.class);
-                completed.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=2");
-                startActivity(completed);
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=2");
+                startActivity(intent);
                 break;
             case R.id.avatar:
 //                LiveEventBus.get("goToLogin").post("");
 //                LiveEventBus.get("changeCartNum").post("0");
 //                LiveEventBus.get("shopping").post("");
+                intent = new Intent(getActivity(), PayActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ivHint:
                 couponInfo();
                 break;
             case R.id.ivXiaoxi:
                 PhoneUtil.getPhone(getActivity());
+                break;
+            case R.id.llyJiFen:
+                if (userCouponBean != null) {
+                    intent = new Intent(getActivity(), IntegralDetailActivity.class);
+                    bundle = new Bundle();
+                    bundle.putSerializable("queryUserPointsBean", userCouponBean);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
                 break;
         }
     }
@@ -149,6 +166,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onSuccess(Call call, Response response, UserCouponBean result) {
+                userCouponBean = result;
                 if (result != null && result.getData() != null) {
                     if (!TextUtils.isEmpty(result.getData().getTotalQuota())) {
                         binding.tvBroker.setText(result.getData().getTotalQuota());

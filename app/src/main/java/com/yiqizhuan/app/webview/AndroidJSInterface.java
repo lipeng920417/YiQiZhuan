@@ -94,6 +94,37 @@ public class AndroidJSInterface {
             public void run() {
                 LiveEventBus.get("shopping").post("");
             }
-        },100);
+        }, 100);
     }
+
+    @JavascriptInterface
+    public void goHome(String data) {
+        LiveEventBus.get("webViewClose").post("");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LiveEventBus.get("goHome").post("");
+            }
+        }, 100);
+    }
+
+    @JavascriptInterface
+    public void getAddressFormJs(String data) {
+        if (TextUtils.isEmpty(data)) {
+            return;
+        }
+        LiveEventBus.get("getAddressFormJs").post(data);
+    }
+
+    @JavascriptInterface
+    public void jumpAppPay(String data) {
+        LiveEventBus.get("webViewClose").post("");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LiveEventBus.get("jumpAppPay").post(data);
+            }
+        }, 100);
+    }
+
 }

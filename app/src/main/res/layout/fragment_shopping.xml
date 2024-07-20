@@ -116,7 +116,7 @@
                 app:tabRippleColor="@color/color_transparent"
                 tools:ignore="MissingConstraints"></com.google.android.material.tabs.TabLayout>
 
-            <androidx.viewpager.widget.ViewPager
+            <com.yiqizhuan.app.views.NoSwipeViewPager
                 android:id="@+id/vp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -1,14 +1,11 @@
 package com.yiqizhuan.app.ui.shopping.item;
 
 import android.content.Context;
-import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.style.RelativeSizeSpan;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.ShopCartBean;
 import com.yiqizhuan.app.util.GlideUtil;
@@ -26,7 +24,6 @@ import com.yiqizhuan.app.views.dialog.DialogUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
@@ -307,6 +304,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
 
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
+        SwipeMenuLayout swipeMenuLayout;
         LinearLayout lly;
         ImageView ivSelect;
         ImageView iv;
@@ -331,6 +329,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
 
         private ItemViewHolder(@NonNull View itemView) {
             super(itemView);
+            swipeMenuLayout = itemView.findViewById(R.id.swipeMenuLayout);
             lly = itemView.findViewById(R.id.lly);
             ivSelect = itemView.findViewById(R.id.ivSelect);
             iv = itemView.findViewById(R.id.iv);

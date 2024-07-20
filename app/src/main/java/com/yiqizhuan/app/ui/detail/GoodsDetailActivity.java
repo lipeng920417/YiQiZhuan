@@ -180,11 +180,11 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                     }
                 }
             } else {
-                //取第一个商品库存大于0的，如果都没有取第一个
+                //取后端返回的，如果都没有取第一个
                 boolean inventory = false;
                 for (GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping : goodsDetailBean.getGoodsAndAttrMapping()) {
                     if (!inventory) {
-                        if (Integer.parseInt(goodsAndAttrMapping.getInventory()) > 0) {
+                        if (goodsAndAttrMapping.getDefaultGoods() == 1) {
                             mapping = goodsAndAttrMapping;
                             inventory = true;
                         }

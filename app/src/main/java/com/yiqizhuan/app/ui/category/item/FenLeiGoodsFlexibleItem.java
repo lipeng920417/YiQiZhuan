@@ -88,13 +88,13 @@ public class FenLeiGoodsFlexibleItem extends AbstractFlexibleItem<FenLeiGoodsFle
                 holder.tvMeiRiXianGou.setVisibility(View.GONE);
             }
             holder.tvMoney.setText(getMoney(detailsDTO));
-            if (TextUtils.equals(detailsDTO.getSellPrice(), detailsDTO.getOriginalPrice())) {
-                holder.tvOriginalPrice.setVisibility(View.GONE);
-            } else {
-                holder.tvOriginalPrice.setText("￥" + detailsDTO.getOriginalPrice());
-                holder.tvOriginalPrice.getPaint().setStrikeThruText(true);
-                holder.tvOriginalPrice.setVisibility(View.VISIBLE);
-            }
+//            if (TextUtils.equals(detailsDTO.getSellPrice(), detailsDTO.getOriginalPrice())) {
+//                holder.tvOriginalPrice.setVisibility(View.GONE);
+//            } else {
+//                holder.tvOriginalPrice.setText("￥" + detailsDTO.getOriginalPrice());
+//                holder.tvOriginalPrice.getPaint().setStrikeThruText(true);
+//                holder.tvOriginalPrice.setVisibility(View.VISIBLE);
+//            }
 //            if (Double.parseDouble(detailsDTO.getSellPrice()) < Double.parseDouble(detailsDTO.getOriginalPrice())) {
 //                holder.tvOriginalPrice.getPaint().setStrikeThruText(true);
 //            } else {
@@ -124,7 +124,8 @@ public class FenLeiGoodsFlexibleItem extends AbstractFlexibleItem<FenLeiGoodsFle
     }
 
     private SpannableString getMoney(ProductListBean.Detail goodsVODTO) {
-        String sellPrice = goodsVODTO.getSellPrice();
+        //分类显示原件
+        String sellPrice = goodsVODTO.getOriginalPrice();
         int sellPriceNum = getDecimalPlaces(sellPrice);
         SpannableString spannableString1 = new SpannableString(sellPrice);
         RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(0.7f);

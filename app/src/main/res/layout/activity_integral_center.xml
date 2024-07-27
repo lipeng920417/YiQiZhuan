@@ -244,7 +244,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="24dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/ivCheckbox"

@@ -9,6 +9,8 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -40,6 +42,7 @@ import com.yiqizhuan.app.util.GlideUtil;
 import com.yiqizhuan.app.util.StatusBarUtils;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.util.UnreadMsgUtil;
+import com.yiqizhuan.app.views.FullWidthImageView;
 import com.yiqizhuan.app.webview.WebActivity;
 import com.youth.banner.listener.OnPageChangeListener;
 
@@ -171,7 +174,14 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 binding.tvDescribe.setText("");
             }
             if (goodsDetailBean.getDescriptionImages() != null && goodsDetailBean.getDescriptionImages().size() > 0) {
-                GlideUtil.loadImageBig(goodsDetailBean.getDescriptionImages().get(0), binding.ivBig);
+                for (String url : goodsDetailBean.getDescriptionImages()) {
+                    FullWidthImageView fullWidthImageView = new FullWidthImageView(this);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    fullWidthImageView.setLayoutParams(layoutParams);
+                    GlideUtil.loadImageBig(url, fullWidthImageView);
+                    binding.llyIvBig.addView(fullWidthImageView);
+                }
             }
             if (!TextUtils.isEmpty(goodsId)) {
                 for (GoodsDetailBean.GoodsAndAttrMapping goodsAndAttrMapping : goodsDetailBean.getGoodsAndAttrMapping()) {

@@ -407,6 +407,14 @@
 
 
                         </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/llyIvBig"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp">
+                        </LinearLayout>
 
                         <com.yiqizhuan.app.views.FullWidthImageView
                             android:id="@+id/ivBig"
@@ -414,7 +422,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="20dp"
-                            android:scaleType="fitCenter">
+                            android:scaleType="fitCenter"
+                            android:visibility="gone">
                         </com.yiqizhuan.app.views.FullWidthImageView>
 
                     </LinearLayout>

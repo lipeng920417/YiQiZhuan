@@ -162,7 +162,8 @@
                 android:singleLine="true"
                 android:text="¥6099"
                 android:textColor="@color/color_818082"
-                android:textSize="11sp"></TextView>
+                android:textSize="11sp"
+                android:visibility="gone"></TextView>
 
             <TextView
                 android:layout_width="44dp"

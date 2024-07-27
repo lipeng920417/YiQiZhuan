@@ -174,6 +174,15 @@ public class GoodsDetailBean {
         private int status;
         private String discount;
         private String isQuota;
+        private int defaultGoods;
+
+        public int getDefaultGoods() {
+            return defaultGoods;
+        }
+
+        public void setDefaultGoods(int defaultGoods) {
+            this.defaultGoods = defaultGoods;
+        }
 
         public String getIsQuota() {
             return isQuota;

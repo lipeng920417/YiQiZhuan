@@ -137,6 +137,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             }
             holder.rlyYiXiaJia.setVisibility(View.GONE);
             if (detailsDTO.getState() == 0) {
+                holder.swipeMenuLayout.setSwipeEnable(true);
                 if (detailsDTO.getGoodsVO().getStock() > 0 && detailsDTO.getGoodsVO().getStock() < detailsDTO.getProductNum()) {
                     holder.tvStock.setVisibility(View.VISIBLE);
                     holder.tvStock.setText("仅剩" + detailsDTO.getGoodsVO().getStock() + "件");
@@ -190,6 +191,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
                     holder.llyCart.setVisibility(View.VISIBLE);
                 }
             } else {
+                holder.swipeMenuLayout.setSwipeEnable(false);
                 holder.tvStock.setVisibility(View.GONE);
                 holder.llyCart.setVisibility(View.GONE);
                 holder.ivSelect.setOnClickListener(new View.OnClickListener() {
@@ -260,6 +262,14 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
                     }).show();
                 }
             });
+            holder.tvDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (shopCartListenerSure != null) {
+                        shopCartListenerSure.delete(detailsDTO);
+                    }
+                }
+            });
         }
     }
 
@@ -325,6 +335,7 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
         TextView tvJiFen;
         LinearLayout llyCart;
         TextView tvStock;
+        TextView tvDelete;
 
 
         private ItemViewHolder(@NonNull View itemView) {
@@ -346,10 +357,11 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             tvNum = itemView.findViewById(R.id.tvNum);
             tvMoney = itemView.findViewById(R.id.tvMoney);
             tvDiscount = itemView.findViewById(R.id.tvDiscount);
-            tvJiFen= itemView.findViewById(R.id.tvJiFen);
+            tvJiFen = itemView.findViewById(R.id.tvJiFen);
             tvJiaHao = itemView.findViewById(R.id.tvJiaHao);
             llyCart = itemView.findViewById(R.id.llyCart);
             tvStock = itemView.findViewById(R.id.tvStock);
+            tvDelete = itemView.findViewById(R.id.tvDelete);
         }
     }
 
@@ -359,6 +371,8 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
         void subtraction(ShopCartBean.DetailsDTO detailsDTO, int num);
 
         void select();
+
+        void delete(ShopCartBean.DetailsDTO detailsDTO);
     }
 
 }

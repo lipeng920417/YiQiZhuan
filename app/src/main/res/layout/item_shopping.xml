@@ -288,6 +288,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvDelete"
         android:layout_width="60dp"
         android:layout_height="100dp"
         android:background="@color/purple_500"

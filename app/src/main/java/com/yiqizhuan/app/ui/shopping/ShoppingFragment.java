@@ -311,6 +311,20 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                 public void select() {
                     refreshFragment();
                 }
+
+                @Override
+                public void delete(ShopCartBean.DetailsDTO detailsDTO) {
+                    List<ShopcartActionPara> shopCartActionParas = new ArrayList<>();
+                    ShopcartActionPara shopcartActionPara = new ShopcartActionPara();
+                    shopcartActionPara.setId(detailsDTO.getId());
+                    shopcartActionPara.setProductId(detailsDTO.getProductId());
+                    shopcartActionPara.setGoodsId(detailsDTO.getGoodsId());
+                    shopcartActionPara.setCartType(detailsDTO.getCartType());
+                    shopcartActionPara.setActionType(1);
+                    shopcartActionPara.setProductNum(detailsDTO.getProductNum());
+                    shopCartActionParas.add(shopcartActionPara);
+                    addShopCartAction(1, shopCartActionParas, false);
+                }
             });
             shoppingTabFragment.setArguments(bundle);
             fragments.add(shoppingTabFragment);

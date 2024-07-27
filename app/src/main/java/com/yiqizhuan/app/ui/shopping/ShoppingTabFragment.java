@@ -100,6 +100,13 @@ public class ShoppingTabFragment extends BaseFragment {
                     shopCartListenerSure.select();
                 }
             }
+
+            @Override
+            public void delete(ShopCartBean.DetailsDTO detailsDTO) {
+                if (shopCartListenerSure != null) {
+                    shopCartListenerSure.delete(detailsDTO);
+                }
+            }
         });
         mFlexibleAdapter.addItem(shoppingFlexibleItem);
     }
@@ -141,6 +148,8 @@ public class ShoppingTabFragment extends BaseFragment {
         void subtraction(ShopCartBean.DetailsDTO detailsDTO, int num);
 
         void select();
+
+        void delete(ShopCartBean.DetailsDTO detailsDTO);
     }
 
 }

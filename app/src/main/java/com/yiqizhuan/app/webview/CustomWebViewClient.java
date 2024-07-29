@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.webkit.WebView;
 
 import com.just.agentweb.WebViewClient;
+import com.yiqizhuan.app.util.Base64Example;
 
 public class CustomWebViewClient extends WebViewClient {
     String data;
@@ -21,7 +22,7 @@ public class CustomWebViewClient extends WebViewClient {
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
         if (!TextUtils.isEmpty(data)){
-            String jsCode = "sessionStorage.setItem('payResult', '" + data + "');";
+            String jsCode = "sessionStorage.setItem('payResult', '" + Base64Example.base64EncodeUtf8(data) + "');";
             view.evaluateJavascript(jsCode, null);
         }
     }

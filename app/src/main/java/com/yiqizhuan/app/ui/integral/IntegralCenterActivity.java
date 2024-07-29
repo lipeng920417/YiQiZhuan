@@ -8,16 +8,20 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.bean.GetHistoryExchange;
 import com.yiqizhuan.app.bean.UserCouponBean;
 import com.yiqizhuan.app.databinding.ActivityIntegralCenterBinding;
+import com.yiqizhuan.app.db.MMKVHelper;
 import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
+import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseActivity;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.views.dialog.DialogUtil;
+import com.yiqizhuan.app.webview.WebActivity;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -89,15 +93,23 @@ public class IntegralCenterActivity extends BaseActivity implements View.OnClick
                 startActivity(new Intent(this, IntegralAuthorizationActivity.class));
                 break;
             case R.id.tvBtn:
-                if (!ivCheckbox) {
-                    ToastUtils.showToast("请阅读并勾选 积分兑换授权书");
-                    return;
+//                if (!ivCheckbox) {
+//                    ToastUtils.showToast("请阅读并勾选 积分兑换授权书");
+//                    return;
+//                }
+//                intent = new Intent(this, IntegralCreateActivity.class);
+//                bundle = new Bundle();
+//                bundle.putSerializable("queryUserPointsBean", queryUserPointsBean);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+
+                if (queryUserPointsBean != null && queryUserPointsBean.getData() != null && !TextUtils.isEmpty(queryUserPointsBean.getData().getTotalUnavailableQuota()) && Double.parseDouble(queryUserPointsBean.getData().getTotalUnavailableQuota()) > 0) {
+                    Intent broker = new Intent(this, WebActivity.class);
+                    broker.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_SIGN_AGREEMENT + "?contractPlan=1" + "&contractPoints=" + queryUserPointsBean.getData().getTotalUnavailableQuota() + "&userName=" + MMKVHelper.getString("userName", ""));
+                    startActivity(broker);
+                } else {
+                    ToastUtils.showToast("暂无积分");
                 }
-                intent = new Intent(this, IntegralCreateActivity.class);
-                bundle = new Bundle();
-                bundle.putSerializable("queryUserPointsBean", queryUserPointsBean);
-                intent.putExtras(bundle);
-                startActivity(intent);
                 break;
             case R.id.ivHint:
                 DialogUtil.build1BtnDialog(this, "可兑换积分为账户预发放积分，需要兑换成功后发放至账户，已发放账户积分前往我的页面查看", "我知道了", true, new DialogUtil.DialogListener1Btn() {

@@ -23,12 +23,11 @@ import com.yiqizhuan.app.databinding.ActivityPayBinding;
 import com.yiqizhuan.app.net.Api;
 import com.yiqizhuan.app.net.BaseCallBack;
 import com.yiqizhuan.app.net.OkHttpManager;
-import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseActivity;
+import com.yiqizhuan.app.ui.order.MyOrderActivity;
 import com.yiqizhuan.app.util.ClickUtil;
 import com.yiqizhuan.app.util.ToastUtils;
 import com.yiqizhuan.app.views.dialog.DialogUtil;
-import com.yiqizhuan.app.webview.WebActivity;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -179,14 +178,16 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
 
     private void goPaySuc() {
         Intent intent = new Intent(PayActivity.this, PaySucceedActivity.class);
+        intent.putExtra("source", source);
         startActivity(intent);
         finish();
     }
 
     private void goOrder() {
-        Intent intent = new Intent(this, WebActivity.class);
-        intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=0");
-        intent.putExtra("source", source);
+//        Intent intent = new Intent(this, WebActivity.class);
+//        intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=0");
+//        startActivity(intent);
+        Intent intent = new Intent(this, MyOrderActivity.class);
         startActivity(intent);
         finish();
     }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="14dp"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:id="@+id/lly"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/background_conner_f6f6f6_4dp"
+        android:orientation="horizontal"
+        android:layout_toLeftOf="@+id/tvQueRenShouHuo">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="7dp"
+            android:src="@mipmap/ic_wuliu_dingdan">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="7dp"
+            android:text="运输中"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"></TextView>
+
+        <TextView
+            android:id="@+id/tvAcceptStation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="包裹已签收！（凭取件码）如有问题请电联：菜鸟公共服务站 18384721129/中农余碧 18384721129，投诉电话：15700601320"
+            android:textColor="@color/color_858585"
+            android:textSize="12sp"></TextView>
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="7dp"
+            android:src="@drawable/svg_arrow_right_common">
+        </ImageView>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tvQueRenShouHuo"
+        android:layout_width="67dp"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="确认收货"
+        android:textColor="@color/white"
+        android:layout_marginLeft="7dp"
+        android:gravity="center"
+        android:textSize="11sp"
+        android:background="@drawable/background_conner_ff1804_8dp"></TextView>
+
+</RelativeLayout>

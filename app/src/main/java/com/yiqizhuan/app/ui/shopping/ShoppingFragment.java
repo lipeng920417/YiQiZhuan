@@ -102,6 +102,27 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                 }
             }
         });
+        LiveEventBus.get("addZaiCiGouMai", List.class).observe(this, new Observer<List>() {
+            @Override
+            public void onChanged(List list) {
+                List<String> list1 = list;
+                if (list1 != null && list1.size() > 0) {
+                    for (String id : list1) {
+                        boolean select = false;
+                        for (ShopCartBean.DetailsDTO detailsDTO1 : selectData) {
+                            if (detailsDTO1.getGoodsId() == Integer.parseInt(id)) {
+                                select = true;
+                            }
+                        }
+                        if (!select) {
+                            ShopCartBean.DetailsDTO detailsDTO = new ShopCartBean.DetailsDTO();
+                            detailsDTO.setGoodsId(Integer.parseInt(id));
+                            selectData.add(detailsDTO);
+                        }
+                    }
+                }
+            }
+        });
         setPrice("0", "0", "0");
     }
 
@@ -601,13 +622,15 @@ public class ShoppingFragment extends BaseFragment implements View.OnClickListen
                     if (selectData != null && selectData.size() > 0) {
                         for (ShopCartBean.DetailsDTO detailsDTO : selectData) {
                             boolean select = false;
+                            ShopCartBean.DetailsDTO temp = null;
                             for (ShopCartBean.DetailsDTO detailsDTO1 : details) {
                                 if (detailsDTO1.getGoodsId() == detailsDTO.getGoodsId()) {
                                     select = true;
+                                    temp = detailsDTO1;
                                 }
                             }
                             if (select) {
-                                newSelectData.add(detailsDTO);
+                                newSelectData.add(temp);
                             }
                         }
                     }

@@ -10,13 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.yiqizhuan.app.BuildConfig;
 import com.yiqizhuan.app.R;
 import com.yiqizhuan.app.databinding.ActivityPaySucceedBinding;
-import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseActivity;
+import com.yiqizhuan.app.ui.order.MyOrderActivity;
 import com.yiqizhuan.app.util.StatusBarUtils;
-import com.yiqizhuan.app.webview.WebActivity;
 
 /**
  * @author LiPeng
@@ -67,8 +65,10 @@ public class PaySucceedActivity extends BaseActivity implements View.OnClickList
     }
 
     private void goOrder() {
-        Intent intent = new Intent(this, WebActivity.class);
-        intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=0");
+//        Intent intent = new Intent(this, WebActivity.class);
+//        intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=0");
+//        startActivity(intent);
+        Intent intent = new Intent(this, MyOrderActivity.class);
         startActivity(intent);
         finish();
     }

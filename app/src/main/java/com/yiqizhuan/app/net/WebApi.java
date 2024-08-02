@@ -54,4 +54,14 @@ public class WebApi {
      */
     public static final String WEB_CHECKOUT= "/checkout";
 
+    /**
+     * 订单列表跳转订单详情 : "/order/detail/" + id
+     */
+    public static final String WEB_ORDER_DETAIL= "/order/detail";
+
+    /**
+     *  订单列表跳转物流详情：`/order/expressInfo/${id}?active=${active}`   active： 代表第几个包裹
+     */
+    public static final String WEB_ORDER_EXPRESS_INFO= "/order/expressInfo";
+
 }

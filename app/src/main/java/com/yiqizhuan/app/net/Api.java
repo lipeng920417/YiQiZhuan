@@ -80,5 +80,17 @@ public class Api {
     //分类二级商品
     public static final String PRODUCT_BY_CATEGORY = "/product/byCategory";
 
+    //订单列表
+    public static final String ORDER_LIST = "/mall/order/list";
+
+    //订单删除
+    public static final String ORDER_DELETE = "/mall/order/delete";
+
+    //订单取消
+    public static final String ORDER_CANCEL = "/mall/order/cancel";
+
+    //确认收货
+    public static final String ORDER_TAKEOVER = "/mall/order/takeOver";
+
 
 }

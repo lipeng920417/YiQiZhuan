@@ -110,6 +110,10 @@
             android:name="com.yiqizhuan.app.ui.search.SearchActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.yiqizhuan.app.ui.order.MyOrderActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -26,6 +26,7 @@ import com.yiqizhuan.app.net.OkHttpManager;
 import com.yiqizhuan.app.net.WebApi;
 import com.yiqizhuan.app.ui.base.BaseFragment;
 import com.yiqizhuan.app.ui.integral.IntegralDetailActivity;
+import com.yiqizhuan.app.ui.order.MyOrderActivity;
 import com.yiqizhuan.app.ui.pay.PayActivity;
 import com.yiqizhuan.app.ui.setting.SettingActivity;
 import com.yiqizhuan.app.util.PhoneUtil;
@@ -98,20 +99,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.llyBroker:
-                intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=1");
+//                intent = new Intent(getActivity(), WebActivity.class);
+//                intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=1");
+//                startActivity(intent);
+                intent = new Intent(getActivity(), MyOrderActivity.class);
+                intent.putExtra("type",2);
                 startActivity(intent);
                 break;
             case R.id.llyCompleted:
-                intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=2");
+//                intent = new Intent(getActivity(), WebActivity.class);
+//                intent.putExtra("url", BuildConfig.BASE_WEB_URL + WebApi.WEB_ORDER + "?type=2");
+//                startActivity(intent);
+                intent = new Intent(getActivity(), MyOrderActivity.class);
+                intent.putExtra("type",3);
                 startActivity(intent);
                 break;
             case R.id.avatar:
 //                LiveEventBus.get("goToLogin").post("");
 //                LiveEventBus.get("changeCartNum").post("0");
 //                LiveEventBus.get("shopping").post("");
-                intent = new Intent(getActivity(), PayActivity.class);
+                intent = new Intent(getActivity(), MyOrderActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ivHint:

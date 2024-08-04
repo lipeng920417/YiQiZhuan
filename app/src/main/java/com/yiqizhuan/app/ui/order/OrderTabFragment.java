@@ -182,7 +182,9 @@ public class OrderTabFragment extends BaseFragment {
 
                     @Override
                     public void refresh(OrderListBean.OrdersDTO ordersDTO, int pos) {
-                        OrderTabFragment.this.refresh();
+                        if (isVisibleToUser) {
+                            OrderTabFragment.this.refresh();
+                        }
                     }
                 });
                 mFlexibleAdapter.addItem(orderFlexibleItem);
@@ -337,7 +339,7 @@ public class OrderTabFragment extends BaseFragment {
     }
 
     /**
-     *  添加购物车
+     * 添加购物车
      */
     private void addShopcartAction(OrderListBean.OrdersDTO ordersDTO) {
         showLoading();

@@ -54,6 +54,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         binding.ivSetting.setOnClickListener(this);
         binding.llyBroker.setOnClickListener(this);
         binding.llyCompleted.setOnClickListener(this);
+        binding.llyPay.setOnClickListener(this);
+        binding.llyCancel.setOnClickListener(this);
         binding.avatar.setOnClickListener(this);
         binding.ivHint.setOnClickListener(this);
         binding.ivXiaoxi.setOnClickListener(this);
@@ -112,6 +114,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 //                startActivity(intent);
                 intent = new Intent(getActivity(), MyOrderActivity.class);
                 intent.putExtra("type",3);
+                startActivity(intent);
+                break;
+            case R.id.llyPay:
+                intent = new Intent(getActivity(), MyOrderActivity.class);
+                intent.putExtra("type",1);
+                startActivity(intent);
+                break;
+            case R.id.llyCancel:
+                intent = new Intent(getActivity(), MyOrderActivity.class);
+                intent.putExtra("type",4);
                 startActivity(intent);
                 break;
             case R.id.avatar:

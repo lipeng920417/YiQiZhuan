@@ -38,6 +38,7 @@ import com.yiqizhuan.app.ui.search.history.ExpansionFoldLayout;
 import com.yiqizhuan.app.ui.search.history.SearchHistoryAdapter;
 import com.yiqizhuan.app.ui.search.item.RecommendFlexibleItem;
 import com.yiqizhuan.app.ui.search.item.SearchFlexibleItem;
+import com.yiqizhuan.app.util.ClickUtil;
 import com.yiqizhuan.app.util.KeyboardUtils;
 import com.yiqizhuan.app.util.ToastUtils;
 
@@ -196,7 +197,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 finish();
                 break;
             case R.id.tvSearch:
-                inputText(binding.edtSearch.getText().toString());
+                if (ClickUtil.isRealClick()) {
+                    inputText(binding.edtSearch.getText().toString());
+                }
                 break;
             case R.id.ivDelete:
                 listHistory.clear();

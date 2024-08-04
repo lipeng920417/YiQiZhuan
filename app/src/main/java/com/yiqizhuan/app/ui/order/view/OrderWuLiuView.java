@@ -1,6 +1,7 @@
 package com.yiqizhuan.app.ui.order.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ public class OrderWuLiuView extends LinearLayout {
     TextView tvAcceptStation;
     TextView tvQueRenShouHuo;
     OrderWuLiuListenerSure orderWuLiuListenerSure;
+    OrderListBean.OrdersDTO.ShippersDTO shippersDTO;
 
 
     public OrderWuLiuView(Context context) {
@@ -49,7 +51,7 @@ public class OrderWuLiuView extends LinearLayout {
         lly.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (orderWuLiuListenerSure != null) {
+                if (orderWuLiuListenerSure != null && shippersDTO != null & !TextUtils.isEmpty(shippersDTO.getShipperNumber())) {
                     orderWuLiuListenerSure.onItem();
                 }
             }
@@ -67,6 +69,7 @@ public class OrderWuLiuView extends LinearLayout {
 
     public void initData(OrderListBean.OrdersDTO.ShippersDTO shippersDTO, OrderWuLiuListenerSure orderWuLiuListenerSure) {
         this.orderWuLiuListenerSure = orderWuLiuListenerSure;
+        this.shippersDTO = shippersDTO;
         if (shippersDTO != null) {
             tvStatus.setText(shippersDTO.getStatus());
             if (shippersDTO.getTrace() != null && shippersDTO.getTrace().getTraces() != null && shippersDTO.getTrace().getTraces().size() > 0) {

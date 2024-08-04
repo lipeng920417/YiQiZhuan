@@ -2,6 +2,7 @@ package com.yiqizhuan.app.net;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 
 
@@ -129,6 +130,9 @@ public class OkHttpManager {
                                     LiveEventBus.get("expiredToken").post(baseResult.getMsg());
                                     callBackError(callBack, call, baseResult.getCode());
                                 } else {
+                                    if (!TextUtils.isEmpty(baseResult.getMsg())) {
+                                        ToastUtils.showToast(baseResult.getMsg());
+                                    }
                                     callBackError(callBack, call, baseResult.getCode());
                                 }
                             } else {

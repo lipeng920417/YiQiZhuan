@@ -137,7 +137,8 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
             }
             holder.rlyYiXiaJia.setVisibility(View.GONE);
             if (detailsDTO.getState() == 0) {
-                holder.swipeMenuLayout.setSwipeEnable(true);
+//                holder.swipeMenuLayout.setSwipeEnable(true);
+                holder.tvDelete.setVisibility(View.VISIBLE);
                 if (detailsDTO.getGoodsVO().getStock() > 0 && detailsDTO.getGoodsVO().getStock() < detailsDTO.getProductNum()) {
                     holder.tvStock.setVisibility(View.VISIBLE);
                     holder.tvStock.setText("仅剩" + detailsDTO.getGoodsVO().getStock() + "件");
@@ -191,7 +192,8 @@ public class ShoppingFlexibleItem extends AbstractFlexibleItem<ShoppingFlexibleI
                     holder.llyCart.setVisibility(View.VISIBLE);
                 }
             } else {
-                holder.swipeMenuLayout.setSwipeEnable(false);
+//                holder.swipeMenuLayout.setSwipeEnable(false);
+                holder.tvDelete.setVisibility(View.GONE);
                 holder.tvStock.setVisibility(View.GONE);
                 holder.llyCart.setVisibility(View.GONE);
                 holder.ivSelect.setOnClickListener(new View.OnClickListener() {

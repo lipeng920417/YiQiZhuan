@@ -46,6 +46,7 @@
             android:textColor="@color/color_858585"
             android:textSize="12sp"></TextView>
         <ImageView
+            android:id="@+id/ivBack"
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_marginRight="10dp"

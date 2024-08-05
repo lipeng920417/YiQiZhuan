@@ -130,9 +130,14 @@ public class OkHttpManager {
                                     LiveEventBus.get("expiredToken").post(baseResult.getMsg());
                                     callBackError(callBack, call, baseResult.getCode());
                                 } else {
-                                    if (!TextUtils.isEmpty(baseResult.getMsg())) {
-                                        ToastUtils.showToast(baseResult.getMsg());
-                                    }
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (!TextUtils.isEmpty(baseResult.getMsg())) {
+                                                ToastUtils.showToast(baseResult.getMsg());
+                                            }
+                                        }
+                                    });
                                     callBackError(callBack, call, baseResult.getCode());
                                 }
                             } else {

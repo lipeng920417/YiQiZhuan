@@ -306,6 +306,7 @@ public class OrderTabFragment extends BaseFragment {
             @Override
             public void onError(Call call, int statusCode, Exception e) {
                 cancelLoading();
+                refresh();
             }
         });
     }

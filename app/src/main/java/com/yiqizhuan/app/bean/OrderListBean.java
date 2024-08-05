@@ -42,6 +42,7 @@ public class OrderListBean {
         private String updatedAt;
         //倒计时秒
         private String expiredSeconds;
+        private List<ShippersDTO> shippers;
 
         public String getExpiredSeconds() {
             return expiredSeconds;
@@ -50,8 +51,6 @@ public class OrderListBean {
         public void setExpiredSeconds(String expiredSeconds) {
             this.expiredSeconds = expiredSeconds;
         }
-
-        private List<ShippersDTO> shippers;
 
         public Integer getId() {
             return id;
@@ -421,7 +420,8 @@ public class OrderListBean {
             private List<ProductsDTO> goods;
             private Integer goodsNum;
             private String status;
-            private TraceDTO trace;
+            private Object trace;
+//            private TraceDTO trace;
 
             public String getShipperCode() {
                 return shipperCode;
@@ -479,110 +479,25 @@ public class OrderListBean {
                 this.status = status;
             }
 
-            public TraceDTO getTrace() {
+            public Object getTrace() {
                 return trace;
             }
 
-            public void setTrace(TraceDTO trace) {
+            public void setTrace(Object trace) {
                 this.trace = trace;
             }
 
+            //            public TraceDTO getTrace() {
+//                return trace;
+//            }
+//
+//            public void setTrace(TraceDTO trace) {
+//                this.trace = trace;
+//            }
+
             public static class TraceDTO {
-                private String eBusinessID;
-                private List<String> preCoordinates;
-                private List<CoordinatesDTO> coordinates;
-                private String shipperCode;
-                private String logisticCode;
-                private Boolean success;
-                private String state;
-                private String stateEx;
-                private String location;
-                private String deliveryManTel;
+
                 private List<TracesDTO> traces;
-                private String senderCityLatAndLng;
-                private String receiverCityLatAndLng;
-                private String cityIsNull;
-                private String routeMapUrl;
-
-                public String geteBusinessID() {
-                    return eBusinessID;
-                }
-
-                public void seteBusinessID(String eBusinessID) {
-                    this.eBusinessID = eBusinessID;
-                }
-
-                public List<String> getPreCoordinates() {
-                    return preCoordinates;
-                }
-
-                public void setPreCoordinates(List<String> preCoordinates) {
-                    this.preCoordinates = preCoordinates;
-                }
-
-                public List<CoordinatesDTO> getCoordinates() {
-                    return coordinates;
-                }
-
-                public void setCoordinates(List<CoordinatesDTO> coordinates) {
-                    this.coordinates = coordinates;
-                }
-
-                public String getShipperCode() {
-                    return shipperCode;
-                }
-
-                public void setShipperCode(String shipperCode) {
-                    this.shipperCode = shipperCode;
-                }
-
-                public String getLogisticCode() {
-                    return logisticCode;
-                }
-
-                public void setLogisticCode(String logisticCode) {
-                    this.logisticCode = logisticCode;
-                }
-
-                public Boolean getSuccess() {
-                    return success;
-                }
-
-                public void setSuccess(Boolean success) {
-                    this.success = success;
-                }
-
-                public String getState() {
-                    return state;
-                }
-
-                public void setState(String state) {
-                    this.state = state;
-                }
-
-                public String getStateEx() {
-                    return stateEx;
-                }
-
-                public void setStateEx(String stateEx) {
-                    this.stateEx = stateEx;
-                }
-
-                public String getLocation() {
-                    return location;
-                }
-
-                public void setLocation(String location) {
-                    this.location = location;
-                }
-
-                public String getDeliveryManTel() {
-                    return deliveryManTel;
-                }
-
-                public void setDeliveryManTel(String deliveryManTel) {
-                    this.deliveryManTel = deliveryManTel;
-                }
 
                 public List<TracesDTO> getTraces() {
                     return traces;
@@ -590,59 +505,6 @@ public class OrderListBean {
 
                 public void setTraces(List<TracesDTO> traces) {
                     this.traces = traces;
-                }
-
-                public String getSenderCityLatAndLng() {
-                    return senderCityLatAndLng;
-                }
-
-                public void setSenderCityLatAndLng(String senderCityLatAndLng) {
-                    this.senderCityLatAndLng = senderCityLatAndLng;
-                }
-
-                public String getReceiverCityLatAndLng() {
-                    return receiverCityLatAndLng;
-                }
-
-                public void setReceiverCityLatAndLng(String receiverCityLatAndLng) {
-                    this.receiverCityLatAndLng = receiverCityLatAndLng;
-                }
-
-                public String getCityIsNull() {
-                    return cityIsNull;
-                }
-
-                public void setCityIsNull(String cityIsNull) {
-                    this.cityIsNull = cityIsNull;
-                }
-
-                public String getRouteMapUrl() {
-                    return routeMapUrl;
-                }
-
-                public void setRouteMapUrl(String routeMapUrl) {
-                    this.routeMapUrl = routeMapUrl;
-                }
-
-                public static class CoordinatesDTO {
-                    private String latAndLng;
-                    private String location;
-
-                    public String getLatAndLng() {
-                        return latAndLng;
-                    }
-
-                    public void setLatAndLng(String latAndLng) {
-                        this.latAndLng = latAndLng;
-                    }
-
-                    public String getLocation() {
-                        return location;
-                    }
-
-                    public void setLocation(String location) {
-                        this.location = location;
-                    }
                 }
 
                 public static class TracesDTO {

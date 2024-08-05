@@ -206,6 +206,29 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/llyPay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@mipmap/ic_mine_pay"></ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="待付款"
+                            android:textColor="@color/color_383638"
+                            android:textSize="14sp"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/llyBroker"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -246,28 +269,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="已完成"
-                            android:textColor="@color/color_383638"
-                            android:textSize="14sp"></TextView>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/llyPay"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@mipmap/ic_mine_pay"></ImageView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="待支付"
                             android:textColor="@color/color_383638"
                             android:textSize="14sp"></TextView>
 
